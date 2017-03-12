@@ -4,23 +4,8 @@
 
     
   <url>
-    <loc>https://bluesmilery.github.io/undefined/undefined/</loc>
-    <lastmod>2017-03-12T07:06:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>sitemaptest</title>
-        <pubTime>2017-03-12T07:06:23.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://bluesmilery.github.io/undefined/undefined/</loc>
-    <lastmod>2017-03-12T04:43:16.000Z</lastmod>
+    <loc>https://bluesmilery.github.io/blogs/1509af3a/</loc>
+    <lastmod>2017-03-12T07:38:52.000Z</lastmod>
     <data>
         <display>
         <title>Linux系统安装——Ubuntu16.04+Windows7双系统</title>
@@ -33,10 +18,9 @@
     </url>
 
     
-    
   <url>
-    <loc>https://bluesmilery.github.io/undefined/undefined/</loc>
-    <lastmod>2017-03-08T13:15:47.000Z</lastmod>
+    <loc>https://bluesmilery.github.io/blogs/4a17b156/</loc>
+    <lastmod>2017-03-12T07:38:52.000Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
@@ -48,4 +32,5 @@
     </data>
     </url>
 
+    
 </urlset>
