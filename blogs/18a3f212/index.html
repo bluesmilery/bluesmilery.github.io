@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Machine learning part 1 - Linear Regression | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文是在学习Andrew Ng所教授的Machine learning课程过程中所记录的笔记。因为个人知识的不足以及英文教学，难免会有理解偏差的地方，欢迎一起交流。
+课程资料：https://www.coursera.org/learn/machine-learning
+Machine learning 主要分为两类：
+Supervised Learning：regression problem、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine learning part 1 - Linear Regression">
+<meta property="og:url" content="https://bluesmilery.github.io/blogs/18a3f212/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="本文是在学习Andrew Ng所教授的Machine learning课程过程中所记录的笔记。因为个人知识的不足以及英文教学，难免会有理解偏差的地方，欢迎一起交流。
+课程资料：https://www.coursera.org/learn/machine-learning
+Machine learning 主要分为两类：
+Supervised Learning：regression problem、">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899939978070.png">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948551839.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948658643.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948921465.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948986668.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949169769.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949263988.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949521576.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949775918.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949866877.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949964080.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950045199.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950126179.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950264157.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950352304.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950568841.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950654663.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950714924.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950795748.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950887837.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951566529.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951636440.jpg">
+<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951935592.jpg">
+<meta property="og:updated_time" content="2017-03-20T08:35:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Machine learning part 1 - Linear Regression">
+<meta name="twitter:description" content="本文是在学习Andrew Ng所教授的Machine learning课程过程中所记录的笔记。因为个人知识的不足以及英文教学，难免会有理解偏差的地方，欢迎一起交流。
+课程资料：https://www.coursera.org/learn/machine-learning
+Machine learning 主要分为两类：
+Supervised Learning：regression problem、">
+<meta name="twitter:image" content="https://bluesmilery.github.io/images/2017-03-20-Machine learning part 1 - Linear Regression/14899939978070.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A Zone for Knowledge</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bluesmilery.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Machine learning part 1 - Linear Regression" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blogs/18a3f212/" class="article-date">
+  <time datetime="2017-03-20T03:36:02.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Machine learning part 1 - Linear Regression
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文是在学习Andrew Ng所教授的Machine learning课程过程中所记录的笔记。因为个人知识的不足以及英文教学，难免会有理解偏差的地方，欢迎一起交流。</p>
+<p>课程资料：<a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning</a></p>
+<p>Machine learning 主要分为两类：</p>
+<p><strong>Supervised Learning</strong>：regression problem、classification problem<br>例子：房价估计，良性恶性肿瘤判断<br>supervised learning:”right answers” given<br>regression: predict continuous valued output(price)<br>classification: discrete valued output(0 or 1)</p>
+<p><strong>Unsupervised Learning</strong>：clustering algorithm<br>例子：谷歌新闻，基因，organize computing clusters，social network analysis，market segmentation，astronomical data analysis，cocktail party problem（录音分辨）</p>
+<a id="more"></a>
+<p>编程作业工具：octave\matlab</p>
+<hr>
+<p>第一周测验，这道题总是错<br>A computer program is said to learn from experience E with respect to some task T and some performance measure P if its performance on T, as measured by P, improves with experience E. Suppose we feed a learning algorithm a lot of historical weather data, and have it learn to predict weather. What would be a reasonable choice for P?<br>这是这节课wiki的地址： <a href="https://share.coursera.org/wiki/index.php/ML:Main" target="_blank" rel="external">https://share.coursera.org/wiki/index.php/ML:Main</a>.<br>我在这上面找到了答案<br>Two definitions of Machine Learning are offered. Arthur Samuel described it as: “the field of study that gives computers the ability to learn without being explicitly programmed.” This is an older, informal definition.</p>
+<p>Tom Mitchell provides a more modern definition: “A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.”</p>
+<p>Example: playing checkers.</p>
+<ul>
+<li>E = the experience of playing many games of checkers</li>
+<li>T = the task of playing checkers.</li>
+<li>P = the probability that the program will win the next game.</li>
+</ul>
+<hr>
+<h2 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h2><p>regression problem：<strong>用training set来进行训练</strong>。<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899939978070.png" width="50%" height="50%"></p>
+<p><strong>Linear regression model：</strong><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948551839.jpg" width="80%" height="80%"><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948658643.jpg" width="50%" height="50%"></p>
+<p>求h的思路：idea<br><strong>J函数被称为cost function，用于确定h中的θ</strong><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948921465.jpg" width="100%" height="100%"><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899948986668.jpg" width="80%" height="80%"></p>
+<p><strong>h与J的关系，只有θ1</strong><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949169769.jpg" width="100%" height="100%"></p>
+<p><strong>h与J的关系，有θ0和θ1</strong>，右边的叫做contour plot等高线图<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949263988.jpg" width="100%" height="100%"></p>
+<h2 id="An-algorithm-gradient-descent-梯度下降"><a href="#An-algorithm-gradient-descent-梯度下降" class="headerlink" title="An algorithm: gradient descent 梯度下降"></a>An algorithm: gradient descent 梯度下降</h2><p>For minimizing the cost function J.<br>gradient descent不止用于最小化J函数，它是一个非常通用的算法。<br>可以把这个算法想象成你在一个山上，要下山，要走下山最快的路<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949521576.jpg" width="100%" height="100%"></p>
+<h2 id="Multivariate-linear-regression多元线性回归-linear-regression-with-multiple-variables"><a href="#Multivariate-linear-regression多元线性回归-linear-regression-with-multiple-variables" class="headerlink" title="Multivariate linear regression多元线性回归(linear regression with multiple variables)"></a>Multivariate linear regression多元线性回归(linear regression with multiple variables)</h2><p>此时有多个变量，而不只有面积着一个变量。<br>注意x上标和下标的意思。上标：第几个training example；下标：第几个变量<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949775918.jpg" width="100%" height="100%"></p>
+<p><strong>此时的hypothesis</strong>：<img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949866877.jpg" width="100%" height="100%"><br>，对其进行线性代数化简<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899949964080.jpg" width="100%" height="100%"></p>
+<p><strong>多元变量下的gradient descent</strong><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950045199.jpg" width="100%" height="100%"><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950126179.jpg" width="80%" height="80%"></p>
+<h2 id="梯度下降运算中的使用技巧"><a href="#梯度下降运算中的使用技巧" class="headerlink" title="梯度下降运算中的使用技巧"></a>梯度下降运算中的使用技巧</h2><h5 id="1）feature-scaling-特征缩放"><a href="#1）feature-scaling-特征缩放" class="headerlink" title="1）feature scaling 特征缩放"></a>1）feature scaling 特征缩放</h5><p>如果不同变量（feature，就是那些参数）的取值范围差的很多，（假如只有两个feature）那么画出来的等高线图会特别椭圆，这个时候gradient descent下降的会很慢，θ收敛的很慢。下面为比较<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950264157.jpg" width="50%" height="50%"><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950352304.jpg" width="50%" height="50%"></p>
+<p><strong>特征缩放一般有两种方式</strong></p>
+<ul>
+<li>一种是除以范围绝对值的最大值，使其范围在－1到＋1之间。（不用严格满足，比如－3 to 3或者－0.3 to 0.3都可以，只要差的不是太多，并且所有feature的范围接近即可）<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950568841.jpg" width="100%" height="100%"></li>
+<li>另一种方法叫做mean normalization均值归一化<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950654663.jpg" width="50%" height="50%"><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950714924.jpg" width="80%" height="80%"></li>
+</ul>
+<h5 id="2）learning-rate－α的选择"><a href="#2）learning-rate－α的选择" class="headerlink" title="2）learning rate－α的选择"></a>2）learning rate－α的选择</h5><p>对于gradient descent：<br>-“debugging”:how to make sure gradient descent is working correctly.</p>
+<ul>
+<li>how to choose learning rate α<br>对于每一次迭代，J函数都应该下降<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950795748.jpg" width="50%" height="50%"><br>可以用自动收敛测试，比如每次J函数下降小于1e-3，但是不推荐，因为选阀值很难。<br>以下这些情况都要选择更小的α<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899950887837.jpg" width="80%" height="80%"></li>
+</ul>
+<p><strong>总结：<br>α太小，收敛慢；α太大，J不收敛</strong><br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951566529.jpg" width="100%" height="100%"></p>
+<p>吴恩达选择α的方式：三倍一选<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951636440.jpg" width="100%" height="100%"></p>
+<h2 id="features-and-polynomial-regression"><a href="#features-and-polynomial-regression" class="headerlink" title="features and polynomial regression"></a>features and polynomial regression</h2><p>合理选择feature（变量）能有效降低假设的复杂度。比如有两个feature房屋的长度和宽度，可以组合成一个feature面积。<br>有时候也可以选择多项式回归，使得model更适合data。<br>至于怎么选择后面的课会讲。</p>
+<h2 id="normal-equation："><a href="#normal-equation：" class="headerlink" title="normal equation："></a>normal equation：</h2><p>目前线性回归的算法有</p>
+<ol>
+<li><strong>梯度下降法</strong>，多次迭代逐渐收敛到J函数的全局最小值。</li>
+<li><strong>normal equation</strong>，method to solve for θ analytically。解析解法，一次求出θ最优值</li>
+</ol>
+<h2 id="向量化："><a href="#向量化：" class="headerlink" title="向量化："></a>向量化：</h2><p>编程的时候向量化，可以让运算速度更快，效率更高<br><img src="/images/2017-03-20-Machine learning part 1 - Linear Regression/14899951935592.jpg" width="80%" height="80%"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://bluesmilery.github.io/blogs/18a3f212/" data-id="cj0hsu9mw0003mhmvi86hgbj0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习ML/">机器学习ML</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blogs/481fe3af/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Reinforcement learning part 1 - Introduction</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习ML/">机器学习ML</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/增强学习RL/" style="font-size: 10px;">增强学习RL</a> <a href="/tags/机器学习ML/" style="font-size: 10px;">机器学习ML</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blogs/18a3f212/">Machine learning part 1 - Linear Regression</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/481fe3af/">Reinforcement learning part 1 - Introduction</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/9a018dfc/">机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/1509af3a/">Linux系统安装——Ubuntu16.04+Windows7双系统</a>
+          </li>
+        
+          <li>
+            <a href="/blogs/4a17b156/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Gai<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
