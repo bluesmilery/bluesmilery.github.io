@@ -4,14 +4,14 @@
 
     
   <url>
-    <loc>https://bluesmilery.github.io/blogs/18a3f212/</loc>
-    <lastmod>2017-03-20T08:35:26.000Z</lastmod>
+    <loc>https://bluesmilery.github.io/blogs/e4dc3fbf/</loc>
+    <lastmod>2017-03-21T13:21:13.000Z</lastmod>
     <data>
         <display>
-        <title>Machine learning part 1 - Linear Regression</title>
-        <pubTime>2017-03-20T03:36:02.000Z</pubTime>
+        <title>增强学习 Reinforcement learning part 2 - Markov Decision Process</title>
+        <pubTime>2017-03-21T11:11:51.000Z</pubTime>
         
-        <tag>机器学习ML</tag>
+        <tag>增强学习RL</tag>
          
          
            
@@ -22,13 +22,30 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/481fe3af/</loc>
-    <lastmod>2017-03-20T03:43:53.000Z</lastmod>
+    <lastmod>2017-03-21T11:08:01.000Z</lastmod>
     <data>
         <display>
-        <title>Reinforcement learning part 1 - Introduction</title>
+        <title>增强学习 Reinforcement learning part 1 - Introduction</title>
         <pubTime>2017-03-20T01:24:02.000Z</pubTime>
         
         <tag>增强学习RL</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://bluesmilery.github.io/blogs/18a3f212/</loc>
+    <lastmod>2017-03-21T11:06:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习 Machine learning part 1 - Linear Regression</title>
+        <pubTime>2017-03-20T03:36:02.000Z</pubTime>
+        
+        <tag>机器学习ML</tag>
          
          
            
@@ -59,21 +76,6 @@
         <display>
         <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
         <pubTime>2017-03-15T12:51:45.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://bluesmilery.github.io/blogs/4a17b156/</loc>
-    <lastmod>2017-03-12T07:38:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-03-08T13:15:47.000Z</pubTime>
         
          
            
