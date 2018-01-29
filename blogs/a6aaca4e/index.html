@@ -1,146 +1,188 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>增强学习 Reinforcement learning part 4 - Model-Free Prediction | Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction上一节讲的东西是基于已知的MPD，也就是有模型学习，而实际中">
-<meta property="og:type" content="article">
-<meta property="og:title" content="增强学习 Reinforcement learning part 4 - Model-Free Prediction">
-<meta property="og:url" content="https://bluesmilery.github.io/blogs/a6aaca4e/index.html">
-<meta property="og:site_name" content="Blog">
-<meta property="og:description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction上一节讲的东西是基于已知的MPD，也就是有模型学习，而实际中">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/E92FA9D7-313D-417C-BBC6-8D45A163A474.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/21EA3F2A-7B69-40EA-B1E9-18A1A2C19F65.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/387EDD82-D792-4E90-A155-39F6FF3211A9.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4FE0C5A0-332F-4F17-97C8-892A0E8B769C.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/BB4D7A1A-6B92-402E-BF7D-D4A960BEA8B0.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A33168FD-B9B8-4373-97B6-96E9B1FC7E6D.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/886703F4-CC7E-4764-80F3-33463A0F4F06.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/FAB7BF81-27D8-4302-9E11-B372A066ADF8.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/AE2D13D1-4BAA-4306-A998-B069B7088116.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/C66CF90D-9764-4490-B38B-99BF1E67F69B.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/5CE4D620-BA50-4495-A13B-3B3C49090D35.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/29A0CB28-583F-4BD7-896A-D39DBAFBD9A0.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/2BB787D8-F799-4A6B-BB41-0892035A2AA5.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0196FCF3-90AB-4D35-8B4D-FC981BD20AE7.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9BB5E63F-8455-427D-9AE5-515ADDD769E4.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4CA3F908-FD81-4530-8ECE-B5DC48F8FBC6.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/B435018E-AFBF-493E-A6A2-97ACAA1538BF.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/77DDA058-E744-4053-9230-9547AD21CE12.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A3A0C7D9-A390-4C7D-8D13-BA3170CD9B4F.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9A8E4CE2-A41E-4C7A-9D2E-80B60116C92C.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0E72C495-842B-4C95-9938-D3A272EEF4CE.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/80C51E09-F894-46BF-AC72-F1064A2231F3.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A3D30FEA-32FB-4B11-A568-EA9296965BE6.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4F2F794A-F1CF-43FF-B244-3391E750E9B7.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/3C733C4B-583B-4649-A3FF-866D8EDBA1E4.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/F844E00C-39EA-4B5D-AFEA-1375E35D5058.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/388FAB25-EA82-4A1E-9815-95556683CC03.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/7CFABCFB-5B11-4C61-82E9-CCA1C24BA17A.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/6B7515C5-2AB0-4C0A-99D9-F572054CE3EE.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/F4C7BFCE-3ACD-43D4-B7B0-F4514118778D.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4C35F103-1580-4FEA-A389-3058B41A4812.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0E1CE4C9-3466-4006-AA04-E208686D1B51.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/55BA8087-15E3-4FB5-8C2A-DD9820FE7EB9.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/1E549164-9CEB-4998-B90A-9F6264563652.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/835A6524-9B0B-438D-864B-42914BEF9ED6.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/16D01323-BC5B-4B68-8F38-DB8F8E1F6F9B.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/DC3DE8F9-231E-4C93-8B2E-F514C8DC76CF.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/D05DF01D-3F1E-4B24-A7C9-62F669272E40.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/6E3E1193-172A-4470-859A-C75376E4DC73.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/2366B8D4-7474-4D0B-9AFD-581C68C059DD.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/48755315-3DA4-45C2-A38F-759E28CF972C.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9D856884-5438-4995-AD31-E083B7DB6041.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/116EE0F0-1CC4-4AC0-9503-10CFDAC087F6.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/5BBBEE88-2D53-46DE-8CC8-AB1340B51822.png">
-<meta property="og:updated_time" content="2017-05-17T03:21:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="增强学习 Reinforcement learning part 4 - Model-Free Prediction">
-<meta name="twitter:description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction上一节讲的东西是基于已知的MPD，也就是有模型学习，而实际中">
-<meta name="twitter:image" content="https://bluesmilery.github.io/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/E92FA9D7-313D-417C-BBC6-8D45A163A474.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="增强学习 Reinforcement learning part 4 - Model-Free Prediction"/>
+
+
+
+
+  <meta name="keywords" content="增强学习RL, Blog" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/a6aaca4e/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
   
 
-</head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">A Zone for Knowledge</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-github-link" class="nav-icon" href="https://github.com/bluesmilery" title="Github" target="_blank"></a>
-        
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bluesmilery.github.io"></form>
-      </div>
-    </div>
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 增强学习 Reinforcement learning part 4 - Model-Free Prediction - Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Blog</a>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Reinforcement learning part 4 - Model-Free Prediction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blogs/a6aaca4e/" class="article-date">
-  <time datetime="2017-05-16T12:56:22.000Z" itemprop="datePublished">2017-05-16</time>
-</a>
-    
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  <div class="article-inner">
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
     
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
     
-      <header class="article-header">
-        
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Blog</a>
+</div>
+
+<nav class="site-navbar">
   
-    <h1 class="article-title" itemprop="name">
-      增强学习 Reinforcement learning part 4 - Model-Free Prediction
-    </h1>
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+    </ul>
   
+</nav>
 
       </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          增强学习 Reinforcement learning part 4 - Model-Free Prediction
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-05-16
+        </span>
+        
+        
+      </div>
+    </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Introduction"><span class="toc-text">1、Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Monte-Carlo-Learning"><span class="toc-text">2、Monte-Carlo Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Temporal-Difference-Learning"><span class="toc-text">3、Temporal-Difference Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、TD-λ"><span class="toc-text">4、TD(λ)</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
       
         <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html" target="_blank" rel="external">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
@@ -270,150 +312,171 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://bluesmilery.github.io/blogs/a6aaca4e/" data-id="cj2rl3i130009gnmvsgqdelpp" class="article-share-link">Partager</a>
+
+    
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li></ul>
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/blogs/b96003ba/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习ML/">机器学习ML</a></li></ul>
-    </div>
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://bluesmilery.github.io/blogs/a6aaca4e/">https://bluesmilery.github.io/blogs/a6aaca4e/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
   </div>
 
 
-  
+
+      
+      
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/增强学习RL/" style="font-size: 20px;">增强学习RL</a> <a href="/tags/机器学习ML/" style="font-size: 10px;">机器学习ML</a>
-    </div>
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/增强学习RL/">增强学习RL</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/blogs/b96003ba/">
+        <span class="next-text nav-default">增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
   </div>
 
-  
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
-    </div>
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
   </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/blogs/a6aaca4e/">增强学习 Reinforcement learning part 4 - Model-Free Prediction</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/b96003ba/">增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/e4dc3fbf/">增强学习 Reinforcement learning part 2 - Markov Decision Process</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/18a3f212/">机器学习 Machine learning part 1 - Linear Regression</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/481fe3af/">增强学习 Reinforcement learning part 1 - Introduction</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
 
-  
-</aside>
-        
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Gai<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
-</footer>
 
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
+    
+  
+  
 
-    </div>
-    <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+
+
     
 
-<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-if (typeof jQuery == 'undefined') {
-  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
-}
-// ]]>
-</script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
 
 
-<script src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
 
-  </div>
-</body>
+  </body>
 </html>

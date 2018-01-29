@@ -1,127 +1,188 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming | Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction这一部分是用动态规划来解决MDP问题，所以先介绍下什么是动态">
-<meta property="og:type" content="article">
-<meta property="og:title" content="增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming">
-<meta property="og:url" content="https://bluesmilery.github.io/blogs/b96003ba/index.html">
-<meta property="og:site_name" content="Blog">
-<meta property="og:description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction这一部分是用动态规划来解决MDP问题，所以先介绍下什么是动态">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/737848F0-DA52-41D0-9E1D-0EE4C7F51AE4.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/27F1D6EC-A4DD-447E-824B-19B3A5D88365.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/EEDA561D-0975-437C-9DA5-44FE195B4E5D.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/42BE141A-72F8-4067-A6AC-C1C4074642F2.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/8A1CCBFD-0D78-4BF9-B649-9E8806A3B9CE.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/183C8581-3986-486F-8C46-CB076F5AEF0D.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/887A54FF-532D-4E08-91AD-943439067C96.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/8C060CBB-158A-4DB9-B8A9-AF9C1AEE3819.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/4F2526A0-4B13-4A56-868F-24474E18EFF2.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/3A6FDDB5-A00D-4989-A5D2-9EEDBFC8046A.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/19BC5362-3238-4EBF-81E0-1283C812866C.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/EAE5565A-B89E-463D-B626-45F71EF903DC.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/E1B33029-6919-4A03-9185-EAC804BB03A5.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/7D97F226-48B6-420F-AEE8-CF0E568B85E1.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/145C478C-215D-4ABD-964B-52222C33D3B1.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/9ECAC510-25D1-4E8A-9520-6FC4C9D54ADE.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/BEB4F5C7-E027-4028-8513-1B03EFC444A9.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/FDB650F5-C6EB-4853-B7E8-CBA6B9265F00.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/C57EE2DD-688D-4E34-8C52-267BABA13163.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/53F5BD3B-6F51-4940-9D3E-8D244B44DD38.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/16C7EA57-ABD6-4E7F-8533-36BCA94C2A0D.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/D6214822-FC86-4C8C-BF90-429C21F6A836.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/55DFF675-66BA-4CD0-8878-39DBC1809814.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/E887D5E7-5635-4601-A29A-C2D4CEA11F36.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/016A5E4D-2713-4FA7-BC4A-D15A43A0588E.png">
-<meta property="og:updated_time" content="2017-04-10T13:54:18.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming">
-<meta name="twitter:description" content="本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。
-课程资料：http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html
-1、Introduction这一部分是用动态规划来解决MDP问题，所以先介绍下什么是动态">
-<meta name="twitter:image" content="https://bluesmilery.github.io/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/737848F0-DA52-41D0-9E1D-0EE4C7F51AE4.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming"/>
+
+
+
+
+  <meta name="keywords" content="增强学习RL, Blog" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/b96003ba/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
   
 
-</head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">A Zone for Knowledge</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-github-link" class="nav-icon" href="https://github.com/bluesmilery" title="Github" target="_blank"></a>
-        
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bluesmilery.github.io"></form>
-      </div>
-    </div>
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming - Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Blog</a>
   </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Reinforcement learning part 3 - Planning by Dynamic Programming" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blogs/b96003ba/" class="article-date">
-  <time datetime="2017-04-10T12:04:48.000Z" itemprop="datePublished">2017-04-10</time>
-</a>
-    
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  <div class="article-inner">
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
     
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
     
-      <header class="article-header">
-        
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Blog</a>
+</div>
+
+<nav class="site-navbar">
   
-    <h1 class="article-title" itemprop="name">
-      增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming
-    </h1>
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+    </ul>
   
+</nav>
 
       </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-04-10
+        </span>
+        
+        
+      </div>
+    </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Introduction"><span class="toc-text">1、Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Policy-Evaluation"><span class="toc-text">2、Policy Evaluation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Policy-Iteration"><span class="toc-text">3、Policy Iteration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Value-Iteration"><span class="toc-text">4、Value Iteration</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
       
         <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html" target="_blank" rel="external">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
@@ -185,159 +246,177 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://bluesmilery.github.io/blogs/b96003ba/" data-id="cj2rl3i0v0005gnmvmuzi32hw" class="article-share-link">Partager</a>
+
+    
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li></ul>
 
-    </footer>
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://bluesmilery.github.io/blogs/b96003ba/">https://bluesmilery.github.io/blogs/b96003ba/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
   </div>
-  
+
+
+
+      
+      
     
-<nav id="article-nav">
-  
-    <a href="/blogs/a6aaca4e/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
+
+    
+      <footer class="post-footer">
         
-          增强学习 Reinforcement learning part 4 - Model-Free Prediction
+          <div class="post-tags">
+            
+              <a href="/tags/增强学习RL/">增强学习RL</a>
+            
+          </div>
         
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/blogs/a6aaca4e/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">增强学习 Reinforcement learning part 4 - Model-Free Prediction</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/blogs/e4dc3fbf/">
+        <span class="next-text nav-default">增强学习 Reinforcement learning part 2 - Markov Decision Process</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
       </div>
-    </a>
+    </div>
+
+    
   
   
-    <a href="/blogs/e4dc3fbf/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">增强学习 Reinforcement learning part 2 - Markov Decision Process</div>
-    </a>
-  
-</nav>
 
   
-</article>
 
-</section>
-        
-          <aside id="sidebar">
-  
+
+
     
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习ML/">机器学习ML</a></li></ul>
-    </div>
-  </div>
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/增强学习RL/" style="font-size: 20px;">增强学习RL</a> <a href="/tags/机器学习ML/" style="font-size: 10px;">机器学习ML</a>
-    </div>
-  </div>
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
-    </div>
-  </div>
-
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/blogs/a6aaca4e/">增强学习 Reinforcement learning part 4 - Model-Free Prediction</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/b96003ba/">增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/e4dc3fbf/">增强学习 Reinforcement learning part 2 - Markov Decision Process</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/18a3f212/">机器学习 Machine learning part 1 - Linear Regression</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/481fe3af/">增强学习 Reinforcement learning part 1 - Introduction</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Gai<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-if (typeof jQuery == 'undefined') {
-  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
-}
-// ]]>
-</script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
 
-
-<script src="/js/script.js"></script>
-
-  </div>
-</body>
+  </body>
 </html>

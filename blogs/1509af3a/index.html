@@ -1,242 +1,65 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Linux系统安装——Ubuntu16.04+Windows7双系统 | Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文安装的是 Ubuntu 16.04 LTS 64位版本，与Windows7构成双系统
-1、先从Ubunbu官方下载系统镜像，选择64位的16.04 LTS版本。
-2、制作USB安装盘。在Windows系统下， 选择UltraISO来制作USB安装盘。注意，制作过程会将U盘格式化，请提前备份好资料。进入UltralISO后，选择 文件&amp;gt;打开，选择下载好的Ubuntu镜像。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux系统安装——Ubuntu16.04+Windows7双系统">
-<meta property="og:url" content="https://bluesmilery.github.io/blogs/1509af3a/index.html">
-<meta property="og:site_name" content="Blog">
-<meta property="og:description" content="本文安装的是 Ubuntu 16.04 LTS 64位版本，与Windows7构成双系统
-1、先从Ubunbu官方下载系统镜像，选择64位的16.04 LTS版本。
-2、制作USB安装盘。在Windows系统下， 选择UltraISO来制作USB安装盘。注意，制作过程会将U盘格式化，请提前备份好资料。进入UltralISO后，选择 文件&amp;gt;打开，选择下载好的Ubuntu镜像。">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910584224.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910813736.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910997235.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911299701.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911475096.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911590023.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911736953.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911839401.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911934382.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912067213.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912156744.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912231168.jpg">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912327156.png">
-<meta property="og:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912442015.png">
-<meta property="og:updated_time" content="2017-03-20T02:43:18.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux系统安装——Ubuntu16.04+Windows7双系统">
-<meta name="twitter:description" content="本文安装的是 Ubuntu 16.04 LTS 64位版本，与Windows7构成双系统
-1、先从Ubunbu官方下载系统镜像，选择64位的16.04 LTS版本。
-2、制作USB安装盘。在Windows系统下， 选择UltraISO来制作USB安装盘。注意，制作过程会将U盘格式化，请提前备份好资料。进入UltralISO后，选择 文件&amp;gt;打开，选择下载好的Ubuntu镜像。">
-<meta name="twitter:image" content="https://bluesmilery.github.io/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910584224.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-
-</head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">A Zone for Knowledge</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-github-link" class="nav-icon" href="https://github.com/bluesmilery" title="Github" target="_blank"></a>
-        
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://bluesmilery.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Linux系统安装——Ubuntu16-04-Windows7双系统" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blogs/1509af3a/" class="article-date">
-  <time datetime="2017-03-11T12:33:07.000Z" itemprop="datePublished">2017-03-11</time>
-</a>
+<html lang="">
+  <head>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Linux系统安装——Ubuntu16.04+Windows7双系统
-    </h1>
-  
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文安装的是 Ubuntu 16.04 LTS 64位版本，与Windows7构成双系统</p>
-<p>1、先从<a href="https://www.ubuntu.com/download/alternative-downloads" target="_blank" rel="external">Ubunbu官方</a>下载系统镜像，选择64位的16.04 LTS版本。</p>
-<p>2、制作USB安装盘。在Windows系统下， 选择<a href="https://www.ezbsystems.com/ultraiso/download.htm" target="_blank" rel="external">UltraISO</a>来制作USB安装盘。注意，制作过程会将U盘格式化，请提前备份好资料。<br>进入UltralISO后，选择 文件&gt;打开，选择下载好的Ubuntu镜像。<br><a id="more"></a><br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910584224.png" alt=""><br>然后选择 启动&gt;写入硬盘映像<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910813736.png" alt=""><br>然后按默认值写入即可。写入方式处可以选择默认的USB-HDD+，也可以选择USB-ZIP+。我选择的是后者。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892910997235.png" alt=""><br>至此，USB启动盘就做好了。</p>
-<p>3、重启电脑，在BIOS中设置USB启动优先。插上U盘，再开机就可以进入Ubuntu的安装界面了。<br>点击install Ubuntu后会进入该界面。这里可能会有个问题，就是点击安装后屏幕会黑屏，我的电脑显卡是GTX 1080，在一个旧显示器（1440x900）上会出现这种现象，但是换成DELL P2415Q（4K）就没有这个黑屏的问题。如果你有黑屏的问题，可以参考这两篇文章：<a href="http://blog.sciencenet.cn/blog-655584-877622.html" target="_blank" rel="external">安装ubuntu黑屏问题的解决</a>、<a href="http://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu" target="_blank" rel="external">How do I set ‘nomodeset’ after I’ve already installed Ubuntu?</a><br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911299701.jpg" alt=""><br>这个界面上的两个选项分别是是否现在下载更新以及一些第三方驱动和软件，这里为了不耽误安装进度，可以都不勾选，等进入系统后再更新。<br>点击Continue后进入下一界面。</p>
-<ul>
-<li>如果你的电脑之前安装有其他系统，就会有第一个选项，它会在第一块硬盘上的一个空白分区里安装Ubuntu，需要注意的是它只会在第一块硬盘上选，如果你后来加了块新硬盘并且想在新硬盘上安装Ubuntu，需要选第三个选项something else。</li>
-<li>第二个选项是会把整块硬盘格式化，如果你不需要双系统（以及不需要硬盘上原来的资料），那么选这个就可以。</li>
-<li>第三个选项是全手动。如果想要安装双系统，或者Ubuntu的分区想自己控制的话，那么选这个。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911475096.jpg" alt=""></li>
-</ul>
-<p>选something else后进入下面这个页面。先简单介绍下界面内容。sd代表硬盘，第一块是sda，第二块sdb，依次类推。以第一块硬盘为例，sda1后面的数字表示分区，1234代表主分区，从5往后代表逻辑分区。可以看出我的第一块硬盘现在有四个分区，sda1是Windows自带的隐藏分区，sda2是windows系统盘，sda3是用做了Windows的数据盘，sda5是打算给Ubuntu做数据盘。<br>选择你想要安装Ubuntu的分区，点下面的加号开始进行Ubuntu分区。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911590023.jpg" alt=""><br>下图是分区选项。第一个是分区大小。第二个是选择分区类型，主分区还是逻辑分区（关于主分区和逻辑分区的知识可以自行百度了解，在Windows和Linux下的概念一样），对于Ubuntu系统本身而言，所有分区都是逻辑分区也没事。第三个是分区的起始位置，正着分还是倒着分，一般都选第一个。第四个是分区的文件系统。第五个是文件挂载点。<br>如果你对Linux系统完全不了解，并且不想了解分区的各种学问，那么按照我这种最简单的分区方法来做就可以：<strong>分两个区，第一个分区的大小和内存大小挂钩，如果你内存比较小（4G、8G）那么分区大小是内存大小的两倍，如果内存比较大，那么分区大小是内存大小的1.5倍，文件系统选Swap，这个分区是作为虚拟内存使用的；第二个分区的大小就是剩余空间全用上就可以，文件类型选Ext4，挂载点就选”/“。</strong><br>网上有各种分区的说法，当然各有各的好处或者是目的，如果你是小白并且只是想简单使用Linux系统，照我的分法肯定没问题。还有关于双系统，网上有说想要装双系统需要把/BOOT分区单独分区来，其实完全没这个必要，按照我的两个分区分法也可以成功安装双系统。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911736953.jpg" alt=""><br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911839401.jpg" alt=""><br>分完区后界面如下。我在新硬盘上分了一个主分区ext4，一个逻辑分区swap，还有一些空间没有使用。<br>在下面的device for boot那里选择”/“分区（如果你分出来了/BOOT分区，那么就选/BOOT）。然后在上面的区域内点击选择”/“分区，然后点Install Now。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892911934382.jpg" alt=""><br>会出现一个确认对话框，点Continue。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912067213.jpg" alt=""><br>然后下面就是选地区选语言设置用户等等，最后出现下图后点Restart Now就安装完成啦。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912156744.jpg" alt=""><br>如果你点完以后出现下面的鬼提示，不用管，直接电源键强制重启即可。记得拔U盘哦。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912231168.jpg" alt=""></p>
-<p>4、如果你只安装了Ubuntu，那么重启后就会进入Ubuntu系统了。如果你是要安装双系统，那么重启之后你会进入到Windows系统，那Ubuntu呢，别着急，接下来我们就添加Ubuntu的启动项。<br>需要下载一个软件<a href="http://neosmart.net/EasyBCD/" target="_blank" rel="external">EasyBCD</a>。进入页面后往下拉选择REGISTER，进入下一页面后不用填信息，直接点Download即可。<br>软件的界面大致如下。在工具菜单里可以设置语言。点左边的添加新条目，操作系统选Linux，类型是GRUB 2，名称可以自己随便设，驱动器的话选当初分的”/“分区，根据分区大小来判断（如果当初分了/BOOT分区，那么就选/BOOT分区），点击添加条目。然后点左边的编辑引导菜单，可以看到这时候条目里有两个系统了，下面有一些选项，比如倒计时或者是等待用户选择，依据情况自己设置。<br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912327156.png" alt=""><br><img src="/images/2017-03-11-Linux系统安装——Ubuntu16-04-Windows7双系统/14892912442015.png" alt=""><br>弄好后重启电脑，看看是不是可以选择两个系统啦，大功告成~</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://bluesmilery.github.io/blogs/1509af3a/" data-id="cj2rl3i0b0000gnmvb22hf0mj" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/blogs/9a018dfc/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow
-        
-      </div>
-    </a>
-  
-  
-</nav>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-  
-</article>
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/增强学习RL/">增强学习RL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习ML/">机器学习ML</a></li></ul>
-    </div>
-  </div>
+
+  <meta name="description" content="Linux系统安装——Ubuntu16.04+Windows7双系统"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/1509af3a/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/增强学习RL/" style="font-size: 20px;">增强学习RL</a> <a href="/tags/机器学习ML/" style="font-size: 10px;">机器学习ML</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/blogs/a6aaca4e/">增强学习 Reinforcement learning part 4 - Model-Free Prediction</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/b96003ba/">增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/e4dc3fbf/">增强学习 Reinforcement learning part 2 - Markov Decision Process</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/18a3f212/">机器学习 Machine learning part 1 - Linear Regression</a>
-          </li>
-        
-          <li>
-            <a href="/blogs/481fe3af/">增强学习 Reinforcement learning part 1 - Introduction</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Gai<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-<script>
+  <script id="baidu_push">
 (function(){
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
         bp.src = 'http://push.zhanzhang.baidu.com/push.js';
@@ -246,32 +69,315 @@
 })();
 </script>
 
-    </div>
-    <nav id="mobile-nav">
+
+
+
+
+
+
+
+
+    <title> Linux系统安装——Ubuntu16.04+Windows7双系统 - Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Blog</a>
+</div>
+
+<nav class="site-navbar">
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+    </ul>
   
 </nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Linux系统安装——Ubuntu16.04+Windows7双系统
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-03-11
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
     
 
-<script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript">
-//<![CDATA[
-if (typeof jQuery == 'undefined') {
-  document.write(unescape("%3Cscript src='/js/jquery-2.0.3.min.js' type='text/javascript'%3E%3C/script%3E"));
-}
-// ]]>
-</script>
+    <div class="post-content">
+      
+        <p>本文安装的是 Ubuntu 16.04 LTS 64位版本，与Windows7构成双系统</p>
+<p>1、先从<a href="https://www.ubuntu.com/download/alternative-downloads" target="_blank" rel="external">Ubunbu官方</a>下载系统镜像，选择64位的16.04 LTS版本。</p>
+<p>2、制作USB安装盘。在Windows系统下， 选择<a href="https://www.ezbsystems.com/ultraiso/download.htm" target="_blank" rel="external">UltraISO</a>来制作USB安装盘。注意，制作过程会将U盘格式化，请提前备份好资料。<br>进入UltralISO后，选择 文件&gt;打开，选择下载好的Ubuntu镜像。<br><a id="more"></a><br><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/i5l1EiiL5E.png" alt=""></p>
+<p>然后选择 启动&gt;写入硬盘映像</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/AlIL7ffb3h.png" alt=""></p>
+<p>然后按默认值写入即可。写入方式处可以选择默认的USB-HDD+，也可以选择USB-ZIP+。我选择的是后者。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/6eaG04kj45.png" alt=""></p>
+<p>至此，USB启动盘就做好了。</p>
+<p>3、重启电脑，在BIOS中设置USB启动优先。插上U盘，再开机就可以进入Ubuntu的安装界面了。<br>点击install Ubuntu后会进入该界面。这里可能会有个问题，就是点击安装后屏幕会黑屏，我的电脑显卡是GTX 1080，在一个旧显示器（1440x900）上会出现这种现象，但是换成DELL P2415Q（4K）就没有这个黑屏的问题。如果你有黑屏的问题，可以参考这两篇文章：<a href="http://blog.sciencenet.cn/blog-655584-877622.html" target="_blank" rel="external">安装ubuntu黑屏问题的解决</a>、<a href="http://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu" target="_blank" rel="external">How do I set ‘nomodeset’ after I’ve already installed Ubuntu?</a></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/ABm41HDd92.jpg" alt=""></p>
+<p>这个界面上的两个选项分别是是否现在下载更新以及一些第三方驱动和软件，这里为了不耽误安装进度，可以都不勾选，等进入系统后再更新。</p>
+<p>点击Continue后进入下一界面。</p>
+<ul>
+<li>如果你的电脑之前安装有其他系统，就会有第一个选项，它会在第一块硬盘上的一个空白分区里安装Ubuntu，需要注意的是它只会在第一块硬盘上选，如果你后来加了块新硬盘并且想在新硬盘上安装Ubuntu，需要选第三个选项something else。</li>
+<li>第二个选项是会把整块硬盘格式化，如果你不需要双系统（以及不需要硬盘上原来的资料），那么选这个就可以。</li>
+<li>第三个选项是全手动。如果想要安装双系统，或者Ubuntu的分区想自己控制的话，那么选这个。</li>
+</ul>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/EiCgmKdHGm.jpg" alt=""></p>
+<p>选something else后进入下面这个页面。先简单介绍下界面内容。sd代表硬盘，第一块是sda，第二块sdb，依次类推。以第一块硬盘为例，sda1后面的数字表示分区，1234代表主分区，从5往后代表逻辑分区。可以看出我的第一块硬盘现在有四个分区，sda1是Windows自带的隐藏分区，sda2是windows系统盘，sda3是用做了Windows的数据盘，sda5是打算给Ubuntu做数据盘。</p>
+<p>选择你想要安装Ubuntu的分区，点下面的加号开始进行Ubuntu分区。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/9DcH5bAdi1.jpg" alt=""></p>
+<p>下图是分区选项。第一个是分区大小。第二个是选择分区类型，主分区还是逻辑分区（关于主分区和逻辑分区的知识可以自行百度了解，在Windows和Linux下的概念一样），对于Ubuntu系统本身而言，所有分区都是逻辑分区也没事。第三个是分区的起始位置，正着分还是倒着分，一般都选第一个。第四个是分区的文件系统。第五个是文件挂载点。</p>
+<p>如果你对Linux系统完全不了解，并且不想了解分区的各种学问，那么按照我这种最简单的分区方法来做就可以：<strong>分两个区，第一个分区的大小和内存大小挂钩，如果你内存比较小（4G、8G）那么分区大小是内存大小的两倍，如果内存比较大，那么分区大小是内存大小的1.5倍，文件系统选Swap，这个分区是作为虚拟内存使用的；第二个分区的大小就是剩余空间全用上就可以，文件类型选Ext4，挂载点就选”/“。</strong></p>
+<p>网上有各种分区的说法，当然各有各的好处或者是目的，如果你是小白并且只是想简单使用Linux系统，照我的分法肯定没问题。还有关于双系统，网上有说想要装双系统需要把/BOOT分区单独分区来，其实完全没这个必要，按照我的两个分区分法也可以成功安装双系统。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/lBfLlc8hJf.jpg" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/kBC1K11jLI.jpg" alt=""></p>
+<p>分完区后界面如下。我在新硬盘上分了一个主分区ext4，一个逻辑分区swap，还有一些空间没有使用。</p>
+<p>在下面的device for boot那里选择”/“分区（如果你分出来了/BOOT分区，那么就选/BOOT）。然后在上面的区域内点击选择”/“分区，然后点Install Now。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/a3IdFjIhFj.jpg" alt=""></p>
+<p>会出现一个确认对话框，点Continue。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/2E3cG20531.jpg" alt=""></p>
+<p>然后下面就是选地区选语言设置用户等等，最后出现下图后点Restart Now就安装完成啦。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/iGBilmeDC0.jpg" alt=""></p>
+<p>如果你点完以后出现下面的鬼提示，不用管，直接电源键强制重启即可。记得拔U盘哦。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/mGdI0hEakm.jpg" alt=""></p>
+<p>4、如果你只安装了Ubuntu，那么重启后就会进入Ubuntu系统了。如果你是要安装双系统，那么重启之后你会进入到Windows系统，那Ubuntu呢，别着急，接下来我们就添加Ubuntu的启动项。</p>
+<p>需要下载一个软件<a href="http://neosmart.net/EasyBCD/" target="_blank" rel="external">EasyBCD</a>。进入页面后往下拉选择REGISTER，进入下一页面后不用填信息，直接点Download即可。</p>
+<p>软件的界面大致如下。在工具菜单里可以设置语言。点左边的添加新条目，操作系统选Linux，类型是GRUB 2，名称可以自己随便设，驱动器的话选当初分的”/“分区，根据分区大小来判断（如果当初分了/BOOT分区，那么就选/BOOT分区），点击添加条目。然后点左边的编辑引导菜单，可以看到这时候条目里有两个系统了，下面有一些选项，比如倒计时或者是等待用户选择，依据情况自己设置。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/hmebB4G4Di.png" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180129/a4l48flCDh.png" alt=""></p>
+<p>弄好后重启电脑，看看是不是可以选择两个系统啦，大功告成~</p>
 
+      
+    </div>
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+    
+      
+      
 
-
-<script src="/js/script.js"></script>
-
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>Author: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>Link: </span>
+      <a href="https://bluesmilery.github.io/blogs/1509af3a/">https://bluesmilery.github.io/blogs/1509af3a/</a>
+    </p>
+    <p class="copyright-item">
+      <span>License: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
   </div>
-</body>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/blogs/9a018dfc/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
 </html>
