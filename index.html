@@ -204,7 +204,8 @@
           <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
 <h2 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h2><p>上一节讲的东西是基于已知的MPD，也就是有模型学习，而实际中很多情况下MDP是未知的，各个状态之间的转移概率以及reward很难得知，所以这种环境称为model free。</p>
-<p>首先先讲model free prediction，类似于DP中的policy evaluation，去估计这个未知的MDP中各个状态的value function。<br>下一节会讲model free control，类似于DP中的policy iteration，去最优化这个未知的MDP中各个状态的value function。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/E92FA9D7-313D-417C-BBC6-8D45A163A474.png" width="70%" height="70%"></p>
+<p>首先先讲model free prediction，类似于DP中的policy evaluation，去估计这个未知的MDP中各个状态的value function。]</p>
+<p>下一节会讲model free control，类似于DP中的policy iteration，去最优化这个未知的MDP中各个状态的value function。</p>
           <div class="read-more">
             <a href="/blogs/a6aaca4e/" class="read-more-link">阅读更多</a>
           </div>
@@ -325,7 +326,9 @@
         
           <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
-<h2 id="1、Markov-Processes"><a href="#1、Markov-Processes" class="headerlink" title="1、Markov Processes"></a>1、Markov Processes</h2><p>在RL中，<strong>MDP是用来描述environment的，并且假设environment是full observable的</strong><br>i.e. The current state completely characterizes the process<br>许多RL问题可以用MDP来表示：</p>
+<h2 id="1、Markov-Processes"><a href="#1、Markov-Processes" class="headerlink" title="1、Markov Processes"></a>1、Markov Processes</h2><p>在RL中，<strong>MDP是用来描述environment的，并且假设environment是full observable的</strong></p>
+<p>i.e. The current state completely characterizes the process</p>
+<p>许多RL问题可以用MDP来表示：</p>
 <ul>
 <li>Optimal control primarily deals with continuous MDPs</li>
 <li>Partially observable problems can be converted into MDPs</li>
@@ -389,8 +392,15 @@
           <p>本文是在学习Andrew Ng所教授的Machine learning课程过程中所记录的笔记。因为个人知识的不足以及英文教学，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="https://www.coursera.org/learn/machine-learning">https://www.coursera.org/learn/machine-learning</a></p>
 <p>Machine learning 主要分为两类：</p>
-<p><strong>Supervised Learning</strong>：regression problem、classification problem<br>例子：房价估计，良性恶性肿瘤判断<br>supervised learning:”right answers” given<br>regression: predict continuous valued output(price)<br>classification: discrete valued output(0 or 1)</p>
-<p><strong>Unsupervised Learning</strong>：clustering algorithm<br>例子：谷歌新闻，基因，organize computing clusters，social network analysis，market segmentation，astronomical data analysis，cocktail party problem（录音分辨）</p>
+<p><strong>Supervised Learning</strong>：regression problem、classification problem</p>
+<p>例子：房价估计，良性恶性肿瘤判断</p>
+<p>supervised learning:”right answers” given</p>
+<ul>
+<li>regression: predict continuous valued output(price)</li>
+<li>classification: discrete valued output(0 or 1)</li>
+</ul>
+<p><strong>Unsupervised Learning</strong>：clustering algorithm</p>
+<p>例子：谷歌新闻，基因，organize computing clusters，social network analysis，market segmentation，astronomical data analysis，cocktail party problem（录音分辨）</p>
           <div class="read-more">
             <a href="/blogs/18a3f212/" class="read-more-link">阅读更多</a>
           </div>
@@ -448,7 +458,11 @@
         
           <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
-<p>关于 Reinforcement learning的两本参考：<br>An Introduction to Reinforcement Learning<br><a href="https://webdocs.cs.ualberta.ca/~sutton/book/the-book-1st.html">https://webdocs.cs.ualberta.ca/~sutton/book/the-book-1st.html</a><br>Algorithms for Reinforcement Learning<br><a href="https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf">https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf</a></p>
+<p>关于 Reinforcement learning的两本参考：</p>
+<p>An Introduction to Reinforcement Learning</p>
+<p><a href="https://webdocs.cs.ualberta.ca/~sutton/book/the-book-1st.html">https://webdocs.cs.ualberta.ca/~sutton/book/the-book-1st.html</a></p>
+<p>Algorithms for Reinforcement Learning</p>
+<p><a href="https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf">https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf</a></p>
           <div class="read-more">
             <a href="/blogs/481fe3af/" class="read-more-link">阅读更多</a>
           </div>
@@ -487,7 +501,7 @@
         
         
         
-          <span class="post-count">本文共5,950字</span>
+          <span class="post-count">本文共5,944字</span>
           <span class="post-count">阅读约30分钟</span>
         
       </div>
@@ -515,7 +529,14 @@
 <li>Python 2.7</li>
 <li>Bazel 0.4.2</li>
 </ul>
-<p>在整个环境配置过程中，有许多东西可以提前下载好，在配置时便可以节省时间了。<br><a href="https://developer.nvidia.com/cuda-downloads">CUDA 8.0</a> (1.4GB)：Linux &gt; x86_64 &gt; Ubuntu &gt; 16.04 &gt; runfile(local)<br><a href="https://developer.nvidia.com/rdp/cudnn-download">cuDNN v5.1</a> (100MB)： 需要注册Nvidia开发者账号，Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0 &gt; cuDNN v5.1 Library for Linux。最好在Linux系统下下载，格式为.tgz。在Windows下下载的格式会识别成.solitairetheme8格式。<br><a href="https://github.com/tensorflow/tensorflow/releases">TensorFlow 源码release版</a> (10MB+)：下载v0.12.0 RC1，zip或者tar.gz均可<br><a href="https://github.com/tensorflow/tensorflow">TensorFlow pip安装包</a> (CPU版40MB+，GPU版80MB+)：选择Linux和Python2的版本，CPU和GPU的都下。pip安装包只会下载最新版本<br><a href="https://github.com/bazelbuild/bazel/releases">Bazel 源码</a> (100MB+)：下载0.4.2版本，选择bazel-0.4.2-installer-linux-x86_64.sh</p>
+<p>在整个环境配置过程中，有许多东西可以提前下载好，在配置时便可以节省时间了。</p>
+<ul>
+<li><a href="https://developer.nvidia.com/cuda-downloads">CUDA 8.0</a> (1.4GB)：Linux &gt; x86_64 &gt; Ubuntu &gt; 16.04 &gt; runfile(local)</li>
+<li><a href="https://developer.nvidia.com/rdp/cudnn-download">cuDNN v5.1</a> (100MB)： 需要注册Nvidia开发者账号，Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0 &gt; cuDNN v5.1 Library for Linux。最好在Linux系统下下载，格式为.tgz。在Windows下下载的格式会识别成.solitairetheme8格式。</li>
+<li><a href="https://github.com/tensorflow/tensorflow/releases">TensorFlow 源码release版</a> (10MB+)：下载v0.12.0 RC1，zip或者tar.gz均可</li>
+<li><a href="https://github.com/tensorflow/tensorflow">TensorFlow pip安装包</a> (CPU版40MB+，GPU版80MB+)：选择Linux和Python2的版本，CPU和GPU的都下。pip安装包只会下载最新版本</li>
+<li><a href="https://github.com/bazelbuild/bazel/releases">Bazel 源码</a> (100MB+)：下载0.4.2版本，选择bazel-0.4.2-installer-linux-x86_64.sh</li>
+</ul>
           <div class="read-more">
             <a href="/blogs/9a018dfc/" class="read-more-link">阅读更多</a>
           </div>

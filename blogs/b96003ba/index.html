@@ -219,7 +219,11 @@
 <li>Overlapping subproblems：子问题重复出现，对每一种子问题只计算一次，然后将结果存起来，下次直接使用</li>
 </ul>
 <p>而MDP刚好满足这两条性质，bellman equation具有递归分解性，说明可以分解为子问题并且会重复出现（类似于斐波那契数列）；value function就相当于能够存储并且重复利用的解</p>
-<p><strong>要使用DP来解决MDP问题，假设条件是对MDP是充分认知（full knowledge）的</strong><br>对于MDP来说，还是从两个方面来说，prediction and control<br>prediction的目的是给你policy，然后去预测使用这个policy的话各个state的value function，也就是预测使用这个policy的话未来的收益<br>control的目的是不给你policy，自己去寻找最优的policy以及未来最优的收益<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/737848F0-DA52-41D0-9E1D-0EE4C7F51AE4.png" width="70%" height="70%"></p>
+<p><strong>要使用DP来解决MDP问题，假设条件是对MDP是充分认知（full knowledge）的</strong></p>
+<p>对于MDP来说，还是从两个方面来说，prediction and control</p>
+<p>prediction的目的是给你policy，然后去预测使用这个policy的话各个state的value function，也就是预测使用这个policy的话未来的收益</p>
+<p>control的目的是不给你policy，自己去寻找最优的policy以及未来最优的收益</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/J028IlH8i7.png" alt=""></p>
 <p>扩展：动态规划还可以解决其他许多问题</p>
 <ul>
 <li>Scheduling algorithms</li>
@@ -228,41 +232,107 @@
 <li>Graphical models (e.g. Viterbi algorithm)</li>
 <li>Bioinformatics (e.g. lattice models)</li>
 </ul>
-<h2 id="2、Policy-Evaluation"><a href="#2、Policy-Evaluation" class="headerlink" title="2、Policy Evaluation"></a>2、Policy Evaluation</h2><p>策略评估<br>需要解决的问题：评估一个给定的policy<br>解决方案：以迭代次数为维度（或者理解成时间，一次迭代相当于过去了一个时刻，agent执行了一次action）不断去迭代Bellman Expectation Equation<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/27F1D6EC-A4DD-447E-824B-19B3A5D88365.png" width="50%" height="50%"><br>可以证明，<strong>最终value function会收敛到vpi</strong><br>采用同步更新的方式，在新的时刻所有的state同时更新<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/EEDA561D-0975-437C-9DA5-44FE195B4E5D.png" width="70%" height="70%"><br>计算方法如下：<br>套用Bellman Expectation Equation，加上迭代次数维度，依据马尔可夫性，未来只与现在有关，所以求state s的k+1时刻的value function，就要使用k时刻state s’的value function，其中s’是s的后续state</p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/42BE141A-72F8-4067-A6AC-C1C4074642F2.png" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/8A1CCBFD-0D78-4BF9-B649-9E8806A3B9CE.png" width="100%" height="100%"></td></tr></table><br>上面的是RL part2中的计算方程，相当于是下面的计算方程迭代到最后已经收敛的形式<br><table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/183C8581-3986-486F-8C46-CB076F5AEF0D.png" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/887A54FF-532D-4E08-91AD-943439067C96.png" width="100%" height="100%"></td></tr></table>
+<h2 id="2、Policy-Evaluation"><a href="#2、Policy-Evaluation" class="headerlink" title="2、Policy Evaluation"></a>2、Policy Evaluation</h2><p>策略评估</p>
+<p>需要解决的问题：评估一个给定的policy</p>
+<p>解决方案：以迭代次数为维度（或者理解成时间，一次迭代相当于过去了一个时刻，agent执行了一次action）不断去迭代Bellman Expectation Equation</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/eLDB0cbdGh.png" alt=""></p>
+<p>可以证明，<strong>最终value function会收敛到vpi</strong></p>
+<p>采用同步更新的方式，在新的时刻所有的state同时更新</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/7F8m89m2L7.png" alt=""></p>
+<p>计算方法如下：</p>
+<p>套用Bellman Expectation Equation，加上迭代次数维度，依据马尔可夫性，未来只与现在有关，所以求state s的k+1时刻的value function，就要使用k时刻state s’的value function，其中s’是s的后续state</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/Ll2i3G7E1c.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/IFA6cI4gEA.png" alt=""></td></tr></table>
 
-<p>下面举个例子gridworld<br>这是个4x4的方格，那两个灰色的方格是特殊的state，可以看作是终点，其他14个白色的方格是普通的state，在白色方格时有四种action选择，向上下左右移动，各自的概率为0.25。每移动一步reward减1，直到灰色的方格<br>所以这个例子可以看作你随机出现在某个方格上，然后用最少的步数走到灰色方格。<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/8C060CBB-158A-4DB9-B8A9-AF9C1AEE3819.png" width="50%" height="50%"><br>下面是进行policy evaluation的迭代过程，k代表第几次迭代<br>先说左边的，选择的policy是random policy，就是在任何一个state，选择四个方向的概率都为0.25。初始v0的时候所有state的value都是0。然后v1时，利用上面vk+1(s)的公式进行计算（0.25x(-1+0)x4）。下面以v2中两个state来说明具体的计算过程<br><u>先计算state6</u>（就是第二行第三个，这里对应公式的话就是s）在这次迭代中（对应公式的话就是k+1）的state value：如果向上走的话会移动到state2（对应公式的话就是s’），那这个action value就是reward(-1)加上state2上一时刻（对应公式的话就是k）的state value(-1)，所以向上移动是0.25x(-1-1)。向其他三个方向移动的计算方式和向上移动类似，结果也都是0.25x(-1-1)。所以state6在v2时的state value就是0.25x(-1-1)x4=-2<br><u>再计算state1</u>（第一行第二个）的state value：如果选择向上走的话，因为上面没有格子了，所以会停在原地，那这次action value就是移动的reward(-1)加上state1上一时刻的state value(-1)，所以向上移动是0.25x(-1-1)。向下向右类似。向左移动的话是reward(-1)加上灰色格子上一时刻的state value(0)，所以向左移动就是0.25x(-1+0)。所以state1在v2时的state value就是0.25x(-1-1)x3+0.25x(-1+0)=-1.75。图中显示是-1.7，那是因为只能显示两位数。<br>如果一直迭代下去，当k为无穷的时候，各个state的value就已经收敛不会变了。</p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/4F2526A0-4B13-4A56-868F-24474E18EFF2.png" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/3A6FDDB5-A00D-4989-A5D2-9EEDBFC8046A.png" width="100%" height="100%"></td></tr></table>
+<p>上面的是RL part2中的计算方程，相当于是下面的计算方程迭代到最后已经收敛的形式</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/0HJ54KeD14.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ejd0leDJCF.png" alt=""></td></tr></table>
 
-<p>再说下右边的，显示的是每次迭代根据左边计算出来的state value选择出来的greedy policy。greedy policy指的是选出各个action value中最高的所对应的action。比如在v2时，state1的四个action value中，向左移动的action value是最高的，所以greedy policy在state1处只选择向左移动<br>当random policy经过许多步迭代后state value收敛到vpi时，这时候选出的greedy policy就是random policy的optimal policy<br>注意：evaluate任何一个policy（这里是random policy）都能得到greedy policy</p>
+<p>下面举个例子gridworld</p>
+<p>这是个4x4的方格，那两个灰色的方格是特殊的state，可以看作是终点，其他14个白色的方格是普通的state，在白色方格时有四种action选择，向上下左右移动，各自的概率为0.25。每移动一步reward减1，直到灰色的方格</p>
+<p>所以这个例子可以看作你随机出现在某个方格上，然后用最少的步数走到灰色方格。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/4KkGKDG329.png" alt=""></p>
+<p>下面是进行policy evaluation的迭代过程，k代表第几次迭代</p>
+<p>先说左边的，选择的policy是random policy，就是在任何一个state，选择四个方向的概率都为0.25。初始v0的时候所有state的value都是0。然后v1时，利用上面vk+1(s)的公式进行计算（0.25x(-1+0)x4）。下面以v2中两个state来说明具体的计算过程</p>
+<p><u>先计算state6</u>（就是第二行第三个，这里对应公式的话就是s）在这次迭代中（对应公式的话就是k+1）的state value：如果向上走的话会移动到state2（对应公式的话就是s’），那这个action value就是reward(-1)加上state2上一时刻（对应公式的话就是k）的state value(-1)，所以向上移动是0.25x(-1-1)。向其他三个方向移动的计算方式和向上移动类似，结果也都是0.25x(-1-1)。所以state6在v2时的state value就是0.25x(-1-1)x4=-2</p>
+<p><u>再计算state1</u>（第一行第二个）的state value：如果选择向上走的话，因为上面没有格子了，所以会停在原地，那这次action value就是移动的reward(-1)加上state1上一时刻的state value(-1)，所以向上移动是0.25x(-1-1)。向下向右类似。向左移动的话是reward(-1)加上灰色格子上一时刻的state value(0)，所以向左移动就是0.25x(-1+0)。所以state1在v2时的state value就是0.25x(-1-1)x3+0.25x(-1+0)=-1.75。图中显示是-1.7，那是因为只能显示两位数。</p>
+<p>如果一直迭代下去，当k为无穷的时候，各个state的value就已经收敛不会变了。</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ilhLcGJKm0.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/JAB7kbLJbK.png" alt=""></td></tr></table>
+
+<p>再说下右边的，显示的是每次迭代根据左边计算出来的state value选择出来的greedy policy。greedy policy指的是选出各个action value中最高的所对应的action。比如在v2时，state1的四个action value中，向左移动的action value是最高的，所以greedy policy在state1处只选择向左移动</p>
+<p>当random policy经过许多步迭代后state value收敛到vpi时，这时候选出的greedy policy就是random policy的optimal policy</p>
+<p>注意：evaluate任何一个policy（这里是random policy）都能得到greedy policy</p>
 <p>总结：进行策略评估的实质就是计算在使用policy pi时各个state的value function，但是因为reword和action的存在，随着时间的推移（action次数的增加），每个state的value function会变化，但是最终会收敛到一个固定值vpi，然后使用greedy policy选出policy pi的optimal policy</p>
-<h2 id="3、Policy-Iteration"><a href="#3、Policy-Iteration" class="headerlink" title="3、Policy Iteration"></a>3、Policy Iteration</h2><p>策略迭代<br>在策略评估中，讲的是在给定一个policy pi后，先对其进行evaluate得到vpi，然后使用greedy policy来improve policy，得到新的policy pi’<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/19BC5362-3238-4EBF-81E0-1283C812866C.png" width="50%" height="50%"><br>在上面gridworld的例子中，因为这个例子很简单，所以经过一次improve后得到的pi’就已经是optimal policy pi*<br>但是通常说来，一般需要经过多次evaluation/improvement的过程才能得到pi*<br>这种不断evaluation/improvement的过程就称作策略迭代<br><strong>注意：类似于policy evaluation中state value会收敛到vpi，在policy iteration中policy肯定会收敛到pi*</strong></p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/EAE5565A-B89E-463D-B626-45F71EF903DC.jpg" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/E1B33029-6919-4A03-9185-EAC804BB03A5.png" width="100%" height="100%"></td></tr></table>
+<h2 id="3、Policy-Iteration"><a href="#3、Policy-Iteration" class="headerlink" title="3、Policy Iteration"></a>3、Policy Iteration</h2><p>策略迭代</p>
+<p>在策略评估中，讲的是在给定一个policy pi后，先对其进行evaluate得到vpi，然后使用greedy policy来improve policy，得到新的policy pi’</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/101a9hKiaC.png" alt=""></p>
+<p>在上面gridworld的例子中，因为这个例子很简单，所以经过一次improve后得到的pi’就已经是optimal policy pi*</p>
+<p>但是通常说来，一般需要经过多次evaluation/improvement的过程才能得到pi*</p>
+<p>这种不断evaluation/improvement的过程就称作策略迭代</p>
+<p><strong>注意：类似于policy evaluation中state value会收敛到vpi，在policy iteration中policy肯定会收敛到pi*</strong></p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/BFA2CI6G5m.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/Hel0eHdai0.png" alt=""></td></tr></table>
 
-<p>evaluation和improvement过程中的算法可以是任意的<br>example：</p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/7D97F226-48B6-420F-AEE8-CF0E568B85E1.jpg" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/145C478C-215D-4ABD-964B-52222C33D3B1.jpg" width="100%" height="100%"></td></tr></table>
+<p>evaluation和improvement过程中的算法可以是任意的</p>
+<p>example：</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/8CeJK6GFi3.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/I21d5hiche.jpg" alt=""></td></tr></table>
 
 <p>下面是具体讲一下improve过程，证明了为什么improve后vpi’(s)&gt;=vpi(s)</p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/9ECAC510-25D1-4E8A-9520-6FC4C9D54ADE.png" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/BEB4F5C7-E027-4028-8513-1B03EFC444A9.png" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/kJ4B7BlhCJ.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/97b7kJ4dJ2.png" alt=""></td></tr></table>
 
-<p>modified：在evaluation部分，一定要等state value达到vpi吗？<br>事实上，这并不是必须的，就好比上面的gridworld例子，在第三次迭代的时候其实就已经是optimal policy了，所以没必要继续迭代下去<br>所以我们可以通过一些方法提前停止evaluation，比如在state value收敛的过程中设置epsilon，小于则停止迭代；或者是设置迭代k次就停止<br>如果设置evaluation只迭代一次，即k=1，那么这就是下面要讲的value iteration</p>
+<p>modified：在evaluation部分，一定要等state value达到vpi吗？</p>
+<p>事实上，这并不是必须的，就好比上面的gridworld例子，在第三次迭代的时候其实就已经是optimal policy了，所以没必要继续迭代下去</p>
+<p>所以我们可以通过一些方法提前停止evaluation，比如在state value收敛的过程中设置epsilon，小于则停止迭代；或者是设置迭代k次就停止</p>
+<p>如果设置evaluation只迭代一次，即k=1，那么这就是下面要讲的value iteration</p>
 <p>总结：policy iteration相比于policy evaluation而言，后者是一次evaluation/improvement过程，只能得到比policy pi更好的policy pi’，而前者是多次evaluation/improvement过程，最终能得到该MDP的optimal policy pi*</p>
-<h2 id="4、Value-Iteration"><a href="#4、Value-Iteration" class="headerlink" title="4、Value Iteration"></a>4、Value Iteration</h2><p>值迭代<br>上面说过能用DP解决的问题需要具有一个特点，满足最优化原理（Principle of Optimality），就是最优解分解之后针对每个子问题也是最优解，对于MDP来说，就是optimal policy可以分为两部分，当前state的optimal action A*，后续state的policy也是optimal policy<br>Any optimal policy can be subdivided into two components:</p>
+<h2 id="4、Value-Iteration"><a href="#4、Value-Iteration" class="headerlink" title="4、Value Iteration"></a>4、Value Iteration</h2><p>值迭代</p>
+<p>上面说过能用DP解决的问题需要具有一个特点，满足最优化原理（Principle of Optimality），就是最优解分解之后针对每个子问题也是最优解，对于MDP来说，就是optimal policy可以分为两部分，当前state的optimal action A*，后续state的policy也是optimal policy<br>Any optimal policy can be subdivided into two components:</p>
 <ul>
 <li>An optimal first action A*</li>
-<li>Followed by an optimal policy from successor state S0<br>所以，若要满足一个policy pi使的state s的value为optimal value，当且仅当policy pi使得s的后续state s’的value为optimal value<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/FDB650F5-C6EB-4853-B7E8-CBA6B9265F00.png" width="80%" height="80%"><br>所以知道了s’的optimal value便可以倒推出来s的optimal value<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/C57EE2DD-688D-4E34-8C52-267BABA13163.jpg" width="80%" height="80%"><br>所以这便是value iteration的思想所在，迭代重复上面这个公式<br>直观上看来，是从最后一个state开始，倒推到第一个state，下面以一个例子来说明下<br>这个例子的目的是每个state找出到达左上角的最短路径（步数），其他方面类似于之前gridworld的例子，action是向四个方向移动，每移动一步reward减1<br>V1初始时所有的state的value都是0，然后在V2时，每个state从四个action value中选出最高的那个作为自己的state value（在policy iteration中是将四个action value求期望作为自己的state value），以第二行第二个为例，它在V1V2V3的时候四个action value都是一样的，所以没有相对的optimal，但是从V4开始，向上和向左比向下向右好，所以它的state value就一直为-2，拿V6来说，它的state value = max(-2, -2, -4, -4) = -2<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/53F5BD3B-6F51-4940-9D3E-8D244B44DD38.png" width="70%" height="70%"><br>在这个例子中需要注意这么几个问题：</li>
+<li>Followed by an optimal policy from successor state S0</li>
+</ul>
+<p>所以，若要满足一个policy pi使的state s的value为optimal value，当且仅当policy pi使得s的后续state s’的value为optimal value</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/f9GH2k4901.png" alt=""></p>
+<p>所以知道了s’的optimal value便可以倒推出来s的optimal value</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/chHIB2ahGI.jpg" alt=""></p>
+<p>所以这便是value iteration的思想所在，迭代重复上面这个公式</p>
+<p>直观上看来，是从最后一个state开始，倒推到第一个state，下面以一个例子来说明下</p>
+<p>这个例子的目的是每个state找出到达左上角的最短路径（步数），其他方面类似于之前gridworld的例子，action是向四个方向移动，每移动一步reward减1</p>
+<p>V1初始时所有的state的value都是0，然后在V2时，每个state从四个action value中选出最高的那个作为自己的state value（在policy iteration中是将四个action value求期望作为自己的state value），以第二行第二个为例，它在V1V2V3的时候四个action value都是一样的，所以没有相对的optimal，但是从V4开始，向上和向左比向下向右好，所以它的state value就一直为-2，拿V6来说，它的state value = max(-2, -2, -4, -4) = -2</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/888CK5hL90.png" alt=""></p>
+<p>在这个例子中需要注意这么几个问题：</p>
+<ul>
 <li>每一次迭代中所有的state都要计算value，只不过有些state每次max的时候都是那些值（先达到了optimal value）所以看起来就不变了</li>
 <li>在开始的时候不像policy iteration那样有个明确的policy，而且在迭代过程中state value并不对应于哪个policy，只有在最终迭代完成后（在例子中是V7）才对应于一个policy，而且还是optimal policy</li>
 <li>如果以右下角那个state为开始的话，那路径就是-6 -5 -4 -3 -2 -1 0，而计算过程是-1 -2 -3 -4 -5 -6，所以符合上面说的Principle of Optimality的倒推性</li>
 </ul>
-<p>所以对于value iteration来说<br>需要解决的问题：找到optimal policy pi*<br>解决方案：不断去迭代Bellman optimality Equation<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/16C7EA57-ABD6-4E7F-8533-36BCA94C2A0D.png" width="50%" height="50%"><br>可以证明， <strong>最终value function会收敛到v*</strong><br>采用同步更新的方式，在新的时刻所有的state同时更新<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/D6214822-FC86-4C8C-BF90-429C21F6A836.png" width="70%" height="70%"><br>计算过程：</p>
-<table><tr><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/55DFF675-66BA-4CD0-8878-39DBC1809814.png" width="100%" height="100%"></td><td><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/E887D5E7-5635-4601-A29A-C2D4CEA11F36.png" width="100%" height="100%"></td></tr></table>
+<p>所以对于value iteration来说</p>
+<p>需要解决的问题：找到optimal policy pi*</p>
+<p>解决方案：不断去迭代Bellman optimality Equation</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/7FbcF26E5K.png" alt=""></p>
+<p>可以证明， <strong>最终value function会收敛到v*</strong></p>
+<p>采用同步更新的方式，在新的时刻所有的state同时更新</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/0cL2DLfmib.png" alt=""></p>
+<p>计算过程：</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/EeFJ4dfg6c.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/FjBAl9jHbk.png" alt=""></td></tr></table>
 
-<p>总结：value iteration的本质就是在每次迭代中每个state都选择optimal value，那么当所有的state都选择出了optimal value后，所对应的policy就是optimal policy。<br>对比policy iteration，是迭代到收敛后每个state才选择optimal value，然后这时候对应的policy就是improve后的policy pi’</p>
-<p>有个value iteration的例子：需要安装java环境<br><a href="http://www.cs.ubc.ca/~poole/demos/mdp/vi.html" target="_blank" rel="external">http://www.cs.ubc.ca/~poole/demos/mdp/vi.html</a></p>
-<p>下表是对DP的一个总结<br><img src="/images/2017-04-10-Reinforcement learning part 3 - Planning by Dynamic Programming/016A5E4D-2713-4FA7-BC4A-D15A43A0588E.png" width="80%" height="80%"></p>
-<p>5、Extensions to Dynamic Programming<br>Asynchronous Dynamic Programming<br>In-Place Dynamic Programming<br>Prioritised Sweeping<br>Real-Time Dynamic Programming<br>Full-Width Backups<br>Approximate Dynamic Programming</p>
-<p>6、Contraction Mapping</p>
+<p>总结：value iteration的本质就是在每次迭代中每个state都选择optimal value，那么当所有的state都选择出了optimal value后，所对应的policy就是optimal policy。</p>
+<p>对比policy iteration，是迭代到收敛后每个state才选择optimal value，然后这时候对应的policy就是improve后的policy pi’</p>
+<p>有个value iteration的例子：需要安装java环境</p>
+<p><a href="http://www.cs.ubc.ca/~poole/demos/mdp/vi.html" target="_blank" rel="external">http://www.cs.ubc.ca/~poole/demos/mdp/vi.html</a></p>
+<p>下表是对DP的一个总结</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/I7B4KjDCFG.png" alt=""></p>
+<p>5、</p>
+<ul>
+<li>Extensions to Dynamic Programming</li>
+<li>Asynchronous Dynamic Programming</li>
+<li>In-Place Dynamic Programming</li>
+<li>Prioritised Sweeping</li>
+<li>Real-Time Dynamic Programming</li>
+<li>Full-Width Backups</li>
+<li>Approximate Dynamic Programming</li>
+</ul>
+<p>6、</p>
+<ul>
+<li>Contraction Mapping</li>
+</ul>
 
       
     </div>

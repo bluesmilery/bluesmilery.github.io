@@ -206,50 +206,133 @@
       
         <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html" target="_blank" rel="external">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
-<h2 id="1、Markov-Processes"><a href="#1、Markov-Processes" class="headerlink" title="1、Markov Processes"></a>1、Markov Processes</h2><p>在RL中，<strong>MDP是用来描述environment的，并且假设environment是full observable的</strong><br>i.e. The current state completely characterizes the process<br>许多RL问题可以用MDP来表示：</p>
+<h2 id="1、Markov-Processes"><a href="#1、Markov-Processes" class="headerlink" title="1、Markov Processes"></a>1、Markov Processes</h2><p>在RL中，<strong>MDP是用来描述environment的，并且假设environment是full observable的</strong></p>
+<p>i.e. The current state completely characterizes the process</p>
+<p>许多RL问题可以用MDP来表示：</p>
 <ul>
 <li>Optimal control primarily deals with continuous MDPs</li>
 <li>Partially observable problems can be converted into MDPs</li>
 <li>Bandits are MDPs with one state</li>
 </ul>
 <a id="more"></a>
-<p>先介绍两个基本知识<br><em>Markov Property</em>：The future is independent of the past given the present<br>未来只与现在有关，与过去无关。这一点性质相当于是简化了模型。<br><em>State Transition Matrix</em>：从状态s转换到状态s’的概率<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950199479.png" width="40%" height="40%"><br>把所有的状态转换概率写成矩阵P     PS：矩阵每一行和为1<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950270596.png" width="40%" height="40%"></p>
+<p>先介绍两个基本知识</p>
+<p><em>Markov Property</em>：The future is independent of the past given the present</p>
+<p>未来只与现在有关，与过去无关。这一点性质相当于是简化了模型。</p>
+<p><em>State Transition Matrix</em>：从状态s转换到状态s’的概率</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/5IDhf7mckm.png" alt=""></p>
+<p>把所有的状态转换概率写成矩阵P     PS：矩阵每一行和为1</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/3fDk2ChCAi.png" alt=""></p>
 <p><strong>Markov Process</strong>：具有马尔可夫性的随机过程，用<s, p="">来表示</s,></p>
 <ul>
 <li>S is a (finite) set of states</li>
-<li>P is a state transition probability matrix<br>example：<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950581701.png" width="100%" height="100%"></li>
+<li>P is a state transition probability matrix</li>
 </ul>
-<h2 id="2、Markov-Reward-Processes"><a href="#2、Markov-Reward-Processes" class="headerlink" title="2、Markov Reward Processes"></a>2、Markov Reward Processes</h2><p>MRP是在MP的基础上增加了一个值——reward。MRP用<s, p,="" r,="" gamma="">来表示<br>其中S和P的定义与MP中的一样，R代表的是到达状态s后（或者说在状态s时）会得到的奖励（或者说是收益），gamma是折现因子，用于表示未来的收益折算到现在的比例，范围是0~1<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950778155.png" width="100%" height="100%"><br>example：<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950843566.png" width="50%" height="50%"></s,></p>
-<p><strong>Return</strong>：从第t步开始，未来N步的总收益，未来的部分是有折扣的。return只是针对某个sequence而言<br>The return Gt is the total discounted reward from time-step t.<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900950996293.png" width="40%" height="40%"><br>gamma越接近于0表示越看重眼前的收益，越接近于1表示越看重未来的收益。<br>为什么要用gamma这个discounted factor？<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900951091670.png" width="70%" height="70%"><br>example：<br>假如MRP中某个sequence是C1 C2 C3 Pass Sleep，那么在C1时的return G1 = - 2 - 2 <em> 0.5 - 2 </em> 0.25 + 10 * 0.125 = -2.25<br>注意这里R2就表示在C1（S1）处的reward，之所以下标不一样，是因为在建模时，对于t的界定是新的t+1是从agent的action结束后，environment反馈reward和observation时开始算，所以状态St = s的reward用Rt+1来表示<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952021500.png" width="100%" height="100%"></p>
-<p><strong>Value Function</strong>：MRP中只有state value function——v(s)，状态s的value function。表示的是从状态s开始对未来的期望收益。（从状态s开始往后所有的sequence的收益的期望）<br>The state value function v(s) of an MRP is the expected return starting from state s<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952312242.png" width="40%" height="40%"><br>example：<br>计算方法见Bellman Equation部分</p>
-<table><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952249550.png" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952376961.png" width="100%" height="100%"></td></tr></table>
+<p>example：</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/AAJkdFdCBI.png" alt=""></p>
+<h2 id="2、Markov-Reward-Processes"><a href="#2、Markov-Reward-Processes" class="headerlink" title="2、Markov Reward Processes"></a>2、Markov Reward Processes</h2><p>MRP是在MP的基础上增加了一个值——reward。MRP用<s, p,="" r,="" gamma="">来表示</s,></p>
+<p>其中S和P的定义与MP中的一样，R代表的是到达状态s后（或者说在状态s时）会得到的奖励（或者说是收益），gamma是折现因子，用于表示未来的收益折算到现在的比例，范围是0~1</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ebHbbF59ha.png" alt=""></p>
+<p>example：</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/hH93g4EKfc.png" alt=""></p>
+<p><strong>Return</strong>：从第t步开始，未来N步的总收益，未来的部分是有折扣的。return只是针对某个sequence而言</p>
+<p>The return Gt is the total discounted reward from time-step t.</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/EabBfi6BEa.png" alt=""></p>
+<p>gamma越接近于0表示越看重眼前的收益，越接近于1表示越看重未来的收益。</p>
+<p>为什么要用gamma这个discounted factor？</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/FCHihJcBkk.png" alt=""></p>
+<p>example：</p>
+<p>假如MRP中某个sequence是C1 C2 C3 Pass Sleep，那么在C1时的return G1 = - 2 - 2 <em> 0.5 - 2 </em> 0.25 + 10 * 0.125 = -2.25</p>
+<p>注意这里R2就表示在C1（S1）处的reward，之所以下标不一样，是因为在建模时，对于t的界定是新的t+1是从agent的action结束后，environment反馈reward和observation时开始算，所以状态St = s的reward用Rt+1来表示</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/bGGk6Kc4m5.png" alt="">&gt;</p>
+<p><strong>Value Function</strong>：MRP中只有state value function——v(s)，状态s的value function。表示的是从状态s开始对未来的期望收益。（从状态s开始往后所有的sequence的收益的期望）</p>
+<p>The state value function v(s) of an MRP is the expected return starting from state s</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/h6I1L65Jde.png" alt=""></p>
+<p>example：</p>
+<p>计算方法见Bellman Equation部分</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/LggGfhFbBB.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/bcCcb8jEhf.png" alt=""></td></tr></table>
 
-
-
-<p><strong>Bellman Equation</strong>：我们将v(s)进行一些数学变换，会发现v(s)可以分解成两部分，一部分是状态s的immediate reward Rt+1，另一部分是折扣过的下一state的v(St+1)<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952558686.png" width="50%" height="50%"><br>假设下一个state有两个，那么结构类似与下面这种树状图，将下一个的所有state都average起来求期望。就相当于树下面的加起来给上面的根节点<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952629585.png" width="50%" height="50%"><br>所以最终v(s)可以表示为<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952703676.png" width="40%" height="40%"><br>所以上面那个例子中每个state的v(s)计算过程如下：<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952777014.png" width="40%" height="40%"><br>可能会注意到计算class3的时候用到了pub，而如果计算pub的时候又会用到class3，有种循环递归的问题，但是实际上v(s)的计算表达式可以用矩阵的形式来表示<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952905484.png" width="40%" height="40%"><br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900952947626.png" width="40%" height="40%"></p>
-<p>由于这是个线性方程，所以可以直接解出。那么上面说的循环递归的问题就不存在了，因为所有state的value function是同时求出来的<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900953105317.png" width="40%" height="40%"><br>但是直接解的复杂度为O(n3)，n为state的个数，所以如果要用直接解法那么只能用于很小的MRP，对于很大的MRP，有很多迭代的方法可以用：</p>
+<p><strong>Bellman Equation</strong>：我们将v(s)进行一些数学变换，会发现v(s)可以分解成两部分，一部分是状态s的immediate reward Rt+1，另一部分是折扣过的下一state的v(St+1)</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/4hE85lCam4.png" alt=""></p>
+<p>假设下一个state有两个，那么结构类似与下面这种树状图，将下一个的所有state都average起来求期望。就相当于树下面的加起来给上面的根节点</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/A0HmB32GmB.png" alt=""></p>
+<p>所以最终v(s)可以表示为</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/db2413DJ2A.png" alt=""></p>
+<p>所以上面那个例子中每个state的v(s)计算过程如下：</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/HdEeDH6L9m.png" alt=""></p>
+<p>可能会注意到计算class3的时候用到了pub，而如果计算pub的时候又会用到class3，有种循环递归的问题，但是实际上v(s)的计算表达式可以用矩阵的形式来表示</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/55F9Cg7dHd.png" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/FHHiIGIEgD.png" alt=""></p>
+<p>由于这是个线性方程，所以可以直接解出。那么上面说的循环递归的问题就不存在了，因为所有state的value function是同时求出来的</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/chab04bLEj.png" alt=""></p>
+<p>但是直接解的复杂度为O(n3)，n为state的个数，所以如果要用直接解法那么只能用于很小的MRP，对于很大的MRP，有很多迭代的方法可以用：</p>
 <ul>
 <li>Dynamic programming（动态规划）</li>
 <li>Monte-Carlo evaluation（蒙特卡罗强化学习）</li>
 <li>Temporal-Difference learning（时序差分学习）</li>
 </ul>
-<h2 id="3、Markov-Decision-Processes"><a href="#3、Markov-Decision-Processes" class="headerlink" title="3、Markov Decision Processes"></a>3、Markov Decision Processes</h2><p>MDP是在MRP的基础上再加一个元素——action。MDP用<s, a,="" p,="" r,="" gamma="">来表示<br>MDP是agent在自己的大脑中用来描述environment模型的，MDP中每个state都具有马尔可夫性<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900953225620.png" width="100%" height="100%"><br>example：与MRP的example相比，概率变成了action，pub的state消失了，在这里如果在class3选择了pub这个action，直接会有0.2概率去class1，而不会有个pub这种state来停留<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900953298556.png" width="50%" height="50%"></s,></p>
-<p><strong>Policy</strong>：在一个state处，agent接下来会采取各种action的概率分布。实质上policy就是定义了agent的行为，在这个state会怎么选，在下一个state会怎么选等等<br>MDP的policy具有马尔可夫性，只与当前state有关。所以policy也是time-independent的<br>加入了policy后，P和R的计算方式<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900953451142.jpg" width="80%" height="80%"></p>
-<p>Value Function：在MDP中有两种value function<br><strong>state-value function</strong>——vπ(s)，状态s的value function。在遵循policy的前提下，从状态s算起的未来期望收益<br>The state-value function vπ(s) of an MDP is the expected return starting from state s, and then following policy pi<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954009196.jpg" width="40%" height="40%"><br><strong>action-value function</strong>——qπ(s, a)，在状态s处执行action a的value function。在遵循policy的前提下，在状态s处执行action a后算起的未来期望收益<br>The action-value function qπ(s, a) is the expected return starting from state s, taking action a, and then following policy pi<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954073137.jpg" width="40%" height="40%"><br>v是针对state而言，q是针对action而言<br>example：<br>计算方法见Bellman Expectation Equation部分<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954142101.jpg" width="60%" height="60%"></p>
-<p><strong>Bellman Expectation Equation</strong>：类似于MRP中的Bellman Equation，vpi(s)和qpi(s, a)也可以写成类似的表达式<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954239048.jpg" width="40%" height="40%"><br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954357252.jpg" width="40%" height="40%"></p>
-<p>类似的，也可以用树状图来表示其计算过程<br>在state s处，有两种action的选择，每种action有自己的value function，所以state s的value function就等于两种action的value function的加权和。<br>而选好一种action后，可能会跳转到的下一state有两种，所以action a的value function就等于两个下一state的value function的加权和。</p>
-<table><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954468076.jpg" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954531592.jpg" width="100%" height="100%"></td></tr></table>
-
-
+<h2 id="3、Markov-Decision-Processes"><a href="#3、Markov-Decision-Processes" class="headerlink" title="3、Markov Decision Processes"></a>3、Markov Decision Processes</h2><p>MDP是在MRP的基础上再加一个元素——action。MDP用<s, a,="" p,="" r,="" gamma="">来表示</s,></p>
+<p>MDP是agent在自己的大脑中用来描述environment模型的，MDP中每个state都具有马尔可夫性</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/HC6IEIa7ma.png" alt=""></p>
+<p>example：与MRP的example相比，概率变成了action，pub的state消失了，在这里如果在class3选择了pub这个action，直接会有0.2概率去class1，而不会有个pub这种state来停留</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/F604DLhE9d.png" alt=""></p>
+<p><strong>Policy</strong>：在一个state处，agent接下来会采取各种action的概率分布。实质上policy就是定义了agent的行为，在这个state会怎么选，在下一个state会怎么选等等</p>
+<p>MDP的policy具有马尔可夫性，只与当前state有关。所以policy也是time-independent的</p>
+<p>加入了policy后，P和R的计算方式</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/3eB784FE2d.jpg" alt=""></p>
+<p>Value Function：在MDP中有两种value function</p>
+<p><strong>state-value function</strong>——vπ(s)，状态s的value function。在遵循policy的前提下，从状态s算起的未来期望收益</p>
+<p>The state-value function vπ(s) of an MDP is the expected return starting from state s, and then following policy pi</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ce9ad85gLD.jpg" alt=""></p>
+<p><strong>action-value function</strong>——qπ(s, a)，在状态s处执行action a的value function。在遵循policy的前提下，在状态s处执行action a后算起的未来期望收益</p>
+<p>The action-value function qπ(s, a) is the expected return starting from state s, taking action a, and then following policy pi</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/F5iH7582Ag.jpg" alt=""></p>
+<p>v是针对state而言，q是针对action而言</p>
+<p>example：</p>
+<p>计算方法见Bellman Expectation Equation部分</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/1DKibehlEc.jpg" alt=""></p>
+<p><strong>Bellman Expectation Equation</strong>：类似于MRP中的Bellman Equation，vpi(s)和qpi(s, a)也可以写成类似的表达式</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/mI4ECD0kJe.jpg" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/maf91FD5iL.jpg" alt=""></p>
+<p>类似的，也可以用树状图来表示其计算过程</p>
+<p>在state s处，有两种action的选择，每种action有自己的value function，所以state s的value function就等于两种action的value function的加权和。</p>
+<p>而选好一种action后，可能会跳转到的下一state有两种，所以action a的value function就等于两个下一state的value function的加权和。</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/haddhfgmLh.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/m6eEiJ4c4I.jpg" alt=""></td></tr></table>
 
 <p>把上面的树形结构链接起来后就是下面这个样子，如果要求state s的value function（也就是根结点是白点），那么如图左；如果要求action a的value function（也就是根结点是黑点），那么如图右。</p>
-<table><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954627070.jpg" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954681992.jpg" width="100%" height="100%"></td></tr></table><br>example：<br>在MDP中vpi(s)的计算过程如下，假设选取每种action的概率相同<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954764585.jpg" width="60%" height="60%"><br>当然vpi(s)的计算还是可以用矩阵来表示的<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954924521.jpg" width="40%" height="40%"><br>direct solution：<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900954977598.jpg" width="40%" height="40%"><br><br>当然，在实际中我们的目标是寻求一个最优解，在state处选择哪个action收益最好，所以就有了以下的内容<br>Optimal Value Function：<br><strong>optimal state-value function</strong>——v<em> (s)，在所有的policy中，选出最大的vpi(s)<br>The optimal state-value function v</em>(s) is the maximum value function over all policies<br><br><strong>optimal action-value function</strong>——q<em> (s, a)，在所有的policy中，选出最大的qpi(s, a)<br>The optimal action-value function q</em>(s, a) is the maximum action-value function over all policies<br><br>OVF代表着MDP中最优的表现（收益）。如果我们知道了OVF，也就意味着这个MDP是solved<br>example：<br>右边那个图pub的q* 应该是9.4 = 1 + (0.2 x 6 + 0.4 x 8 + 0.4 x 10)<br><table><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900955968345.jpg" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956258752.jpg" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/kaglF63HfB.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/fJmf4l7Elc.jpg" alt=""></td></tr></table>
 
-<p><strong>Optimal Policy</strong>：<br>先定义一下policy的好坏，如下，pi好于pi’<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956383179.jpg" width="40%" height="40%"><br>比较重要的是在任意一个MDP中，肯定会有一个optimal policy pi*<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956453002.jpg" width="100%" height="100%"><br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956603835.jpg" width="80%" height="80%"></p>
-<p>example：<br>红色的箭头就代表了optimal policy<br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956668487.jpg" width="60%" height="60%"></p>
-<p><strong>Bellman Optimality Equation</strong>：<br>依旧用树状图来表示计算过程</p>
-<p><table><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956823036.jpg" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956879552.jpg" width="100%" height="100%"></td></tr><tr><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956933680.jpg" width="100%" height="100%"></td><td><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900956983239.jpg" width="100%" height="100%"></td></tr></table><br><img src="/images/2017-03-21-Reinforcement learning part 2 - Markov Decision Process/14900957037932.jpg" width="60%" height="60%"></p>
-<p>既然要找到MDP的最优解，那么就要解Bellman Optimality Equation<br>因为存在max的计算过程，所以BOE是一个非线性方程，通常没有什么直接解法，但是可以用一些迭代方法来解</p>
+<p>example：</p>
+<p>在MDP中vpi(s)的计算过程如下，假设选取每种action的概率相同</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/LhHCEmEEIK.jpg" alt=""></p>
+<p>当然vpi(s)的计算还是可以用矩阵来表示的</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/L8f4KI62DE.jpg" alt=""></p>
+<p>direct solution：</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/7i5c464i1A.jpg" alt=""></p>
+<p>当然，在实际中我们的目标是寻求一个最优解，在state处选择哪个action收益最好，所以就有了以下的内容</p>
+<p>Optimal Value Function：</p>
+<p><strong>optimal state-value function</strong>——v* (s)，在所有的policy中，选出最大的vpi(s)<br>The optimal state-value function v*(s) is the maximum value function over all policies</p>
+<p><strong>optimal action-value function</strong>——q* (s, a)，在所有的policy中，选出最大的qpi(s, a)<br>The optimal action-value function q*(s, a) is the maximum action-value function over all policies</p>
+<p>OVF代表着MDP中最优的表现（收益）。如果我们知道了OVF，也就意味着这个MDP是solved</p>
+<p>example：</p>
+<p>右边那个图pub的q* 应该是9.4 = 1 + (0.2 x 6 + 0.4 x 8 + 0.4 x 10)</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/BE6Ljme1Ck.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/Dmc4ibc94a.jpg" alt=""></td></tr></table>
+
+<p><strong>Optimal Policy</strong>：</p>
+<p>先定义一下policy的好坏，如下，pi好于pi’</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/Ge7lehFkCd.jpg" alt=""></p>
+<p>比较重要的是在任意一个MDP中，肯定会有一个optimal policy pi*</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/G82cILLLE5.jpg" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/AhbDKjh5Jf.jpg" alt=""></p>
+<p>example：</p>
+<p>红色的箭头就代表了optimal policy</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/E19k621JI0.jpg" alt=""></p>
+<p><strong>Bellman Optimality Equation</strong>：</p>
+<p>依旧用树状图来表示计算过程</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/lD95b50FCc.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/gHaD9gf6e1.jpg" alt=""></td></tr><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/1E5eA59KiC.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/b757mj0CDh.jpg" alt=""></td></tr></table>
+
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/IHe7BDjEFD.jpg" alt=""></p>
+<p>既然要找到MDP的最优解，那么就要解Bellman Optimality Equation</p>
+<p>因为存在max的计算过程，所以BOE是一个非线性方程，通常没有什么直接解法，但是可以用一些迭代方法来解</p>
 <ul>
 <li>Value Iteration</li>
 <li>Policy Iteration</li>

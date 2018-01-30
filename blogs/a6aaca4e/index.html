@@ -207,30 +207,45 @@
         <p>本文是在学习David Silver所教授的Reinforcement learning课程过程中所记录的笔记。因为个人知识的不足以及全程啃生肉，难免会有理解偏差的地方，欢迎一起交流。</p>
 <p>课程资料：<a href="http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html" target="_blank" rel="external">http://www0.cs.ucl.ac.uk/staff/D.Silver/web/Teaching.html</a></p>
 <h2 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h2><p>上一节讲的东西是基于已知的MPD，也就是有模型学习，而实际中很多情况下MDP是未知的，各个状态之间的转移概率以及reward很难得知，所以这种环境称为model free。</p>
-<p>首先先讲model free prediction，类似于DP中的policy evaluation，去估计这个未知的MDP中各个状态的value function。<br>下一节会讲model free control，类似于DP中的policy iteration，去最优化这个未知的MDP中各个状态的value function。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/E92FA9D7-313D-417C-BBC6-8D45A163A474.png" width="70%" height="70%"></p>
+<p>首先先讲model free prediction，类似于DP中的policy evaluation，去估计这个未知的MDP中各个状态的value function。]</p>
+<p>下一节会讲model free control，类似于DP中的policy iteration，去最优化这个未知的MDP中各个状态的value function。</p>
 <a id="more"></a>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/2jKbEh0B4d.png" alt=""></p>
 <h2 id="2、Monte-Carlo-Learning"><a href="#2、Monte-Carlo-Learning" class="headerlink" title="2、Monte-Carlo Learning"></a>2、Monte-Carlo Learning</h2><p>在有模型的时候给定一个policy pi后对这个policy进行评估很简单，但是在model free的情况下，不知道MDP的状态转移概率及reward（但是知道state），就无法用原来的公式进行计算。所以MC采用的学习方式是learn directly from episodes of experience。这里episode理解为MDP中的某个序列，比如在之前的student例子中，C1 C2 C3 Pass Sleep就可理解为一个episode。MC的思想就是在MDP中，依据给定的policy pi去行动，会依次经过一些state并且得到reward。如果不断的尝试（尝试一次就是一个episode），那么就可以大体估计出MDP的状态转移概率和reward。</p>
 <p>需要注意的是MC学习用的episode必须是完整的和有终止状态的。（完整可以这么理解，假如从C1 state开始，在policy pi下会依次经过C2 C3 Pass Sleep这些state，其中sleep是终止状态，那么C1到sleep就被称为一个完整的episode，要使用MC方法来计算C1的state value function，那必须使用这个完整的episode。与之相对的是下面要讲的TD方法是使用不完整的episode，比如计算C1的state value function ，只需使用C1 C2就可以）</p>
-<p>使用Monte-Carlo进行policy evaluation。回忆下原来计算state value function的时候是求从状态s开始对未来的期望收益，而在MC中，收益的计算方法依旧一样，因为MC使用完整的episode，所以对于状态s后面的reward都知道。但是不再是对未来的收益求期望了（因为转移概率不知道），我们采用最简单的方法，求平均value = mean return<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/21EA3F2A-7B69-40EA-B1E9-18A1A2C19F65.png" width="70%" height="70%"></p>
+<p>使用Monte-Carlo进行policy evaluation。回忆下原来计算state value function的时候是求从状态s开始对未来的期望收益，而在MC中，收益的计算方法依旧一样，因为MC使用完整的episode，所以对于状态s后面的reward都知道。但是不再是对未来的收益求期望了（因为转移概率不知道），我们采用最简单的方法，求平均value = mean return</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/kdmeEgec7H.png" alt=""></p>
 <p>在一个episode，如果经过了状态s，那么N(s)就累加一，S(s)累加上这次的return。然后状态s的V(s)就等于S/N，如果尝试的episode次数足够多，那么求出来的V(s)就是Vpi(s)。（原因是尝试的次数足够多后，整个policy的所有情况都会遍历到，从状态s往后的各种情况的return的概率用频率逼近，所以也就和求期望是一样的了）</p>
-<p>可以看到first标记为红色，意思是在一个episode中，第一次经过状态s才计数，如果一个episode中经过了状态s好几次（循环），那么后面几次都不算的。与之相对的是every，就是每次经过状态s都计数。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/387EDD82-D792-4E90-A155-39F6FF3211A9.png" width="80%" height="80%"></p>
-<p>下面讲了一个例子，玩blackjack 21点<br>简单描述下建模过程，每个state由三个因素构成，agent手中牌的点数和，dealer显示的一张牌的点数，agent手中有没有ace（也就是A，这张牌既可以当1点，也可以当10点），这是agent能观察到的environment。agent的action有两种，stick和twist。reward按照胜负来表示，赢了+1，平手为0，输了-1<br>后面是使用MC来评估value function，在经过10000次episode（也就是10000局比赛），可以发现图像并不平整还有起伏，说明还有噪声，也就是还没收敛到Vpi，在经过50000局比才后，图像很平整，就可以认为已经收敛到Vpi了</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4FE0C5A0-332F-4F17-97C8-892A0E8B769C.jpg" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/BB4D7A1A-6B92-402E-BF7D-D4A960BEA8B0.jpg" width="100%" height="100%"></td></tr></table>
+<p>可以看到first标记为红色，意思是在一个episode中，第一次经过状态s才计数，如果一个episode中经过了状态s好几次（循环），那么后面几次都不算的。与之相对的是every，就是每次经过状态s都计数。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/0CJcGbjE24.png" alt=""></p>
+<p>下面讲了一个例子，玩blackjack 21点</p>
+<p>简单描述下建模过程，每个state由三个因素构成，agent手中牌的点数和，dealer显示的一张牌的点数，agent手中有没有ace（也就是A，这张牌既可以当1点，也可以当10点），这是agent能观察到的environment。agent的action有两种，stick和twist。reward按照胜负来表示，赢了+1，平手为0，输了-1</p>
+<p>后面是使用MC来评估value function，在经过10000次episode（也就是10000局比赛），可以发现图像并不平整还有起伏，说明还有噪声，也就是还没收敛到Vpi，在经过50000局比才后，图像很平整，就可以认为已经收敛到Vpi了</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/KKdmKJ0l5B.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/I4LJ5C9EGb.jpg" alt=""></td></tr></table>
 
-<p>有个问题可以改进，那就是求平均值那里，原来是把所有的值都累加完再求，而其实<strong>均值是可以增量求的</strong>。k个值的均值等于前k-1值的均值加上后面那部分，后面那部分可以看作是一个误差，什么与什么的误差呢，就是前k-1个求出来的均值是uk-1，预计下一个值也是uk-1，但实际上第k个值是xk，所以就产生了个误差，所以就要把这部分误差加上去修正平均值。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A33168FD-B9B8-4373-97B6-96E9B1FC7E6D.png" width="30%" height="30%"></p>
-<p>所以在MC中更新V(s)可以用增量的方式，每完成一个episode，便可以用Gt去增量更新V(s)<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/886703F4-CC7E-4764-80F3-33463A0F4F06.png" width="50%" height="50%"></p>
-<p>后面误差前的系数虽然是跟次数有关，但实际上也可以用一个固定值代替，因为在实际情况中，记录次数需要额外开销，并且如果是一个动态的系统，也没法从头到尾一直记录次数。可以证明的是，用固定值代替也不影响结果。<br>In non-stationary problems, it can be useful to track a running mean, i.e. forget old episodes.<br>In real world, don’t want to remember everything.<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/FAB7BF81-27D8-4302-9E11-B372A066ADF8.png" width="50%" height="50%"></p>
+<p>有个问题可以改进，那就是求平均值那里，原来是把所有的值都累加完再求，而其实<strong>均值是可以增量求的</strong>。k个值的均值等于前k-1值的均值加上后面那部分，后面那部分可以看作是一个误差，什么与什么的误差呢，就是前k-1个求出来的均值是uk-1，预计下一个值也是uk-1，但实际上第k个值是xk，所以就产生了个误差，所以就要把这部分误差加上去修正平均值。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/mh6b7i82G2.png" alt=""></p>
+<p>所以在MC中更新V(s)可以用增量的方式，每完成一个episode，便可以用Gt去增量更新V(s)</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/3Db7lddldb.png" alt=""></p>
+<p>后面误差前的系数虽然是跟次数有关，但实际上也可以用一个固定值代替，因为在实际情况中，记录次数需要额外开销，并且如果是一个动态的系统，也没法从头到尾一直记录次数。可以证明的是，用固定值代替也不影响结果。</p>
+<p>In non-stationary problems, it can be useful to track a running mean, i.e. forget old episodes.</p>
+<p>In real world, don’t want to remember everything.</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/68fe1CC2Ib.png" alt=""></p>
 <h2 id="3、Temporal-Difference-Learning"><a href="#3、Temporal-Difference-Learning" class="headerlink" title="3、Temporal-Difference Learning"></a>3、Temporal-Difference Learning</h2><p>TD称为时序差分学习。MC因为要完成一个episode后才能更新V(s)，效率比较低，所以TD便改进了这一点，learn directly from incomplete episodes of experience，TD使用的是不完整的episode。</p>
-<p>MC使用的是真实的return来更新V(s)，但是TD不是。TD使用一步真实的reward加上对下一个状态的state value function的猜测，所以TD updates a guess towards a guess。这种方法的好处就是走出一步就可以更新V(s)，而不用等整个episode完成。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/AE2D13D1-4BAA-4306-A998-B069B7088116.png" width="70%" height="70%"></p>
+<p>MC使用的是真实的return来更新V(s)，但是TD不是。TD使用一步真实的reward加上对下一个状态的state value function的猜测，所以TD updates a guess towards a guess。这种方法的好处就是走出一步就可以更新V(s)，而不用等整个episode完成。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/1AgbFc8ADi.png" alt=""></p>
 <p>下面举个例子，下班回家时对耗时的估计。可以看到MC要等整个路程都完成后才能更新各个状态的值，而TD在进行到下一状态后就可以更新上一状态的值。</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/C66CF90D-9764-4490-B38B-99BF1E67F69B.png" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/5CE4D620-BA50-4495-A13B-3B3C49090D35.jpg" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/GmajgKga07.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/LI3eBgh2k5.jpg" alt=""></td></tr></table>
 
 <p>所以MC与TD相比较</p>
 <ul>
 <li>TD can learn before knowing the final outcome<br>TD在每步结束后就可以实时学习（learn online），也就是实时更新state value function。但是MC必须整个episode完成后才能求出Gt，从而更新state value function</li>
 <li>TD can learn without the final outcome<br>TD可以使用不完整的episode学习，MC只能使用完整的episode学习。这样的话，TD可以用于continuing (non-terminating)的environment中，而MC只能用于episodic (terminating)的environment中</li>
 </ul>
-<p>再来讨论下Bias/Variance平衡的问题<br>bias：MC中的Gt是属于无偏估计的，因为用到的reward都是真实的没有偏差的，但是TD target是有偏差的估计，因为V(st+1)是猜的，不是真实的。<br>variance：因为MC的Gt要加很多项，每一项都会存在随机的噪声，所以MC的variance会很高，而TD只有两项，所以受到的随机因素影响很小，从而TD的variance就小。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/29A0CB28-583F-4BD7-896A-D39DBAFBD9A0.png" width="70%" height="70%"></p>
+<p>再来讨论下Bias/Variance平衡的问题</p>
+<p>bias：MC中的Gt是属于无偏估计的，因为用到的reward都是真实的没有偏差的，但是TD target是有偏差的估计，因为V(st+1)是猜的，不是真实的。</p>
+<p>variance：因为MC的Gt要加很多项，每一项都会存在随机的噪声，所以MC的variance会很高，而TD只有两项，所以受到的随机因素影响很小，从而TD的variance就小。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/b9CCaLibjh.png" alt=""></p>
 <p>所以这是MC与TD第二个区别</p>
 <ul>
 <li>MC has high variance, zero bias<ul>
@@ -249,12 +264,16 @@
 </li>
 </ul>
 <p>下面再讲个例子，有一条直线，左右两边是终止状态，中间是ABCDE五个状态，action是向左或者向右，只有在E向右的时候才会得到reward+1，左边是对各个状态的state value function的估计，可以看到经过100次episode后，已经比较接近真实的value了。右图是统计了估计的value与真实的value之间的RMS误差，上半部分是MC，下半部分是TD，分别使用了不同的alpha值，可以看到TD整体是优于MC的，并且随着episode次数的增加，误差逐渐减少并趋于稳定，在平稳部分还有波动那就是噪声引起的，这也可以看出TD的variance比MC的小很多。</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/2BB787D8-F799-4A6B-BB41-0892035A2AA5.jpg" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0196FCF3-90AB-4D35-8B4D-FC981BD20AE7.jpg" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/54HDEafKDg.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/jBFgmgFlJg.jpg" alt=""></td></tr></table>
 
-<p>之前说道MC和TD在experience趋向无穷的时候，V(s)才会收敛于Vpi(s)，那如果experience是有限的呢？<br>比如这个例子，总共只有八次episode，求AB两个状态的state value function。可以先求B的，8次中有两次得到的reward是0，6次得到的reward是1，所以V(B) = 6/8 = 0.75。那A的呢，如果以MC的角度去看，出现A的episode只有第一个，并且在AB收到的reward都为0，所以Gt = 0，从而V(A) = 0。但是从TD的角度看，我们先用得到的episode构建出MDP，所以V(A) = 0 + V(B) = 0.75</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9BB5E63F-8455-427D-9AE5-515ADDD769E4.png" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4CA3F908-FD81-4530-8ECE-B5DC48F8FBC6.jpg" width="100%" height="100%"></td></tr></table>
+<p>之前说道MC和TD在experience趋向无穷的时候，V(s)才会收敛于Vpi(s)，那如果experience是有限的呢？</p>
+<p>比如这个例子，总共只有八次episode，求AB两个状态的state value function。可以先求B的，8次中有两次得到的reward是0，6次得到的reward是1，所以V(B) = 6/8 = 0.75。那A的呢，如果以MC的角度去看，出现A的episode只有第一个，并且在AB收到的reward都为0，所以Gt = 0，从而V(A) = 0。但是从TD的角度看，我们先用得到的episode构建出MDP，所以V(A) = 0 + V(B) = 0.75</p>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/hBgA214Af3.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/A163FgDI4J.jpg" alt=""></td></tr></table>
 
-<p>从这个例子中也可以看出在有限的experience下，MC和TD的计算方法是不一样的<br>MC：是求最小均方误差，就是使用出现过A的episode来的计算Gt，然后更新state value function<br>TD：是使用最大似然马尔可夫模型，根据所有的episode计算出状态转移概率和reward，从而求出state value function<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/B435018E-AFBF-493E-A6A2-97ACAA1538BF.png" width="70%" height="70%"></p>
+<p>从这个例子中也可以看出在有限的experience下，MC和TD的计算方法是不一样的</p>
+<p>MC：是求最小均方误差，就是使用出现过A的episode来的计算Gt，然后更新state value function</p>
+<p>TD：是使用最大似然马尔可夫模型，根据所有的episode计算出状态转移概率和reward，从而求出state value function</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/jdjIBL6A94.png" alt=""></p>
 <p>通过这个例子可以看出MC与TD的第三点区别，TD能利用马尔可夫性，所以在马尔可夫环境下更有效率，而MC无法利用马尔可夫性，所以在非马尔可夫环境下更有效率</p>
 <ul>
 <li>TD exploits Markov property<ul>
@@ -267,36 +286,55 @@
 </li>
 </ul>
 <p>下面总结一下MC、TD、DP的区别，MC是使用一个完整的episode来更新V(s)，TD是使用不完整的episode来更新V(s)，而DP是使用状态s后面下一步所有的状态来计算V(s)</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/77DDA058-E744-4053-9230-9547AD21CE12.png" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A3A0C7D9-A390-4C7D-8D13-BA3170CD9B4F.png" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9A8E4CE2-A41E-4C7A-9D2E-80B60116C92C.png" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/gc6h0AkGKa.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/2JL8I4e6b4.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/71J69Gjde6.png" alt=""></td></tr></table>
 
-<p>而且还有两个概念前面没有提及，bootstrapping和sampling<br>sampling可以理解成抽样，就是使用一个episode，可以看到MC和TD是使用sampling的，而DP是使用遍历下一层所有的情况，所以不使用sampling<br>bootstrapping可以理解成是不是需要使用完整的episode，像TD和DP都是使用下一层来计算上一层的，而MC是使用一个完整的episode，一直到terminate<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0E72C495-842B-4C95-9938-D3A272EEF4CE.png" width="70%" height="70%"></p>
-<p>下面这张图从bootstrapping和sampling两个维度把之前讲的方法进行了分类，一目了然<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/80C51E09-F894-46BF-AC72-F1064A2231F3.jpg" width="50%" height="50%"></p>
-<h2 id="4、TD-λ"><a href="#4、TD-λ" class="headerlink" title="4、TD(λ)"></a>4、TD(λ)</h2><p>之前讲的TD都是只考虑了未来的一步，那可不可以考虑未来的两步呢，甚至是三步四步？当然可以，见下图，这就称作n-step TD，如果n无穷，那么就是MC方法了<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/A3D30FEA-32FB-4B11-A568-EA9296965BE6.jpg" width="50%" height="50%"></p>
-<p>在n-step TD中Gt的计算方法如下<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4F2F794A-F1CF-43FF-B244-3391E750E9B7.png" width="70%" height="70%"></p>
-<p>那么n-step TD的V(s)更新公式变为<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/3C733C4B-583B-4649-A3FF-866D8EDBA1E4.png" width="50%" height="50%"></p>
-<p>下图是Large Random Walk Example，统计了经过10次episode后的RMS误差，横坐标为选择不同的alpha，图中不同的曲线代表了n的不同取值。<br>上面的是online的，immediately update value function。下面的是offline，delay update until the end of episode<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/F844E00C-39EA-4B5D-AFEA-1375E35D5058.jpg" width="50%" height="50%"></p>
+<p>而且还有两个概念前面没有提及，bootstrapping和sampling</p>
+<p>sampling可以理解成抽样，就是使用一个episode，可以看到MC和TD是使用sampling的，而DP是使用遍历下一层所有的情况，所以不使用sampling</p>
+<p>bootstrapping可以理解成是不是需要使用完整的episode，像TD和DP都是使用下一层来计算上一层的，而MC是使用一个完整的episode，一直到terminate</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/8G3Imk6g58.png" alt=""></p>
+<p>下面这张图从bootstrapping和sampling两个维度把之前讲的方法进行了分类，一目了然</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/712FL9gdBI.jpg" alt=""></p>
+<h2 id="4、TD-λ"><a href="#4、TD-λ" class="headerlink" title="4、TD(λ)"></a>4、TD(λ)</h2><p>之前讲的TD都是只考虑了未来的一步，那可不可以考虑未来的两步呢，甚至是三步四步？当然可以，见下图，这就称作n-step TD，如果n无穷，那么就是MC方法了</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/iDHcgib9L4.jpg" alt=""></p>
+<p>在n-step TD中Gt的计算方法如下</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/jBmfE4d9F0.png" alt=""></p>
+<p>那么n-step TD的V(s)更新公式变为</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/KfG3jKDlIF.png" alt=""></p>
+<p>下图是Large Random Walk Example，统计了经过10次episode后的RMS误差，横坐标为选择不同的alpha，图中不同的曲线代表了n的不同取值。</p>
+<p>上面的是online的，immediately update value function。下面的是offline，delay update until the end of episode</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/0L8d8I2CcB.jpg" alt=""></p>
 <p>可以看到online与offline误差最小的位置不一样，如果我们换了一个MDP或者做了一些其他的变化，那这个最优点就会变化，选的n就会变，如果每次都要画这种图来比较的话就太麻烦了，有没有什么办法可以解决一下？</p>
-<p>答案是有的，那就是把不同的n-step组合一下，比如把n=4和n=2按照一半一半的比例组合一下。但是这么组合很傻瓜，有没有什么更有效的组合方法？<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/388FAB25-EA82-4A1E-9815-95556683CC03.png" width="50%" height="50%"></p>
-<p>答案也是有的，把所有的n-step都综合起来，各自的比例分别是(1-λ)λn-1，所以新的Gtλ就是把Gt(n)按照各自的比例加起来，然后用Gtλ来更新V(s)，所以这种TD称作Forward-view TD(λ)<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/7CFABCFB-5B11-4C61-82E9-CCA1C24BA17A.jpg" width="50%" height="50%"></p>
-<p>关于n-step各自的比例(1-λ)λn-1是服从指数分布的<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/6B7515C5-2AB0-4C0A-99D9-F572054CE3EE.jpg" width="50%" height="50%"></p>
-<p>Forward-view TD(λ)如下图所示，在更新状态St时需要用到未来的值，所以被称作像前看forward view。但是需要注意的是，因为需要用到所有的n-step，所以它也需要完整的episode的才能计算，这一点与MC一样<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/F4C7BFCE-3ACD-43D4-B7B0-F4514118778D.jpg" width="70%" height="70%"></p>
-<p>这是Forward-view TD(λ) on Large Random Walk，图中不同的曲线代表着选择了不同的λ<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/4C35F103-1580-4FEA-A389-3058B41A4812.jpg" width="70%" height="70%"></p>
+<p>答案是有的，那就是把不同的n-step组合一下，比如把n=4和n=2按照一半一半的比例组合一下。但是这么组合很傻瓜，有没有什么更有效的组合方法？</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/IFCa31G44j.png" alt=""></p>
+<p>答案也是有的，把所有的n-step都综合起来，各自的比例分别是(1-λ)λn-1，所以新的Gtλ就是把Gt(n)按照各自的比例加起来，然后用Gtλ来更新V(s)，所以这种TD称作Forward-view TD(λ)</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/gdhelHEg0b.jpg" alt=""></p>
+<p>关于n-step各自的比例(1-λ)λn-1是服从指数分布的</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/HmckfdB5f2.jpg" alt=""></p>
+<p>Forward-view TD(λ)如下图所示，在更新状态St时需要用到未来的值，所以被称作像前看forward view。但是需要注意的是，因为需要用到所有的n-step，所以它也需要完整的episode的才能计算，这一点与MC一样</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/a2e76f9GLe.jpg" alt=""></p>
+<p>这是Forward-view TD(λ) on Large Random Walk，图中不同的曲线代表着选择了不同的λ</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/8fLKcJHem0.jpg" alt=""></p>
 <p>既然有forward view，那么肯定有backward view</p>
 <ul>
 <li>Forward view provides theory</li>
 <li>Backward view provides mechanism</li>
 <li><strong>Update online, every step, from incomplete sequences</strong></li>
 </ul>
-<p>讲述一个新概念，Eligibility Traces，字面理解是资格迹或者传导径迹，其实质是判断过去经历过的状态中哪些对现在的状态有影响。比如依次经过了三次响铃，一次灯亮后，你遭到了电击，那么是三次响铃导致了电击，还是说灯亮后会导致电击。当然都有可能，所以我们从把这两方面都考虑进去，考虑频率的称为frequency heuristic，考虑最近的称为recency heuristic，然后把它们俩结合起来。<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/0E1CE4C9-3466-4006-AA04-E208686D1B51.jpg" width="70%" height="70%"></p>
-<p>下面是backward view TD(λ)的主要含义，对于每个state来说都有自己的eligibility trace E(s)，在更新V(s)的时候把E(s)也考虑进去了，乘在TD error部分<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/55BA8087-15E3-4FB5-8C2A-DD9820FE7EB9.jpg" width="50%" height="50%"></p>
-<p>E(s)初始化为0，在第一次经过状态s的时候便会+1，并且每一时刻E(s)都会按照<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/1E549164-9CEB-4998-B90A-9F6264563652.jpg" width="20%" height="20%"></p>
+<p>讲述一个新概念，Eligibility Traces，字面理解是资格迹或者传导径迹，其实质是判断过去经历过的状态中哪些对现在的状态有影响。比如依次经过了三次响铃，一次灯亮后，你遭到了电击，那么是三次响铃导致了电击，还是说灯亮后会导致电击。当然都有可能，所以我们从把这两方面都考虑进去，考虑频率的称为frequency heuristic，考虑最近的称为recency heuristic，然后把它们俩结合起来。</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/1L1I92h7af.jpg" alt=""></p>
+<p>下面是backward view TD(λ)的主要含义，对于每个state来说都有自己的eligibility trace E(s)，在更新V(s)的时候把E(s)也考虑进去了，乘在TD error部分</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/Ihdf4HLdfg.jpg" alt=""></p>
+<p>E(s)初始化为0，在第一次经过状态s的时候便会+1，并且每一时刻E(s)都会按照</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/8l7BhAe1Ci.jpg" alt=""></p>
 <p>进行指数级衰减，如果再次经过了状态s，那么再+1。这个+1就是下图中突然向上的那一下。</p>
 <p>假设下图描述的就是状态s的eligibility trace，在最一开始的时候为0，然后第一次经过状态s后+1，然后开始衰减，但是过了很短的时间又经过了状态s，所以又向上冲了一下。所以图中前面一部分就是很短的时间内经过了状态s四次，所以此时E(s)就很高，但是在接下来很长的时间内没有在经过状态s，所以E(s)快速衰减，接近于0。此时再次连续两次经过状态s，又很长时间没经过，然后再次经过状态s，然后就结束了。所以图片就是状态s的E(s)的值的变化情况。</p>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/835A6524-9B0B-438D-864B-42914BEF9ED6.jpg" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/16D01323-BC5B-4B68-8F38-DB8F8E1F6F9B.png" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/2l20ahiH1f.jpg" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/68916dFA16.png" alt=""></td></tr></table>
 
-<p>backward view TD(λ)的伪代码，看着比较容易理解这个算法是怎么样的，以及eligibility trace是如何更新的<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/DC3DE8F9-231E-4C93-8B2E-F514C8DC76CF.jpg" width="70%" height="70%"></p>
+<p>backward view TD(λ)的伪代码，看着比较容易理解这个算法是怎么样的，以及eligibility trace是如何更新的</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/IAkd36Ld6e.jpg" alt=""></p>
 <p>Forward view和backward view的本质是一样的，只是从两个角度去描述了同一件事情。Forward view是向未来看，用未来的reward来更新当前状态，而backward view是向过去看，在当前状态收到reward了以后，它会把reward传递回过去，去更新过去的点（以过去状态的角度看来，这不也就是用未来的reward来更新自己吗）。并且forward view和backward view都是离当前状态近的占的比例高，如果两个状态离的很远（假设为A,B，以时间为顺序A在过去B在未来），从forward view的角度看，B对A的影响很小，从backward view的角度看，B往回传递给A的影响也很小，是统一的。</p>
-<p>当λ=0时，便是最一开始讲的TD(0)<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/D05DF01D-3F1E-4B24-A7C9-62F669272E40.png" width="70%" height="70%"></p>
+<p>当λ=0时，便是最一开始讲的TD(0)</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/3aBdBHGecG.png" alt=""></p>
 <p>而当λ=1时，是与MC是等价的，下面几张图就说的是这件事</p>
 <ul>
 <li>When λ = 1, credit is deferred until end of episode</li>
@@ -304,7 +342,7 @@
 <li>Over the course of an episode, total update for TD(1) is the</li>
 <li>same as total update for MC</li>
 </ul>
-<table><tr><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/6E3E1193-172A-4470-859A-C75376E4DC73.png" width="100%" height="100%"></td><td><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/2366B8D4-7474-4D0B-9AFD-581C68C059DD.png" width="100%" height="100%"></td></tr></table>
+<table><tr><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/fk3H2D6l76.png" alt=""></td><td><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/9hhAF66270.png" alt=""></td></tr></table>
 
 <ul>
 <li>TD(1) is roughly equivalent to every-visit Monte-Carlo</li>
@@ -312,9 +350,10 @@
 <li>If value function is only updated offline at end of episode</li>
 <li>Then total update is exactly the same as MC</li>
 </ul>
-<p><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/48755315-3DA4-45C2-A38F-759E28CF972C.png" width="70%" height="70%"></p>
-<p>实质上forward-view TD(λ)和backward view TD(λ)是等价的，是一个算法从两个角度去看<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/9D856884-5438-4995-AD31-E083B7DB6041.png" width="70%" height="70%"></p>
-<p><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/116EE0F0-1CC4-4AC0-9503-10CFDAC087F6.png" width="70%" height="70%"></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/69I12jlK8I.png" alt=""></p>
+<p>实质上forward-view TD(λ)和backward view TD(λ)是等价的，是一个算法从两个角度去看</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/H3HLj6deh9.png" alt=""></p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ImFcjGIgDd.png" alt=""></p>
 <p>Offline updates</p>
 <ul>
 <li>Updates are accumulated within episode</li>
@@ -328,7 +367,8 @@
 <li>By using a slightly dierent form of eligibility trace</li>
 <li>Sutton and von Seijen, ICML 2014</li>
 </ul>
-<p>总结：<br><img src="/images/2017-05-16-Reinforcement learning part 4 - Model-Free Prediction/5BBBEE88-2D53-46DE-8CC8-AB1340B51822.png" width="100%" height="100%"></p>
+<p>总结：</p>
+<p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/lkKf7hkl2l.png" alt=""></p>
 
       
     </div>

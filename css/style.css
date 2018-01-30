@@ -547,25 +547,33 @@ h6 {
       .post .post-header .post-link.active:before, .post .post-header .post-link:active:before, .post .post-header .post-link:focus:before, .post .post-header .post-link:hover:before {
         right: 0;
         left: 0; }
-    .post .post-header .post-meta .post-time {
-      font-size: 15px;
-      color: #8a8a8a; }
-    .post .post-header .post-meta .post-category {
-      display: inline;
-      font-size: 14px;
-      color: #8a8a8a; }
-      .post .post-header .post-meta .post-category::before {
-        content: '·'; }
-      .post .post-header .post-meta .post-category a {
-        color: inherit; }
-        .post .post-header .post-meta .post-category a:hover {
-          color: #c05b4d; }
-    .post .post-header .post-meta .post-visits {
-      display: inline-block;
-      font-size: 14px;
-      color: #8a8a8a; }
-      .post .post-header .post-meta .post-visits::before {
-        content: '·'; }
+    .post .post-header .post-meta {
+      /* 修改字数统计的字体，分隔符均换为| -- Gai */ }
+      .post .post-header .post-meta .post-time {
+        font-size: 14px;
+        color: #8a8a8a; }
+      .post .post-header .post-meta .post-category {
+        display: inline;
+        font-size: 14px;
+        color: #8a8a8a; }
+        .post .post-header .post-meta .post-category::before {
+          content: ' | '; }
+        .post .post-header .post-meta .post-category a {
+          color: inherit; }
+          .post .post-header .post-meta .post-category a:hover {
+            color: #c05b4d; }
+      .post .post-header .post-meta .post-visits {
+        display: inline-block;
+        font-size: 14px;
+        color: #8a8a8a; }
+        .post .post-header .post-meta .post-visits::before {
+          content: ' | '; }
+      .post .post-header .post-meta .post-count {
+        display: inline-block;
+        font-size: 14px;
+        color: #8a8a8a; }
+        .post .post-header .post-meta .post-count::before {
+          content: ' | '; }
   .post .post-toc {
     position: absolute;
     width: 200px;
