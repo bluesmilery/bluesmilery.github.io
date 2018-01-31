@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="CentOS6源码编译安装TensorFlow"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/9ef0e127/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz",
+      appKey: "mOzxpdEEenjouuAKMFPazvnd"
+    });
+  </script>
+
+
+
+
+
+    <title> CentOS6源码编译安装TensorFlow - Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CentOS6源码编译安装TensorFlow
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-30
+        </span>
+        
+        
+        <div class="post-visits"
+             data-url="/blogs/9ef0e127/"
+             data-title="CentOS6源码编译安装TensorFlow">
+            阅读次数
+          </div>
+        
+        
+        
+        
+          <span class="post-count">本文共5,370字</span>
+          <span class="post-count">阅读约24分钟</span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#追根溯源"><span class="toc-text">追根溯源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装过程"><span class="toc-text">安装过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Java-8"><span class="toc-text">1、Java-8</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、gcc-4-9-4"><span class="toc-text">2、gcc-4.9.4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-准备工作"><span class="toc-text">2.1 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-下载gcc源码"><span class="toc-text">2.2 下载gcc源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-下载所需要的依赖库"><span class="toc-text">2.3 下载所需要的依赖库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-配置编译安装"><span class="toc-text">2.4 配置编译安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Python-2-7"><span class="toc-text">3、Python-2.7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-准备工作"><span class="toc-text">3.1 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-下载Python2-7源码"><span class="toc-text">3.2 下载Python2.7源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-配置编译安装"><span class="toc-text">3.3 配置编译安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-使新版本生效"><span class="toc-text">3.4 使新版本生效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-解决yum失效问题"><span class="toc-text">3.5 解决yum失效问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-更新setuptools和pip"><span class="toc-text">3.6 更新setuptools和pip</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、Bazel-0-5-3"><span class="toc-text">4、Bazel-0.5.3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-下载Bazel源码"><span class="toc-text">4.1 下载Bazel源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-编译"><span class="toc-text">4.2 编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-一些错误"><span class="toc-text">4.3 一些错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、NVIDIA-Driver"><span class="toc-text">5、NVIDIA Driver</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-准备工作"><span class="toc-text">5.1 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-下载驱动程序"><span class="toc-text">5.2 下载驱动程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-安装"><span class="toc-text">5.3 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-验证"><span class="toc-text">5.4 验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-一些错误"><span class="toc-text">5.5 一些错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、CUDA-8-0"><span class="toc-text">6、CUDA-8.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-下载"><span class="toc-text">6.1 下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-安装"><span class="toc-text">6.2 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-测试"><span class="toc-text">6.3 测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、cuDNN-6-0"><span class="toc-text">7、cuDNN-6.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-下载"><span class="toc-text">7.1 下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-安装"><span class="toc-text">7.2 安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、TensorFlow-1-3-0"><span class="toc-text">8、TensorFlow-1.3.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-准备工作"><span class="toc-text">8.1 准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-下载TensorFlow源码"><span class="toc-text">8.2 下载TensorFlow源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-配置"><span class="toc-text">8.3 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-编译打包安装"><span class="toc-text">8.4 编译打包安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-验证"><span class="toc-text">8.5 验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-6-一些错误"><span class="toc-text">8.6 一些错误</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>文章首发于微信公众号：链家产品技术团队，欢迎搜索关注~</p>
+<p>公司前一阵搞了两台GPU服务器，终于有“玩具”可以玩了～用的卡是最新的P100（好吧，真正最新的是V100，不过还没铺货）。本着爱折腾的精神，自然就开始了折腾它们的征程（结果是我被折腾了。。。）</p>
+<p>以前自己也搭建过TensorFlow的开发环境（<a href="https://bluesmilery.github.io/blogs/9a018dfc/">见链接</a>），所以一开始以为这次也不会难，结果。。。咳咳，还是要正视自己的水平的。因为服务器上装的是系统是CentOS，以前自己捣鼓的时候用的是Ubuntu，差别还是不少的，所以特此记录自己踩过的坑，也给其他人一些经验帮助。</p>
+<p>这次折腾总共分为两个阶段：最初打算直接通过pip下载TensorFlow安装包安装，结果完全失败，不过在此期间摸清了许多限制条件，也为第二个阶段——通过编译的方式安装TensorFlow打下了基础。</p>
+<p>系统版本：CentOS release 6.8 (Final)    64位</p>
+<a id="more"></a>
+<h1 id="追根溯源"><a href="#追根溯源" class="headerlink" title="追根溯源"></a>追根溯源</h1><p>首先，目标是安装TensorFlow，所以查阅TensorFlow官网的源码安装教程</p>
+<p>发现需要使用Bazel来进行编译TensorFlow源码，进而生成pip安装包，通过pip来安装</p>
+<p>那下一步就是安装Bazel。去Bazel官网查看，发现主要提供了Ubuntu、MacOS、Windows的安装方式，对于其他平台来说，需要通过源码编译的方式来安装。所需要的环境条件主要是JDK8、Python、跟C相关的编译工具等</p>
+<p>CentOS 6.8自带的gcc版本为4.4.7，不支持C++11，而TensorFlow和Bazel的编译需要C++11的支持，所以要将gcc升级为支持C++11的版本，经过网上查找，gcc版本跨度不是很大的情况下，可以使用低版本的来编译安装高版本的gcc。gcc4.9.4可以通过4.4.7编译安装</p>
+<p>CentOS 6.8自带的Python版本为2.6.6，而TensorFlow和Bazel的编译所需要的Python版本最低为2.7</p>
+<p>因为要使用GPU，所以关于TensorFlow部分还需要一些额外的条件，在编译之前需要具备显卡驱动、Cuda Toolkit以及cuDNN</p>
+<p>所以整个安装流程如下：</p>
+<p>Java8、gcc4.9.4、Python2.7、pip、Bazel、NVIDIA Driver、CUDA、cuDNN、TensorFlow</p>
+<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><h2 id="1、Java-8"><a href="#1、Java-8" class="headerlink" title="1、Java-8"></a>1、Java-8</h2><p>去Oracle官网下载最新的Java8版本即可（8u144）</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>下载.tar.gz格式的压缩包后，解压缩，将bin目录所在的路径添加到PATH当中即可</p>
+<h2 id="2、gcc-4-9-4"><a href="#2、gcc-4-9-4" class="headerlink" title="2、gcc-4.9.4"></a>2、gcc-4.9.4</h2><h3 id="2-1-准备工作"><a href="#2-1-准备工作" class="headerlink" title="2.1 准备工作"></a>2.1 准备工作</h3><p>先检查系统中是否安装了g++，如果没有的话在编译安装gcc时会报错</p>
+<blockquote>
+<p>make[1]: <em>*</em> [stage1-bubble] Error 2</p>
+</blockquote>
+<p>使用yum安装g++</p>
+<p><code>yum install gcc-c++</code></p>
+<h3 id="2-2-下载gcc源码"><a href="#2-2-下载gcc源码" class="headerlink" title="2.2 下载gcc源码"></a>2.2 下载gcc源码</h3><p><a href="http://ftp.gnu.org/gnu/gcc/gcc-4.9.4/gcc-4.9.4.tar.bz2" target="_blank" rel="external">http://ftp.gnu.org/gnu/gcc/gcc-4.9.4/gcc-4.9.4.tar.bz2</a></p>
+<p>解压</p>
+<p><code>tar -jxvf gcc-4.9.4.tar.bz2</code></p>
+<p>进入目录，接下来的操作都在这个目录下进行</p>
+<p><code>cd gcc-4.9.4</code></p>
+<h3 id="2-3-下载所需要的依赖库"><a href="#2-3-下载所需要的依赖库" class="headerlink" title="2.3 下载所需要的依赖库"></a>2.3 下载所需要的依赖库</h3><p>正常只需要执行</p>
+<p><code>./contrib/download_prerequisites</code></p>
+<p>但是因为服务器无法访问外网（后来就算可以访问了，但是连接依旧有限，比如这步自动下载一些依赖包的操作，就无法正常进行），所以我们采用先把所需要的依赖包下载下来后，放到所需要的目录（后来发现是ftp服务器无法请求= =）</p>
+<p>查看下载操作的脚本</p>
+<p><code>vim contrib/download_prerequisites</code></p>
+<p>可以发现脚本通过wget下载了五个依赖包，分别是</p>
+<ul>
+<li><a href="http://ftp.gnu.org/gnu/mpfr/mpfr-2.4.2.tar.bz2" target="_blank" rel="external">mpfr-2.4.2</a></li>
+<li><a href="http://ftp.gnu.org/gnu/gmp/gmp-4.3.2.tar.bz2" target="_blank" rel="external">gmp-4.3.2</a></li>
+<li><a href="http://www.multiprecision.org/mpc/download/mpc-0.8.1.tar.gz" target="_blank" rel="external">mpc-0.8.1</a></li>
+<li><a href="http://isl.gforge.inria.fr/isl-0.12.2.tar.bz2" target="_blank" rel="external">isl-0.12.2</a></li>
+<li><a href="https://www.bastoul.net/cloog/pages/download/cloog-0.18.1.tar.gz" target="_blank" rel="external">cloog-0.18.1</a></li>
+</ul>
+<p>也可以去 <a href="ftp://gcc.gnu.org/pub/gcc/infrastructure/" target="_blank" rel="external">ftp://gcc.gnu.org/pub/gcc/infrastructure/</a> 下载</p>
+<p>下载完成后将它们放到gcc-4.9.4目录下即可，然后再执行</p>
+<p><code>./contrib/download_prerequisites</code></p>
+<h3 id="2-4-配置编译安装"><a href="#2-4-配置编译安装" class="headerlink" title="2.4 配置编译安装"></a>2.4 配置编译安装</h3><p>官方建议新建一个目录用于编译，所以</p>
+<p><code>mkdir build</code></p>
+<p><code>cd build</code></p>
+<p>配置</p>
+<p><code>../gcc-4.9.4/configure --prefix=/opt/gcc-4.9.4/ --enable-checking=release --enable-languages=c,c++ --disable-multilib</code></p>
+<p>关于具体的参数设置可以参照 <a href="https://gcc.gnu.org/install/configure.html" target="_blank" rel="external">https://gcc.gnu.org/install/configure.html</a></p>
+<p>编译</p>
+<p><code>make -j4</code></p>
+<p>-j4指的是使用四个线程，服务器的CPU大约使用了不到20分钟。不过有人不建议使用多线程编译，说是可能会失败。</p>
+<p>安装</p>
+<p><code>make install</code></p>
+<p>添加路径，打开 .bashrc，添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export PATH=/opt/gcc-4.9.4/bin:$PATH  </div><div class="line">export CXX=/opt/gcc-4.9.4/bin/c++  </div><div class="line">export CC=/opt/gcc-4.9.4/bin/gcc  </div><div class="line">export LDFLAGS=&quot;-L/opt/gcc-4.9.4/lib -L/opt/gcc-4.9.4/lib64&quot;  </div><div class="line">export CXXFLAGS=&quot;-L/opt/gcc-4.9.4/lib -L/opt/gcc-4.9.4/lib64&quot;  </div><div class="line">export C_INCLUDE_PATH=/opt/gcc-4.9.4/include  </div><div class="line">export CXX_INCLUDE_PATH=$C_INCLUDE_PATH  </div><div class="line">export LD_RUN_PATH=/opt/gcc-4.9.4/lib/:/opt/gcc-4.9.4/lib64/  </div><div class="line">export LD_LIBRARY_PATH=/opt/gcc-4.9.4/lib/:/opt/gcc-4.9.4/lib64/:$LD_LIBRARY_PATH</div></pre></td></tr></table></figure>
+<p>一般添加第一行就可以，但是在Bazel的编译过程中会出现一些错误，加上后面的部分可以解决这些错误</p>
+<p>最后在source一下 .bashrc 就可以了～</p>
+<p>通过 <code>gcc -v</code> 和 <code>g++ -v</code> 可以看到版本已经变成了4.9.4：gcc version 4.9.4 (GCC)</p>
+<h2 id="3、Python-2-7"><a href="#3、Python-2-7" class="headerlink" title="3、Python-2.7"></a>3、Python-2.7</h2><p>Python也需要通过编译源码的方式安装，使用刚才升级过的gcc来编译。之所以这样做是因为可以在后续操作中避免一些错误</p>
+<h3 id="3-1-准备工作"><a href="#3-1-准备工作" class="headerlink" title="3.1 准备工作"></a>3.1 准备工作</h3><p>安装一些系统依赖</p>
+<p><code>yum groupinstall -y &#39;development tools&#39;</code><br><code>yum install -y zlib-devel bzip2-devel openssl-devel xz-libs wget</code></p>
+<h3 id="3-2-下载Python2-7源码"><a href="#3-2-下载Python2-7源码" class="headerlink" title="3.2 下载Python2.7源码"></a>3.2 下载Python2.7源码</h3><p><a href="https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz" target="_blank" rel="external">https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz</a></p>
+<p>解压</p>
+<p><code>xz -d Python-2.7.14.tar.xz</code><br><code>tar -xvf Python-2.7.14.tar</code></p>
+<p>进入目录，接下来的操作都在这个目录下进行</p>
+<p><code>cd Python-2.7.14</code></p>
+<h3 id="3-3-配置编译安装"><a href="#3-3-配置编译安装" class="headerlink" title="3.3 配置编译安装"></a>3.3 配置编译安装</h3><p>配置</p>
+<p><code>./configure --prefix=/usr/local</code></p>
+<p>编译，用时几分钟</p>
+<p><code>make</code></p>
+<p>安装</p>
+<p><code>make install</code></p>
+<h3 id="3-4-使新版本生效"><a href="#3-4-使新版本生效" class="headerlink" title="3.4 使新版本生效"></a>3.4 使新版本生效</h3><p>两种方式：加入PATH、软连接</p>
+<p>加入PATH</p>
+<p><code>export PATH=/usr/local/bin:$PATH</code></p>
+<p>软连接</p>
+<p><code>mv /usr/bin/python /usr/bin/python2.6</code><br><code>ln -s /usr/local/bin/python2.7 /usr/bin/python</code></p>
+<p>此时通过 <code>python -V</code> 可以查看Python版本已经为2.7</p>
+<h3 id="3-5-解决yum失效问题"><a href="#3-5-解决yum失效问题" class="headerlink" title="3.5 解决yum失效问题"></a>3.5 解决yum失效问题</h3><p>因为yum依赖的是原来Python2.6版本，所以做以下修改</p>
+<p><code>vim /usr/bin/yum</code></p>
+<p>将第一行 <code>#!/usr/bin/python</code> 改为 <code>#!/usr/bin/python2.6</code></p>
+<h3 id="3-6-更新setuptools和pip"><a href="#3-6-更新setuptools和pip" class="headerlink" title="3.6 更新setuptools和pip"></a>3.6 更新setuptools和pip</h3><p>分别下载 <a href="https://pypi.python.org/pypi/setuptools" target="_blank" rel="external">setuptools</a> 和 <a href="https://pypi.python.org/pypi/pip" target="_blank" rel="external">pip</a> 的安装包</p>
+<p>解压后进到相应的目录，执行</p>
+<p><code>python setup.py install</code></p>
+<p>此时通过 <code>pip -V</code> 可以查看pip的版本，已经是对应于Python2.7的了</p>
+<p>顺手更新pip源，毕竟还是国内的快</p>
+<p><code>vim ~/.pip/pip.conf</code></p>
+<p>然后写入如下内容并保存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[global]  </div><div class="line">trusted-host = mirrors.aliyun.com  </div><div class="line">index-url = http://mirrors.aliyun.com/pypi/simple</div></pre></td></tr></table></figure>
+<h2 id="4、Bazel-0-5-3"><a href="#4、Bazel-0-5-3" class="headerlink" title="4、Bazel-0.5.3"></a>4、Bazel-0.5.3</h2><p>接下来是编译安装Bazel，主要参照 <a href="https://docs.bazel.build/versions/master/install-compile-source.html" target="_blank" rel="external">官方教程</a> 即可</p>
+<h3 id="4-1-下载Bazel源码"><a href="#4-1-下载Bazel源码" class="headerlink" title="4.1 下载Bazel源码"></a>4.1 下载Bazel源码</h3><p>去GitHub上下载 bazel-\<version\>-dist.zip 格式的源码，下载最新版或者特定版本均可。此处下载的是0.5.3版本（最新的为0.5.4）</version\></p>
+<p><a href="https://github.com/bazelbuild/bazel/releases/download/0.5.3/bazel-0.5.3-dist.zip" target="_blank" rel="external">https://github.com/bazelbuild/bazel/releases/download/0.5.3/bazel-0.5.3-dist.zip</a></p>
+<p>解压，最好指定目录，因为Bazel所有文件都放在根目录</p>
+<p><code>unzip bazel-0.5.3-dist.zip -d bazel-0.5.3</code></p>
+<p>进入目录，接下来的操作都在这个目录下进行</p>
+<p><code>cd bazel-0.5.3</code></p>
+<h3 id="4-2-编译"><a href="#4-2-编译" class="headerlink" title="4.2 编译"></a>4.2 编译</h3><p>运行</p>
+<p><code>./compile.sh</code></p>
+<p>编译出的结果放在 <code>output/bazel</code> 当中，将其复制到PATH路径下即可</p>
+<p><code>cp output/bazel /usr/local/bin</code></p>
+<p>或者</p>
+<p><code>cp output/bazel /usr/bin</code></p>
+<p>可以执行 <code>bazel</code> 验证是否安装成功</p>
+<h3 id="4-3-一些错误"><a href="#4-3-一些错误" class="headerlink" title="4.3 一些错误"></a>4.3 一些错误</h3><ul>
+<li>第一个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR: /root/gg/bazel/third_party/BUILD:106:1: Extracting interface //third_party:apache_commons_collections failed (Exit 1): ijar failed: error executing command</div></pre></td></tr></table></figure>
+<p>参照这个 <a href="https://github.com/bazelbuild/bazel/issues/760" target="_blank" rel="external">issue</a> 解决：</p>
+<p>升级gcc后，需要添加CXX, CC, LDFLAGS and CXXFLAGS等环境变量</p>
+<ul>
+<li>第二个 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Executing genrule //src:embedded_tools failed (Exit 1): bash failed: error executing command</div></pre></td></tr></table></figure>
+<p>参照这两个 <a href="https://github.com/bazelbuild/bazel/issues/2738" target="_blank" rel="external">issue</a>、<a href="https://github.com/bazelbuild/bazel/issues/673" target="_blank" rel="external">issue</a> 解决：</p>
+<p><code>mkdir /root/tmp</code><br><code>export TMPDIR=/root/tmp</code> </p>
+<ul>
+<li>第三个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">AttributeError: ZipFile instance has no attribute &apos;__exit__&apos;</div></pre></td></tr></table></figure>
+<p>当初升级gcc后直接编译Bazel报的错误，经查找是Python版本的问题（当时Python还是2.6），使用gcc4.9.4编译安装Python2.7后问题解决</p>
+<h2 id="5、NVIDIA-Driver"><a href="#5、NVIDIA-Driver" class="headerlink" title="5、NVIDIA Driver"></a>5、NVIDIA Driver</h2><h3 id="5-1-准备工作"><a href="#5-1-准备工作" class="headerlink" title="5.1 准备工作"></a>5.1 准备工作</h3><p>安装一些系统依赖</p>
+<p><code>yum install kernel-source</code></p>
+<h3 id="5-2-下载驱动程序"><a href="#5-2-下载驱动程序" class="headerlink" title="5.2 下载驱动程序"></a>5.2 下载驱动程序</h3><p>去 <a href="http://www.nvidia.cn/Download/index.aspx" target="_blank" rel="external">http://www.nvidia.cn/Download/index.aspx</a> 这里寻找对应的显卡驱动即可，这里选择：</p>
+<ul>
+<li>Product Type: Tesla</li>
+<li>Product Series: P-Series</li>
+<li>Product: Tesla P100</li>
+<li>Operating System: Linux 64-bit</li>
+<li>CUDA Toolkit: 8.0</li>
+<li>Language: English(US)</li>
+</ul>
+<p>这里下载的文件名是：NVIDIA-Linux-x86_64-384.66.run</p>
+<h3 id="5-3-安装"><a href="#5-3-安装" class="headerlink" title="5.3 安装"></a>5.3 安装</h3><p>添加可执行权限，安装</p>
+<p><code>chmod +x NVIDIA-Linux-x86_64-384.66.run</code><br><code>./NVIDIA-Linux-x86_64-384.66.run</code></p>
+<p>进入安装界面后一路同意就可以，是否安装32位的库，我选择的同意。对于最后出现的warning我选择了忽略</p>
+<p>安装完成后需要重启服务器，驱动才会生效</p>
+<p><code>reboot</code></p>
+<h3 id="5-4-验证"><a href="#5-4-验证" class="headerlink" title="5.4 验证"></a>5.4 验证</h3><p>执行</p>
+<p><code>nvidia-smi</code></p>
+<p>后可以看到一些显卡信息，包括驱动版本、风扇转速、温度、显卡型号、已用功率/总功率、已用显存/总显存、GPU计算力利用率等</p>
+<h3 id="5-5-一些错误"><a href="#5-5-一些错误" class="headerlink" title="5.5 一些错误"></a>5.5 一些错误</h3><ul>
+<li>第一个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR: Unable to find the kernel source tree for the currently running kernel. Please make sure you have installed the kernel source files for your kernel and that they are properly configured; on Red Hat Linux systems, for example, be sure you have the &apos;kernel-source&apos; or &apos;kernel-devel&apos; RPM installed. If you know the correct kernel source files are installed, you may specify the kernel source path with the &apos;--kernel-source-path&apos; command line option.</div></pre></td></tr></table></figure>
+<p>如果没做最一开始的准备工作，可能会出现这个错误</p>
+<ul>
+<li>第二个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">WARNING: nvidia-installer was forced to guess the X library path &apos;/usr/lib64&apos; and X module path &apos;/usr/lib64/xorg/modules&apos;; these paths were not queryable from the system.  If X fails to find the NVIDIA X driver module, please install the `pkg-config` utility and the X.Org SDK/development package for your distribution and reinstall the driver.</div></pre></td></tr></table></figure>
+<p>安装完成后的warning，目前没发现有什么问题</p>
+<h2 id="6、CUDA-8-0"><a href="#6、CUDA-8-0" class="headerlink" title="6、CUDA-8.0"></a>6、CUDA-8.0</h2><p>CUDA是英伟达开发的一款针对于使用GPU来加速计算的工具包，所以机器学习或者深度学习想要使用GPU来加速计算的话，就必须使用CUDA</p>
+<h3 id="6-1-下载"><a href="#6-1-下载" class="headerlink" title="6.1 下载"></a>6.1 下载</h3><p>去 <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="external">https://developer.nvidia.com/cuda-downloads</a> 这里寻找对应平台的文件下载即可。这里有一份详尽官方的 <a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/" target="_blank" rel="external">说明文档</a></p>
+<p>目前CUDA已经出了9.0，但是TenforFlow官方推荐的是8.0，所以我们安装的还是8.0版本</p>
+<p>这里一些选项的选择为：</p>
+<ul>
+<li>Operating System: Linux</li>
+<li>Architecture: x86_64</li>
+<li>Distribution: CentOS</li>
+<li>Version: 6</li>
+<li>Installer Type: runfile(local)</li>
+</ul>
+<p>下面会显示两个安装文件，一个 Base Installer ，一个Patch。安装完Base后再安装Patch即可</p>
+<h3 id="6-2-安装"><a href="#6-2-安装" class="headerlink" title="6.2 安装"></a>6.2 安装</h3><p>添加可执行权限，安装</p>
+<p><code>chmod +x cuda_8.0.61_375.26_linux.run</code><br><code>./cuda_8.0.61_375.26_linux.run</code></p>
+<p>接下来会有一系列提示需要确认，其中在询问是否要安装显卡驱动时选 n ，因为我们之前已经安装了最新版本的驱动。其他的一路同意即可</p>
+<p>安装完成后会出现以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">Installing the CUDA Toolkit in /usr/local/cuda-8.0 ...  </div><div class="line">Missing recommended library: libGLU.so  </div><div class="line">Missing recommended library: libX11.so  </div><div class="line">Missing recommended library: libXi.so  </div><div class="line">Missing recommended library: libXmu.so  </div><div class="line"></div><div class="line">Installing the CUDA Samples in /home/gaixindong ...  </div><div class="line">Copying samples to /home/gaixindong/NVIDIA_CUDA-8.0_Samples now...  </div><div class="line">Finished copying samples.  </div><div class="line"></div><div class="line">= Summary =   </div><div class="line"></div><div class="line">Driver:   Not Selected  </div><div class="line">Toolkit:  Installed in /usr/local/cuda-8.0  </div><div class="line">Samples:  Installed in /home/gaixindong, but missing recommended libraries  </div><div class="line"></div><div class="line">Please make sure that  </div><div class="line">-   PATH includes /usr/local/cuda-8.0/bin  </div><div class="line">-   LD_LIBRARY_PATH includes /usr/local/cuda-8.0/lib64, or, add /usr/local/cuda-8.0/lib64 to /etc ld.so.conf and run ldconfig as root  </div><div class="line"></div><div class="line">To uninstall the CUDA Toolkit, run the uninstall script in /usr/local/cuda-8.0/bin  </div><div class="line"></div><div class="line">Please see CUDA_Installation_Guide_Linux.pdf in /usr/local/cuda-8.0/doc/pdf for detailed information on setting up CUDA.  </div><div class="line"></div><div class="line">***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 361.00 is required for CUDA 8.0 functionality to work.  </div><div class="line">To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:  </div><div class="line">    sudo &lt;CudaInstaller&gt;.run -silent -driver  </div><div class="line"></div><div class="line">Logfile is /tmp/cuda_install_132117.log</div></pre></td></tr></table></figure>
+<p>根据以上提示内容发现，缺少了一些推荐的库，但是这些库可能是跟运行它提供的samples有关，所以现在并没有安装。日后如果有问题，可以依照这些提示去安装一下</p>
+<p>并且samples也可以选择不安装，因为在cuda的目录下有一份samples</p>
+<p>最后再打一下补丁即可</p>
+<p><code>chmod +x cuda_8.0.61.2_linux.run</code><br><code>./cuda_8.0.61.2_linux.run</code></p>
+<h3 id="6-3-测试"><a href="#6-3-测试" class="headerlink" title="6.3 测试"></a>6.3 测试</h3><p>进入samples目录，选择第一个例子进行测试</p>
+<p><code>cd /usr/local/cuda/samples/1_Utilities/deviceQuery</code><br><code>make</code></p>
+<p>编译完成后执行</p>
+<p><code>./deviceQuery</code></p>
+<p>会看到一系列显卡参数信息，只要最后显示 <code>Result = PASS</code> 即说明CUDA安装成功</p>
+<h2 id="7、cuDNN-6-0"><a href="#7、cuDNN-6-0" class="headerlink" title="7、cuDNN-6.0"></a>7、cuDNN-6.0</h2><p>在CUDA之外，还有个库叫做cuDNN(CUDA Deep Neural Network library)，是专门给深度神经网络针对GPU调优的，也是TensorFlow官方要求必须安装的</p>
+<h3 id="7-1-下载"><a href="#7-1-下载" class="headerlink" title="7.1 下载"></a>7.1 下载</h3><p>去 <a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="external">https://developer.nvidia.com/rdp/cudnn-download</a> 选择对应的版本下载即可。不过需要先注册开发者账号后才可以下载</p>
+<p>目前cuDNN最新版本是7.0，因为担心兼容性问题所以没有选择最新版本。因为之前安装的CUDA是8.0，所以我们选择</p>
+<p>Download cuDNN v6.0 (April 27, 2017), for CUDA 8.0</p>
+<p>cuDNN v6.0 Library for Linux</p>
+<h3 id="7-2-安装"><a href="#7-2-安装" class="headerlink" title="7.2 安装"></a>7.2 安装</h3><p>执行解压操作</p>
+<p><code>tar -zxvf cudnn-8.0-linux-x64-v6.0-tgz</code></p>
+<p>解压后的文件夹是cuda。执行以下操作把文件复制到相应的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cp cuda/include/cudnn.h /usr/local/cuda/include/  </div><div class="line">cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/  </div><div class="line">chmod a+r /usr/local/cuda/include/cudnn.h  </div><div class="line">chmod a+r /usr/local/cuda/lib64/libcudnn*</div></pre></td></tr></table></figure>
+<h2 id="8、TensorFlow-1-3-0"><a href="#8、TensorFlow-1-3-0" class="headerlink" title="8、TensorFlow-1.3.0"></a>8、TensorFlow-1.3.0</h2><p>终于到最后一步了，整个过程主要参照 <a href="https://www.tensorflow.org/install/install_sources" target="_blank" rel="external">官方教程</a></p>
+<h3 id="8-1-准备工作"><a href="#8-1-准备工作" class="headerlink" title="8.1 准备工作"></a>8.1 准备工作</h3><p>安装一些系统依赖</p>
+<p><code>yum install python-devel</code><br><code>pip install numpy wheel</code></p>
+<h3 id="8-2-下载TensorFlow源码"><a href="#8-2-下载TensorFlow源码" class="headerlink" title="8.2 下载TensorFlow源码"></a>8.2 下载TensorFlow源码</h3><p>最一开始是直接通过pip下载官方编译好的安装包进行安装，但因为CentOS的原因，并不能通过这种方式安装（在网上找到的CentOS安装TensorFlow大部分都是通过编译源码来安装的）。所以这也是导致这次安装如此繁琐的原因</p>
+<p>目前TensorFlow的最新版本为1.3.0，源码可以通过git clone下来，也可以直接去releases界面下载</p>
+<ul>
+<li>git clone</li>
+</ul>
+<p><code>git clone https://github.com/tensorflow/tensorflow</code><br><code>git checkout r1.3</code></p>
+<ul>
+<li>releases界面</li>
+</ul>
+<p><a href="https://github.com/tensorflow/tensorflow/archive/v1.3.0.tar.gz" target="_blank" rel="external">TensorFlow 1.3.0</a></p>
+<h3 id="8-3-配置"><a href="#8-3-配置" class="headerlink" title="8.3 配置"></a>8.3 配置</h3><p>进入TensorFlow源码根目录后，执行</p>
+<p><code>./configure</code></p>
+<p>接下来会有一系列提示需要确认，其中</p>
+<p>Do you wish to use jemalloc as the malloc implementation? [Y/n] 选择 n，因为选择y后编译不通过</p>
+<p>Do you wish to build TensorFlow with CUDA support? [y/N] 选择 y，因为我们要使用GPU</p>
+<p>其他的默认就可以（大写字母是默认选择）</p>
+<p>以下是具体的配置选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">.........  </div><div class="line">You have bazel 0.5.3- installed.  </div><div class="line">Please specify the location of python. [Default is /usr/local/bin/python]:  </div><div class="line">Found possible Python library paths:  </div><div class="line">/usr/local/lib/python2.7/site-packages  </div><div class="line">Please input the desired Python library path to use.  Default is [/usr/local/lib/python2.7/site-packages]  </div><div class="line"></div><div class="line">Using python library path: /usr/local/lib/python2.7/site-packages  </div><div class="line">Do you wish to build TensorFlow with MKL support? [y/N]  </div><div class="line">No MKL support will be enabled for TensorFlow  </div><div class="line">Please specify optimization flags to use during compilation when bazel option &quot;--config=opt&quot; is specified [Default is -march=native]:  </div><div class="line">Do you wish to use jemalloc as the malloc implementation? [Y/n] n</div><div class="line">jemalloc disabled  </div><div class="line">Do you wish to build TensorFlow with Google Cloud Platform support? [y/N]  </div><div class="line">No Google Cloud Platform support will be enabled for TensorFlow  </div><div class="line">Do you wish to build TensorFlow with Hadoop File System support? [y/N]  </div><div class="line">No Hadoop File System support will be enabled for TensorFlow  </div><div class="line">Do you wish to build TensorFlow with the XLA just-in-time compiler (experimental)? [y/N]  </div><div class="line">No XLA support will be enabled for TensorFlow  </div><div class="line">Do you wish to build TensorFlow with VERBS support? [y/N]  </div><div class="line">No VERBS support will be enabled for TensorFlow  </div><div class="line">Do you wish to build TensorFlow with OpenCL support? [y/N]  </div><div class="line">No OpenCL support will be enabled for TensorFlow  </div><div class="line">Do you wish to build TensorFlow with CUDA support? [y/N] y</div><div class="line">CUDA support will be enabled for TensorFlow  </div><div class="line">Do you want to use clang as CUDA compiler? [y/N]  </div><div class="line">nvcc will be used as CUDA compiler  </div><div class="line">Please specify the CUDA SDK version you want to use, e.g. 7.0. [Leave empty to default to CUDA 8.0]:  </div><div class="line">Please specify the location where CUDA 8.0 toolkit is installed. Refer to README.md for more details. [Default is /usr/local/cuda]:  </div><div class="line">Please specify which gcc should be used by nvcc as the host compiler. [Default is /opt/gcc-4.9.4/bin/gcc]:  </div><div class="line">Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 6.0]:  </div><div class="line">Please specify the location where cuDNN 6 library is installed. Refer to README.md for more details. [Default is /usr/local/cuda]:  </div><div class="line">Please specify a list of comma-separated Cuda compute capabilities you want to build with.  </div><div class="line">You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus.  </div><div class="line">Please note that each additional compute capability significantly increases your build time and binary size.  </div><div class="line">[Default is: &quot;6.0&quot;]:  </div><div class="line">Do you wish to build TensorFlow with MPI support? [y/N]  </div><div class="line">MPI support will not be enabled for TensorFlow  </div><div class="line">Configuration finished</div></pre></td></tr></table></figure>
+<h3 id="8-4-编译打包安装"><a href="#8-4-编译打包安装" class="headerlink" title="8.4 编译打包安装"></a>8.4 编译打包安装</h3><p>接下来进行编译操作</p>
+<p><code>bazel build --config=opt --config=cuda//tensorflow/tools/pip_package:build_pip_package</code></p>
+<p>如果顺利的话就不会出现什么ERROR提示，整个编译过程大约十分钟。如果出现错误可以加入 <code>--verbose_failures</code> 参数，会提供更丰富的出错信息</p>
+<p>编译完成后，接下来就是打包成 .whl 文件供pip安装使用，文件会放到/tmp/tensorflow_pkg目录下</p>
+<p><code>bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg</code></p>
+<p>安装</p>
+<p><code>pip install /tmp/tensorflow_pkg/tensorflow-1.3.0-py2-none-any.whl</code></p>
+<p>安装过程会自动联网下载一些依赖的包，如果无法连外网的话，那就需要自己下载所需要的包，然后上传到服务器后用pip离线安装</p>
+<p>可以使用 <a href="https://pypi.python.org/pypi/" target="_blank" rel="external">官方pip源</a> 或者 <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="external">阿里pip源</a> 来搜索安装，推荐后者，国内快</p>
+<p>依赖的包有（可能不全）：</p>
+<ul>
+<li>backports.weakref-1.0</li>
+<li>bleach-1.5.0</li>
+<li>funcsigs-1.0.2</li>
+<li>html5lib-0.9999999</li>
+<li>Markdown-2.6.9</li>
+<li>mock-2.0.0</li>
+<li>numpy-1.13.1</li>
+<li>pbr-3.1.1</li>
+<li>protobuf-3.4.0</li>
+<li>six-1.11.0</li>
+<li>tensorflow_tensorboard-0.1.6</li>
+<li>webencodings-0.5.1</li>
+<li>Werkzeug-0.12.2</li>
+<li>wheel-0.30.0</li>
+</ul>
+<h3 id="8-5-验证"><a href="#8-5-验证" class="headerlink" title="8.5 验证"></a>8.5 验证</h3><p>进入python，进行 <code>import tensorflow</code>，没有错误那就代表大功告成了！</p>
+<h3 id="8-6-一些错误"><a href="#8-6-一些错误" class="headerlink" title="8.6 一些错误"></a>8.6 一些错误</h3><p>整个编译过程还是比较坎坷的</p>
+<p>1、第一个错误  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">ERROR: /root/gg/tensorflow/tensorflow/tensorflow/tools/pip_package/BUILD:100:1: no such package &apos;@boringssl//&apos;: Traceback (most recent call last):  </div><div class="line">	File &quot;/root/gg/tensorflow/tensorflow/tensorflow/workspace.bzl&quot;, line 116  </div><div class="line">		_apply_patch(repo_ctx, repo_ctx.attr.patch_file)  </div><div class="line">	File &quot;/root/gg/tensorflow/tensorflow/tensorflow/workspace.bzl&quot;, line 107, in _apply_patch  </div><div class="line">		_execute_and_check_ret_code(repo_ctx, cmd)  </div><div class="line">	File &quot;/root/gg/tensorflow/tensorflow/tensorflow/workspace.bzl&quot;, line 91, in _execute_and_check_ret_code  </div><div class="line">		fail(&quot;Non-zero return code(&#123;1&#125;) when ...))  </div><div class="line">Non-zero return code(256) when executing &apos;patch -p1 -d /root/.cache/bazel/_bazel_root/9abfd3cc56b23f8500d978612da34f89/external/boringssl -i /root/gg/tensorflow/tensorflow/third_party/boringssl/add_boringssl_s390x.patch&apos;:  </div><div class="line">Stdout:  </div><div class="line">Stderr: java.io.IOException: Cannot run program &quot;patch&quot; (in directory &quot;/root/.cache/bazel/_bazel_root/9abfd3cc56b23f8500d978612da34f89/external/boringssl&quot;): error=2, No such file or directory and referenced by &apos;//tensorflow/tools/pip_package:licenses&apos;.  </div><div class="line">ERROR: Analysis of target &apos;//tensorflow/tools/pip_package:build_pip_package&apos; failed; build aborted.  </div><div class="line">INFO: Elapsed time: 1.401s</div></pre></td></tr></table></figure>
+<p>这个错误出现的时候@boringssl和@protobuf是交替出现，<code>no such package &#39;@boringssl</code>。一开始以为是这两个包没有下载成功，因为在info信息中有连接下载链接失败的提示，并且错误信息中是说没有找到对应的包，所以去 <code>tensorflow/workspace.bzl</code> 中查找对应的下载链接，下载到具体的包后在服务器上做了个微型本地服务器，将workspace.bzl中的下载链接改成本地的下载链接。然而这个错误继续出现，后来经过白银指点，发现是 <code>Cannot run program &quot;patch&quot;</code> 这里的问题，遂去 <code>yum install patch</code> 后该错误不再出现。原来的思路一直局限在下载不成功上，没有仔细观察后面的错误信息</p>
+<p>2、第二个错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">C++ compilation of rule &apos;@nanopb_git//: nanopb&apos; failed: crosstool_wrapper_driver_is_not_gcc failed: error executing command</div></pre></td></tr></table></figure>
+<p>后续内容还有一堆，其中@nanopb_git会变成其他包的名字，所以查找的重点就放在了后面 <code>crosstool_wrapper_driver_is_not_gcc failed: error executing command</code></p>
+<p>3、经过了一顿google，查阅了无数github上的issus，都没有发现类似的问题（有这部分相同的报错，但是后续错误内容不同），问题没有解决，我决定先编译TensorFlow提供的example，看看小范围编译是否存在问题</p>
+<p><code>bazel build --config=opt --config=cuda //tensorflow/cc:tutorials_example_trainer</code></p>
+<p>此时报错：</p>
+<blockquote>
+<p>error: ‘MADV_NOHUGEPAGE’ undeclared</p>
+</blockquote>
+<p>参照这个 <a href="https://github.com/tensorflow/tensorflow/issues/7572" target="_blank" rel="external">issus</a> 解决：</p>
+<p>在进行configure配置时，将 Do you wish to use jemalloc as the malloc implementation? [Y/n] 选择 n</p>
+<p>4、在对example编译成功后，又继续回来尝试编译源码，但是依旧出问题。不过，有时候命运就是捉弄人，尝到了‘踏破铁鞋无觅处，得来全不费功夫’的滋味</p>
+<p>看到白银在看 <a href="http://www.jianshu.com/p/fdb7b54b616e" target="_blank" rel="external">这篇文章</a>，突然发现在文章的前部有这样一句话：</p>
+<p>“CentOS 6 上glibc最多到2.12，强行使用高版本的glibc会导致程序意外崩溃”</p>
+<p>这篇文章之前看过，但是注意力从来没有留意这句话。突然想到会不会真的是glibc的问题。因为在之前的尝试过程中因为某些报错需要安装glibc2.14版本，而系统里自带的版本只到2.12，所以就去下载编译了glibc2.14版本，并且加入LD_LIBRARY_PATH中</p>
+<p>那么在 .bashrc 中将glibc添加到LD_LIBRARY_PATH中这一行注释掉，结果竟然顺利编译成功！真是惊喜啊</p>
+<p>感谢白银同学，最后两个关键问题都是在他的帮助下解决的～</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li>官方安装指南</li>
+</ul>
+<p><a href="https://www.tensorflow.org/install/install_sources" target="_blank" rel="external">https://www.tensorflow.org/install/install_sources</a>  </p>
+<p><a href="https://docs.bazel.build/versions/master/install-compile-source.html" target="_blank" rel="external">https://docs.bazel.build/versions/master/install-compile-source.html</a>  </p>
+<p><a href="https://gcc.gnu.org/install/configure.html" target="_blank" rel="external">https://gcc.gnu.org/install/configure.html</a>  </p>
+<p><a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/" target="_blank" rel="external">http://docs.nvidia.com/cuda/cuda-installation-guide-linux/</a>  </p>
+<ul>
+<li>gcc安装</li>
+</ul>
+<p><a href="http://caosiyang.github.io/2016/05/04/installing-gcc/" target="_blank" rel="external">http://caosiyang.github.io/2016/05/04/installing-gcc/</a>  </p>
+<p><a href="http://www.cjjjs.com/paper/czxt/2017222114137150.html" target="_blank" rel="external">http://www.cjjjs.com/paper/czxt/2017222114137150.html</a>  </p>
+<ul>
+<li>Python以及pip安装</li>
+</ul>
+<p><a href="http://farwmarth.com/%E5%8D%87%E7%BA%A7centos%E4%B8%8A%E7%9A%84python/" target="_blank" rel="external">http://farwmarth.com/%E5%8D%87%E7%BA%A7centos%E4%B8%8A%E7%9A%84python/</a>  </p>
+<p><a href="http://blog.csdn.net/tiantuanzi/article/details/50475718" target="_blank" rel="external">http://blog.csdn.net/tiantuanzi/article/details/50475718</a>  </p>
+<p><a href="http://www.itdadao.com/articles/c15a1317443p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a1317443p0.html</a></p>
+<ul>
+<li>显卡驱动及CUDA相关（文章里关于禁用nouveau、重新建立initramfs image文件的操作在本服务器上不操作也可以正常安装显卡驱动）</li>
+</ul>
+<p><a href="http://www.gpusever.com/show.php?cid=33&amp;id=27" target="_blank" rel="external">http://www.gpusever.com/show.php?cid=33&amp;id=27</a>  </p>
+<p><a href="http://www.centoscn.com/image-text/install/2015/0921/6199.html" target="_blank" rel="external">http://www.centoscn.com/image-text/install/2015/0921/6199.html</a>  </p>
+<ul>
+<li>TensorFlow安装</li>
+</ul>
+<p><a href="http://www.jianshu.com/p/fdb7b54b616e" target="_blank" rel="external">http://www.jianshu.com/p/fdb7b54b616e</a>  </p>
+<p><a href="http://ju.outofmemory.cn/entry/311727" target="_blank" rel="external">http://ju.outofmemory.cn/entry/311727</a>  </p>
+<p><a href="https://blog.abysm.org/2016/06/building-tensorflow-centos-6/" target="_blank" rel="external">https://blog.abysm.org/2016/06/building-tensorflow-centos-6/</a>  </p>
+<p><a href="http://blog.csdn.net/may0324/article/details/53413024" target="_blank" rel="external">http://blog.csdn.net/may0324/article/details/53413024</a>  </p>
+<p><a href="http://www.alfrednanwu.com/machine-learning/-gtx-1080ubuntu1604cuda8cudnn51tensorflow" target="_blank" rel="external">http://www.alfrednanwu.com/machine-learning/-gtx-1080ubuntu1604cuda8cudnn51tensorflow</a>  </p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://bluesmilery.github.io/blogs/9ef0e127/">https://bluesmilery.github.io/blogs/9ef0e127/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/blogs/a6aaca4e/">
+        <span class="next-text nav-default">增强学习 Reinforcement learning part 4 - Model-Free Prediction</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzY4MC8xMDIzNQ">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>  
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  
+  <br>
+  <span id="busuanzi_container_site_uv">
+    被<span id="busuanzi_value_site_uv"></span>个小伙伴
+  </span>
+  <span id="busuanzi_container_site_pv">
+    查看了<span id="busuanzi_value_site_pv"></span>次~
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+   <script type="text/javascript">
+	(function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+  </script>
+
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
