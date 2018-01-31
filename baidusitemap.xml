@@ -5,14 +5,21 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/9ef0e127/</loc>
-    <lastmod>2018-01-31T03:10:19.356Z</lastmod>
+    <lastmod>2018-01-31T03:45:37.756Z</lastmod>
     <data>
         <display>
         <title>CentOS6源码编译安装TensorFlow</title>
         <pubTime>2017-09-30T12:59:17.000Z</pubTime>
         
+        <tag>CentOS</tag>
+         
+        <tag>TensorFlow</tag>
+         
          
            
+             
+              <breadCrumb title="技术" url="https://bluesmilery.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -20,16 +27,19 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/a6aaca4e/</loc>
-    <lastmod>2018-01-30T08:40:32.520Z</lastmod>
+    <lastmod>2018-01-31T03:45:13.176Z</lastmod>
     <data>
         <display>
         <title>增强学习 Reinforcement learning part 4 - Model-Free Prediction</title>
         <pubTime>2017-05-16T12:56:22.000Z</pubTime>
         
-        <tag>增强学习RL</tag>
+        <tag>Reinforcement Learning</tag>
          
          
            
+             
+              <breadCrumb title="笔记" url="https://bluesmilery.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
         </display>
     </data>
     </url>
@@ -37,16 +47,19 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/b96003ba/</loc>
-    <lastmod>2018-01-30T08:14:25.853Z</lastmod>
+    <lastmod>2018-01-31T03:45:02.164Z</lastmod>
     <data>
         <display>
         <title>增强学习 Reinforcement learning part 3 - Planning by Dynamic Programming</title>
         <pubTime>2017-04-10T12:04:48.000Z</pubTime>
         
-        <tag>增强学习RL</tag>
+        <tag>Reinforcement Learning</tag>
          
          
            
+             
+              <breadCrumb title="笔记" url="https://bluesmilery.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
         </display>
     </data>
     </url>
@@ -54,16 +67,19 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/e4dc3fbf/</loc>
-    <lastmod>2018-01-30T07:56:42.296Z</lastmod>
+    <lastmod>2018-01-31T03:44:55.006Z</lastmod>
     <data>
         <display>
         <title>增强学习 Reinforcement learning part 2 - Markov Decision Process</title>
         <pubTime>2017-03-21T11:11:51.000Z</pubTime>
         
-        <tag>增强学习RL</tag>
+        <tag>Reinforcement Learning</tag>
          
          
            
+             
+              <breadCrumb title="笔记" url="https://bluesmilery.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
         </display>
     </data>
     </url>
@@ -71,48 +87,19 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/481fe3af/</loc>
-    <lastmod>2018-01-30T07:39:04.600Z</lastmod>
+    <lastmod>2018-01-31T03:44:45.675Z</lastmod>
     <data>
         <display>
         <title>增强学习 Reinforcement learning part 1 - Introduction</title>
         <pubTime>2017-03-20T01:24:02.000Z</pubTime>
         
-        <tag>增强学习RL</tag>
+        <tag>Reinforcement Learning</tag>
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://bluesmilery.github.io/blogs/18a3f212/</loc>
-    <lastmod>2018-01-30T05:40:46.133Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习 Machine learning part 1 - Linear Regression</title>
-        <pubTime>2017-03-20T03:36:02.000Z</pubTime>
-        
-        <tag>机器学习ML</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://bluesmilery.github.io/blogs/9a018dfc/</loc>
-    <lastmod>2018-01-30T05:17:49.417Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
-        <pubTime>2017-03-15T12:51:45.000Z</pubTime>
-        
-         
-           
+             
+              <breadCrumb title="笔记" url="https://bluesmilery.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
         </display>
     </data>
     </url>
@@ -120,17 +107,65 @@
     
   <url>
     <loc>https://bluesmilery.github.io/blogs/1509af3a/</loc>
-    <lastmod>2018-01-29T09:20:27.107Z</lastmod>
+    <lastmod>2018-01-31T03:43:51.943Z</lastmod>
     <data>
         <display>
         <title>Linux系统安装——Ubuntu16.04+Windows7双系统</title>
         <pubTime>2017-03-11T12:33:07.000Z</pubTime>
         
+        <tag>Linux</tag>
+         
          
            
+             
+              <breadCrumb title="技术" url="https://bluesmilery.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://bluesmilery.github.io/blogs/9a018dfc/</loc>
+    <lastmod>2018-01-31T03:43:30.758Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
+        <pubTime>2017-03-15T12:51:45.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https://bluesmilery.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://bluesmilery.github.io/blogs/18a3f212/</loc>
+    <lastmod>2018-01-31T03:37:12.741Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习 Machine learning part 1 - Linear Regression</title>
+        <pubTime>2017-03-20T03:36:02.000Z</pubTime>
+        
+        <tag>Machine Learning</tag>
+         
+         
+           
+             
+              <breadCrumb title="笔记" url="https://bluesmilery.github.io/categories/%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
 </urlset>
