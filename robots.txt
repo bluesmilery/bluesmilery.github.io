@@ -1,15 +1,4 @@
 User-agent: *
-Allow: /
-Allow: /archives/
-Allow: /blogs/
-Allow: /categories/
-Allow: /about/
-Allow: /tags/
-
-Disallow: /css/
-Disallow: /fonts/
-Disallow: /js/
-Disallow: /lib/
-
-Sitemap: https://bluesmilery.github.io/baidusitemap.xml
-Sitemap: https://bluesmilery.github.io/sitemap.xml
+Disallow: /tags/
+Disallow: /page/
+Disallow: /categories/
