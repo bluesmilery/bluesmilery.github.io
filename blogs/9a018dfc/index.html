@@ -22,38 +22,67 @@
 
 
 
-  <meta name="keywords" content="Machine Learning, Linux, Gai's Blog" />
+  <meta name="keywords" content="Linux, Machine Learning, Gai's Blog" />
+
+
+
+
+
+  <meta name="google-site-verification" content="SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g" />
 
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Gai's Blog">
 
 
 
 
-  <link rel="alternate" href="/default" title="Gai's Blog">
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0" />
 
 
 
 <link rel="canonical" href="https://bluesmilery.github.io/blogs/9a018dfc/"/>
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0" />
 
 
 
   
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3f2fd48827f9ed28f8d9432317653de";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121307266-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121307266-1');
+</script>
 
 
   <script id="baidu_push">
@@ -86,6 +115,9 @@
 
 
 
+<script>
+  window.config = {"title":"Gai's Blog","subtitle":"A Zone for Knowledge","description":null,"author":"Gai","language":null,"timezone":null,"url":"https://bluesmilery.github.io","root":"/","permalink":"blogs/:abbrlink/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":year-:month-:day-:title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":[{"type":"git","repo":"git@github.com:bluesmilery/bluesmilery.github.io.git","branch":"master"},{"type":"baidu_url_submitter"}],"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"sitemap":{"path":"sitemap.xml"},"baidusitemap":{"path":"baidusitemap.xml"},"abbrlink":{"alg":"crc32","rep":"hex"},"baidu_url_submit":{"count":10,"host":"bluesmilery.github.io","token":"cktimjuXHORRMXsM","path":"baidu_urls.txt"},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"tag_generator":{"per_page":10},"category_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"ip":"0.0.0.0","compress":false,"header":true},"since":2017,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Archives":"/archives/","Tags":"/tags","Categories":"/categories"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"plgaixd92498@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/bluesmilery","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz","app_key":"mOzxpdEEenjouuAKMFPazvnd"},"baidu_analytics":"a3f2fd48827f9ed28f8d9432317653de","baidu_verification":null,"google_analytics":"UA-121307266-1","google_verification":"SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g","disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":"MTAyMC8zMzY4MC8xMDIzNQ","version":"2.9.0","word_count":true};
+</script>
 
     <title> 机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow - Gai's Blog </title>
   </head>
@@ -108,7 +140,7 @@
         <li class="mobile-menu-item">
           
           
-            Home
+            首页
           
         </li>
       </a>
@@ -117,16 +149,7 @@
         <li class="mobile-menu-item">
           
           
-            Archives
-          
-        </li>
-      </a>
-    
-      <a href="/categories">
-        <li class="mobile-menu-item">
-          
-          
-            Categories
+            归档
           
         </li>
       </a>
@@ -135,7 +158,16 @@
         <li class="mobile-menu-item">
           
           
-            Tags
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
           
         </li>
       </a>
@@ -156,7 +188,7 @@
           <a class="menu-item-link" href="/">
             
             
-              Home
+              首页
             
           </a>
         </li>
@@ -165,16 +197,7 @@
           <a class="menu-item-link" href="/archives/">
             
             
-              Archives
-            
-          </a>
-        </li>
-      
-        <li class="menu-item">
-          <a class="menu-item-link" href="/categories">
-            
-            
-              Categories
+              归档
             
           </a>
         </li>
@@ -183,7 +206,16 @@
           <a class="menu-item-link" href="/tags">
             
             
-              Tags
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
             
           </a>
         </li>
@@ -222,14 +254,14 @@
         <div class="post-visits"
              data-url="/blogs/9a018dfc/"
              data-title="机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow">
-            阅读次数
+            阅读次数 0
           </div>
         
         
         
         
-          <span class="post-count">本文共5,944字</span>
-          <span class="post-count">阅读约30分钟</span>
+          <span class="post-count">本文共6,228字</span>
+          <span class="post-count">阅读约32分钟</span>
         
       </div>
     </header>
@@ -237,11 +269,12 @@
     
     
   <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
+    <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、安装Nvidia显卡驱动（GTX-1080）"><span class="toc-text">一、安装Nvidia显卡驱动（GTX 1080）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、安装CUDA8-0"><span class="toc-text">二、安装CUDA8.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、安装cuDNN-v5-1"><span class="toc-text">三、安装cuDNN v5.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、安装TensorFlow"><span class="toc-text">四、安装TensorFlow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、pip安装"><span class="toc-text">1、pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、源码编译安装"><span class="toc-text">2、源码编译安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、测试TensorFlow"><span class="toc-text">3、测试TensorFlow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、注意事项"><span class="toc-text">4、注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-text">参考：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#课外小知识"><span class="toc-text">课外小知识</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
+
 
 
     <div class="post-content">
@@ -259,11 +292,11 @@
 </ul>
 <p>在整个环境配置过程中，有许多东西可以提前下载好，在配置时便可以节省时间了。</p>
 <ul>
-<li><a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="external">CUDA 8.0</a> (1.4GB)：Linux &gt; x86_64 &gt; Ubuntu &gt; 16.04 &gt; runfile(local)</li>
-<li><a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="external">cuDNN v5.1</a> (100MB)： 需要注册Nvidia开发者账号，Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0 &gt; cuDNN v5.1 Library for Linux。最好在Linux系统下下载，格式为.tgz。在Windows下下载的格式会识别成.solitairetheme8格式。</li>
-<li><a href="https://github.com/tensorflow/tensorflow/releases" target="_blank" rel="external">TensorFlow 源码release版</a> (10MB+)：下载v0.12.0 RC1，zip或者tar.gz均可</li>
-<li><a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">TensorFlow pip安装包</a> (CPU版40MB+，GPU版80MB+)：选择Linux和Python2的版本，CPU和GPU的都下。pip安装包只会下载最新版本</li>
-<li><a href="https://github.com/bazelbuild/bazel/releases" target="_blank" rel="external">Bazel 源码</a> (100MB+)：下载0.4.2版本，选择bazel-0.4.2-installer-linux-x86_64.sh</li>
+<li><a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">CUDA 8.0</a> (1.4GB)：Linux &gt; x86_64 &gt; Ubuntu &gt; 16.04 &gt; runfile(local)</li>
+<li><a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN v5.1</a> (100MB)： 需要注册Nvidia开发者账号，Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0 &gt; cuDNN v5.1 Library for Linux。最好在Linux系统下下载，格式为.tgz。在Windows下下载的格式会识别成.solitairetheme8格式。</li>
+<li><a href="https://github.com/tensorflow/tensorflow/releases" target="_blank" rel="noopener">TensorFlow 源码release版</a> (10MB+)：下载v0.12.0 RC1，zip或者tar.gz均可</li>
+<li><a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">TensorFlow pip安装包</a> (CPU版40MB+，GPU版80MB+)：选择Linux和Python2的版本，CPU和GPU的都下。pip安装包只会下载最新版本</li>
+<li><a href="https://github.com/bazelbuild/bazel/releases" target="_blank" rel="noopener">Bazel 源码</a> (100MB+)：下载0.4.2版本，选择bazel-0.4.2-installer-linux-x86_64.sh</li>
 </ul>
 <a id="more"></a>
 <h2 id="一、安装Nvidia显卡驱动（GTX-1080）"><a href="#一、安装Nvidia显卡驱动（GTX-1080）" class="headerlink" title="一、安装Nvidia显卡驱动（GTX 1080）"></a>一、安装Nvidia显卡驱动（GTX 1080）</h2><p>1、安装完Ubuntu16.04系统后，第一次进入系统分辨率很低，所以先简单修改一下分辨率。</p>
@@ -276,7 +309,7 @@
 <p><code>sudo cp sources.list sources.list.bak</code></p>
 <p><code>sudo gedit sources.list</code></p>
 <p>把下面的内容添加到sources.list文件头部：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</div><div class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</div><div class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</div><div class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</div><div class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
 <p>然后更新源和更新已安装的包</p>
 <p><code>sudo apt-get update</code></p>
 <p><code>sudo apt-get upgrade</code></p>
@@ -293,34 +326,34 @@
 <p><code>sudo apt-get install nvidia-375</code></p>
 <p>重启电脑后驱动生效</p>
 <p>可以执行：<code>nvidia-smi</code>来查看信息，或者执行：<code>nvidia-settings</code>查看更详细的信息</p>
-<h2 id="二、安装CUDA8-0"><a href="#二、安装CUDA8-0" class="headerlink" title="二、安装CUDA8.0"></a>二、安装CUDA8.0</h2><p>1、先去Nvidia开发者网站下载<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="external">CUDA8.0</a><br><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/L8H4mIGh9L.png" alt=""></p>
+<h2 id="二、安装CUDA8-0"><a href="#二、安装CUDA8-0" class="headerlink" title="二、安装CUDA8.0"></a>二、安装CUDA8.0</h2><p>1、先去Nvidia开发者网站下载<a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener">CUDA8.0</a><br><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/L8H4mIGh9L.png" alt=""></p>
 <p>下载好后，执行：<code>sudo sh cuda_8.0.44_linux.run</code>进行安装。如果出现了提示空间不足，那么执行：<code>sudo sh cuda_8.0.27_linux.run --tmpdir=/opt/temp/</code></p>
 <p>执行后会有一系列提示需要确认，其中，询问是否安装Nvidia显卡驱动的时候选n，因为我们之前已经装过了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">Do you accept the previously read EULA?</div><div class="line">accept/decline/quit:               accept</div><div class="line"></div><div class="line">Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 367.48?</div><div class="line">(y)es/(n)o/(q)uit: n</div><div class="line"></div><div class="line">Install the CUDA 8.0 Toolkit?</div><div class="line">(y)es/(n)o/(q)uit: y</div><div class="line"></div><div class="line">Enter Toolkit Location</div><div class="line"> [ default is /usr/local/cuda-8.0 ]:</div><div class="line"></div><div class="line">Do you want to install a symbolic link at /usr/local/cuda?</div><div class="line">(y)es/(n)o/(q)uit: y</div><div class="line"></div><div class="line">Install the CUDA 8.0 Samples?</div><div class="line">(y)es/(n)o/(q)uit: y</div><div class="line"></div><div class="line">Enter CUDA Samples Location</div><div class="line"> [ default is /home/gai ]:</div><div class="line"></div><div class="line">Installing the CUDA Toolkit in /usr/local/cuda-8.0 ...</div><div class="line">Missing recommended library: libGLU.so</div><div class="line">Missing recommended library: libX11.so</div><div class="line">Missing recommended library: libXi.so</div><div class="line">Missing recommended library: libXmu.so</div><div class="line"></div><div class="line">Installing the CUDA Samples in /home/gai ...</div><div class="line">Copying samples to /home/gai/NVIDIA_CUDA-8.0_Samples now...</div><div class="line">Finished copying samples.</div><div class="line"></div><div class="line">===========</div><div class="line">= Summary =</div><div class="line">===========</div><div class="line"></div><div class="line">Driver:   Not Selected</div><div class="line">Toolkit:  Installed in /usr/local/cuda-8.0</div><div class="line">Samples:  Installed in /home/gai, but missing recommended libraries</div><div class="line"></div><div class="line">Please make sure that</div><div class="line"> -   PATH includes /usr/local/cuda-8.0/bin</div><div class="line"> -   LD_LIBRARY_PATH includes /usr/local/cuda-8.0/lib64, or, add /usr/local/cuda-8.0/lib64 to /etc/ld.so.conf and run ldconfig as root</div><div class="line"></div><div class="line">To uninstall the CUDA Toolkit, run the uninstall script in /usr/local/cuda-8.0/bin</div><div class="line"></div><div class="line">Please see CUDA_Installation_Guide_Linux.pdf in /usr/local/cuda-8.0/doc/pdf for detailed information on setting up CUDA.</div><div class="line"></div><div class="line">***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 361.00 is required for CUDA 8.0 functionality to work.</div><div class="line">To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:</div><div class="line">    sudo &lt;CudaInstaller&gt;.run -silent -driver</div><div class="line"></div><div class="line">Logfile is /tmp/cuda_install_6100.log</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">Do you accept the previously read EULA?</span><br><span class="line">accept/decline/quit:               accept</span><br><span class="line"></span><br><span class="line">Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 367.48?</span><br><span class="line">(y)es/(n)o/(q)uit: n</span><br><span class="line"></span><br><span class="line">Install the CUDA 8.0 Toolkit?</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Enter Toolkit Location</span><br><span class="line"> [ default is /usr/local/cuda-8.0 ]:</span><br><span class="line"></span><br><span class="line">Do you want to install a symbolic link at /usr/local/cuda?</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Install the CUDA 8.0 Samples?</span><br><span class="line">(y)es/(n)o/(q)uit: y</span><br><span class="line"></span><br><span class="line">Enter CUDA Samples Location</span><br><span class="line"> [ default is /home/gai ]:</span><br><span class="line"></span><br><span class="line">Installing the CUDA Toolkit in /usr/local/cuda-8.0 ...</span><br><span class="line">Missing recommended library: libGLU.so</span><br><span class="line">Missing recommended library: libX11.so</span><br><span class="line">Missing recommended library: libXi.so</span><br><span class="line">Missing recommended library: libXmu.so</span><br><span class="line"></span><br><span class="line">Installing the CUDA Samples in /home/gai ...</span><br><span class="line">Copying samples to /home/gai/NVIDIA_CUDA-8.0_Samples now...</span><br><span class="line">Finished copying samples.</span><br><span class="line"></span><br><span class="line">===========</span><br><span class="line">= Summary =</span><br><span class="line">===========</span><br><span class="line"></span><br><span class="line">Driver:   Not Selected</span><br><span class="line">Toolkit:  Installed in /usr/local/cuda-8.0</span><br><span class="line">Samples:  Installed in /home/gai, but missing recommended libraries</span><br><span class="line"></span><br><span class="line">Please make sure that</span><br><span class="line"> -   PATH includes /usr/local/cuda-8.0/bin</span><br><span class="line"> -   LD_LIBRARY_PATH includes /usr/local/cuda-8.0/lib64, or, add /usr/local/cuda-8.0/lib64 to /etc/ld.so.conf and run ldconfig as root</span><br><span class="line"></span><br><span class="line">To uninstall the CUDA Toolkit, run the uninstall script in /usr/local/cuda-8.0/bin</span><br><span class="line"></span><br><span class="line">Please see CUDA_Installation_Guide_Linux.pdf in /usr/local/cuda-8.0/doc/pdf for detailed information on setting up CUDA.</span><br><span class="line"></span><br><span class="line">***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 361.00 is required for CUDA 8.0 functionality to work.</span><br><span class="line">To install the driver using this installer, run the following command, replacing &lt;CudaInstaller&gt; with the name of this run file:</span><br><span class="line">    sudo &lt;CudaInstaller&gt;.run -silent -driver</span><br><span class="line"></span><br><span class="line">Logfile is /tmp/cuda_install_6100.log</span><br></pre></td></tr></table></figure>
 <p>可以发现系统提示缺少一些推荐安装的库：libGLU.so、libX11.so、libXi.so、libXmu.so</p>
-<p>使用<a href="http://packages.ubuntu.com/" target="_blank" rel="external">Ubuntu Packages Search</a>进行搜索，在Search the contents of packages处分别键入以上四个库，可以发现需要安装以下软件包：libglu1-mesa-dev、libx11-dev、libxi-dev、libxmu-dev</p>
+<p>使用<a href="http://packages.ubuntu.com/" target="_blank" rel="noopener">Ubuntu Packages Search</a>进行搜索，在Search the contents of packages处分别键入以上四个库，可以发现需要安装以下软件包：libglu1-mesa-dev、libx11-dev、libxi-dev、libxmu-dev</p>
 <p>所以执行：<code>sudo apt-get install libglu1-mesa-dev libx11-dev libxi-dev libxmu-dev</code></p>
-<p>再参考下<a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#mandatory-post" target="_blank" rel="external">官方的安装指南</a>，发现还要配置环境变量，在home目录下执行：<code>sudo gedit .bashrc</code>，然后在文件末尾添加上下面两行内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export PATH=/usr/local/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</div><div class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</div></pre></td></tr></table></figure>
+<p>再参考下<a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#mandatory-post" target="_blank" rel="noopener">官方的安装指南</a>，发现还要配置环境变量，在home目录下执行：<code>sudo gedit .bashrc</code>，然后在文件末尾添加上下面两行内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/cuda-8.0/bin$&#123;PATH:+:$&#123;PATH&#125;&#125;</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;&#125;</span><br></pre></td></tr></table></figure>
 <p>然后执行：<code>source ~/.bashrc</code>更新一下</p>
 <p>2、测试CUDA</p>
 <p>测试几个官方CUDA的例子</p>
 <p>在CUDA例子的1_Utilities/deviceQuery目录下执行：<code>make</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&quot;/usr/local/cuda-8.0&quot;/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_60,code=compute_60 -o deviceQuery.o -c deviceQuery.cpp</div><div class="line">nvcc warning : The &apos;compute_20&apos;, &apos;sm_20&apos;, and &apos;sm_21&apos; architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).</div><div class="line">&quot;/usr/local/cuda-8.0&quot;/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_60,code=compute_60 -o deviceQuery deviceQuery.o</div><div class="line">nvcc warning : The &apos;compute_20&apos;, &apos;sm_20&apos;, and &apos;sm_21&apos; architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).</div><div class="line">mkdir -p ../../bin/x86_64/linux/release</div><div class="line">cp deviceQuery ../../bin/x86_64/linux/release</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;/usr/local/cuda-8.0&quot;/bin/nvcc -ccbin g++ -I../../common/inc  -m64    -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_60,code=compute_60 -o deviceQuery.o -c deviceQuery.cpp</span><br><span class="line">nvcc warning : The &apos;compute_20&apos;, &apos;sm_20&apos;, and &apos;sm_21&apos; architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).</span><br><span class="line">&quot;/usr/local/cuda-8.0&quot;/bin/nvcc -ccbin g++   -m64      -gencode arch=compute_20,code=sm_20 -gencode arch=compute_30,code=sm_30 -gencode arch=compute_35,code=sm_35 -gencode arch=compute_37,code=sm_37 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_60,code=compute_60 -o deviceQuery deviceQuery.o</span><br><span class="line">nvcc warning : The &apos;compute_20&apos;, &apos;sm_20&apos;, and &apos;sm_21&apos; architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).</span><br><span class="line">mkdir -p ../../bin/x86_64/linux/release</span><br><span class="line">cp deviceQuery ../../bin/x86_64/linux/release</span><br></pre></td></tr></table></figure>
 <p>编译完成，然后执行：<code>./deviceQuery</code>，会得到如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">./deviceQuery Starting...</div><div class="line"></div><div class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</div><div class="line"></div><div class="line">Detected 1 CUDA Capable device(s)</div><div class="line"></div><div class="line">Device 0: &quot;GeForce GTX 1080&quot;</div><div class="line">  CUDA Driver Version / Runtime Version          8.0 / 8.0</div><div class="line">  CUDA Capability Major/Minor version number:    6.1</div><div class="line">  Total amount of global memory:                 8110 MBytes (8504279040 bytes)</div><div class="line">  (20) Multiprocessors, (128) CUDA Cores/MP:     2560 CUDA Cores</div><div class="line">  GPU Max Clock rate:                            1810 MHz (1.81 GHz)</div><div class="line">  Memory Clock rate:                             5005 Mhz</div><div class="line">  Memory Bus Width:                              256-bit</div><div class="line">  L2 Cache Size:                                 2097152 bytes</div><div class="line">  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)</div><div class="line">  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers</div><div class="line">  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers</div><div class="line">  Total amount of constant memory:               65536 bytes</div><div class="line">  Total amount of shared memory per block:       49152 bytes</div><div class="line">  Total number of registers available per block: 65536</div><div class="line">  Warp size:                                     32</div><div class="line">  Maximum number of threads per multiprocessor:  2048</div><div class="line">  Maximum number of threads per block:           1024</div><div class="line">  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</div><div class="line">  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</div><div class="line">  Maximum memory pitch:                          2147483647 bytes</div><div class="line">  Texture alignment:                             512 bytes</div><div class="line">  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)</div><div class="line">  Run time limit on kernels:                     Yes</div><div class="line">  Integrated GPU sharing Host Memory:            No</div><div class="line">  Support host page-locked memory mapping:       Yes</div><div class="line">  Alignment requirement for Surfaces:            Yes</div><div class="line">  Device has ECC support:                        Disabled</div><div class="line">  Device supports Unified Addressing (UVA):      Yes</div><div class="line">  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0</div><div class="line">  Compute Mode:</div><div class="line">     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</div><div class="line"></div><div class="line">deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1080</div><div class="line">Result = PASS</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">./deviceQuery Starting...</span><br><span class="line"></span><br><span class="line"> CUDA Device Query (Runtime API) version (CUDART static linking)</span><br><span class="line"></span><br><span class="line">Detected 1 CUDA Capable device(s)</span><br><span class="line"></span><br><span class="line">Device 0: &quot;GeForce GTX 1080&quot;</span><br><span class="line">  CUDA Driver Version / Runtime Version          8.0 / 8.0</span><br><span class="line">  CUDA Capability Major/Minor version number:    6.1</span><br><span class="line">  Total amount of global memory:                 8110 MBytes (8504279040 bytes)</span><br><span class="line">  (20) Multiprocessors, (128) CUDA Cores/MP:     2560 CUDA Cores</span><br><span class="line">  GPU Max Clock rate:                            1810 MHz (1.81 GHz)</span><br><span class="line">  Memory Clock rate:                             5005 Mhz</span><br><span class="line">  Memory Bus Width:                              256-bit</span><br><span class="line">  L2 Cache Size:                                 2097152 bytes</span><br><span class="line">  Maximum Texture Dimension Size (x,y,z)         1D=(131072), 2D=(131072, 65536), 3D=(16384, 16384, 16384)</span><br><span class="line">  Maximum Layered 1D Texture Size, (num) layers  1D=(32768), 2048 layers</span><br><span class="line">  Maximum Layered 2D Texture Size, (num) layers  2D=(32768, 32768), 2048 layers</span><br><span class="line">  Total amount of constant memory:               65536 bytes</span><br><span class="line">  Total amount of shared memory per block:       49152 bytes</span><br><span class="line">  Total number of registers available per block: 65536</span><br><span class="line">  Warp size:                                     32</span><br><span class="line">  Maximum number of threads per multiprocessor:  2048</span><br><span class="line">  Maximum number of threads per block:           1024</span><br><span class="line">  Max dimension size of a thread block (x,y,z): (1024, 1024, 64)</span><br><span class="line">  Max dimension size of a grid size    (x,y,z): (2147483647, 65535, 65535)</span><br><span class="line">  Maximum memory pitch:                          2147483647 bytes</span><br><span class="line">  Texture alignment:                             512 bytes</span><br><span class="line">  Concurrent copy and kernel execution:          Yes with 2 copy engine(s)</span><br><span class="line">  Run time limit on kernels:                     Yes</span><br><span class="line">  Integrated GPU sharing Host Memory:            No</span><br><span class="line">  Support host page-locked memory mapping:       Yes</span><br><span class="line">  Alignment requirement for Surfaces:            Yes</span><br><span class="line">  Device has ECC support:                        Disabled</span><br><span class="line">  Device supports Unified Addressing (UVA):      Yes</span><br><span class="line">  Device PCI Domain ID / Bus ID / location ID:   0 / 1 / 0</span><br><span class="line">  Compute Mode:</span><br><span class="line">     &lt; Default (multiple host threads can use ::cudaSetDevice() with device simultaneously) &gt;</span><br><span class="line"></span><br><span class="line">deviceQuery, CUDA Driver = CUDART, CUDA Driver Version = 8.0, CUDA Runtime Version = 8.0, NumDevs = 1, Device0 = GeForce GTX 1080</span><br><span class="line">Result = PASS</span><br></pre></td></tr></table></figure>
 <p>再测试另外一个例子，在5_Simulations/nbody目录下执行<code>make</code>，如果提示cannot find -lglut，那么需要执行下：<code>sudo apt-get install freeglut3-dev</code></p>
 <p>编译完成后执行：<code>./nbody -benchmark -numbodies=256000 -device=0</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">Run &quot;nbody -benchmark [-numbodies=&lt;numBodies&gt;]&quot; to measure performance.</div><div class="line">    -fullscreen       (run n-body simulation in fullscreen mode)</div><div class="line">    -fp64             (use double precision floating point values for simulation)</div><div class="line">    -hostmem          (stores simulation data in host memory)</div><div class="line">    -benchmark        (run benchmark to measure performance)</div><div class="line">    -numbodies=&lt;N&gt;    (number of bodies (&gt;= 1) to run in simulation)</div><div class="line">    -device=&lt;d&gt;       (where d=0,1,2.... for the CUDA device to use)</div><div class="line">    -numdevices=&lt;i&gt;   (where i=(number of CUDA devices &gt; 0) to use for simulation)</div><div class="line">    -compare          (compares simulation results running once on the default GPU and once on the CPU)</div><div class="line">    -cpu              (run n-body simulation on the CPU)</div><div class="line">    -tipsy=&lt;file.bin&gt; (load a tipsy model file for simulation)</div><div class="line"></div><div class="line">NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</div><div class="line"></div><div class="line">&gt; Windowed mode</div><div class="line">&gt; Simulation data stored in video memory</div><div class="line">&gt; Single precision floating point simulation</div><div class="line">&gt; 1 Devices used for simulation</div><div class="line">gpuDeviceInit() CUDA Device [0]: &quot;GeForce GTX 1080</div><div class="line">&gt; Compute 6.1 CUDA device: [GeForce GTX 1080]</div><div class="line">number of bodies = 256000</div><div class="line">256000 bodies, total time for 10 iterations: 2395.682 ms</div><div class="line">= 273.559 billion interactions per second</div><div class="line">= 5471.177 single-precision GFLOP/s at 20 flops per interaction</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Run &quot;nbody -benchmark [-numbodies=&lt;numBodies&gt;]&quot; to measure performance.</span><br><span class="line">    -fullscreen       (run n-body simulation in fullscreen mode)</span><br><span class="line">    -fp64             (use double precision floating point values for simulation)</span><br><span class="line">    -hostmem          (stores simulation data in host memory)</span><br><span class="line">    -benchmark        (run benchmark to measure performance)</span><br><span class="line">    -numbodies=&lt;N&gt;    (number of bodies (&gt;= 1) to run in simulation)</span><br><span class="line">    -device=&lt;d&gt;       (where d=0,1,2.... for the CUDA device to use)</span><br><span class="line">    -numdevices=&lt;i&gt;   (where i=(number of CUDA devices &gt; 0) to use for simulation)</span><br><span class="line">    -compare          (compares simulation results running once on the default GPU and once on the CPU)</span><br><span class="line">    -cpu              (run n-body simulation on the CPU)</span><br><span class="line">    -tipsy=&lt;file.bin&gt; (load a tipsy model file for simulation)</span><br><span class="line"></span><br><span class="line">NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.</span><br><span class="line"></span><br><span class="line">&gt; Windowed mode</span><br><span class="line">&gt; Simulation data stored in video memory</span><br><span class="line">&gt; Single precision floating point simulation</span><br><span class="line">&gt; 1 Devices used for simulation</span><br><span class="line">gpuDeviceInit() CUDA Device [0]: &quot;GeForce GTX 1080</span><br><span class="line">&gt; Compute 6.1 CUDA device: [GeForce GTX 1080]</span><br><span class="line">number of bodies = 256000</span><br><span class="line">256000 bodies, total time for 10 iterations: 2395.682 ms</span><br><span class="line">= 273.559 billion interactions per second</span><br><span class="line">= 5471.177 single-precision GFLOP/s at 20 flops per interaction</span><br></pre></td></tr></table></figure>
 <p>至此CUDA8.0安装完成。</p>
-<h2 id="三、安装cuDNN-v5-1"><a href="#三、安装cuDNN-v5-1" class="headerlink" title="三、安装cuDNN v5.1"></a>三、安装cuDNN v5.1</h2><p>先去Nvidia开发者网站下载<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="external">cuDNN</a>，这个需要注册账号后才能下载。</p>
+<h2 id="三、安装cuDNN-v5-1"><a href="#三、安装cuDNN-v5-1" class="headerlink" title="三、安装cuDNN v5.1"></a>三、安装cuDNN v5.1</h2><p>先去Nvidia开发者网站下载<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN</a>，这个需要注册账号后才能下载。</p>
 <p>选择Download cuDNN v5.1 (August 10, 2016), for CUDA 8.0，然后点cuDNN v5.1 Library for Linux，会下载一个.tgz的文件</p>
 <p><img src="http://p3awn0zgi.bkt.clouddn.com/blog/180130/ef1784Ea8K.png" alt=""></p>
 <p>在文件所在目录下执行：<code>tar -zxvf cudnn-8.0-linux-x64-v5.0-ga.tgz</code></p>
 <p>虽然官方没有提供安装说明，但是google下就能查到。执行下列命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include/</div><div class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/</div><div class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h</div><div class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn*</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp cuda/include/cudnn.h /usr/local/cuda/include/</span><br><span class="line">sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/</span><br><span class="line">sudo chmod a+r /usr/local/cuda/include/cudnn.h</span><br><span class="line">sudo chmod a+r /usr/local/cuda/lib64/libcudnn*</span><br></pre></td></tr></table></figure>
 <p>这样cuDNN v5.1就安装完成了。</p>
-<h2 id="四、安装TensorFlow"><a href="#四、安装TensorFlow" class="headerlink" title="四、安装TensorFlow"></a>四、安装TensorFlow</h2><p>TensorFlow有自己的<a href="https://www.tensorflow.org/get_started/os_setup#pip-installation" target="_blank" rel="external">官方安装文档</a>，提供了多种安装方式，我使用过其中的两种：pip安装和源码编译安装。简单说下两种安装方式的特点，pip安装过程便捷，几句命令就搞定。源码编译安装过程复杂，并且容易遇到各种问题。所以一般我们都会选择pip安装方式。</p>
+<h2 id="四、安装TensorFlow"><a href="#四、安装TensorFlow" class="headerlink" title="四、安装TensorFlow"></a>四、安装TensorFlow</h2><p>TensorFlow有自己的<a href="https://www.tensorflow.org/get_started/os_setup#pip-installation" target="_blank" rel="noopener">官方安装文档</a>，提供了多种安装方式，我使用过其中的两种：pip安装和源码编译安装。简单说下两种安装方式的特点，pip安装过程便捷，几句命令就搞定。源码编译安装过程复杂，并且容易遇到各种问题。所以一般我们都会选择pip安装方式。</p>
 <p>安装过程还有些小插曲，第一次安装的时候先尝试了使用pip安装，结果安装完后TensorFlow不识别GPU，捣鼓了很久并且google各种资料安装过程都没有问题，遂放弃pip转为源码编译安装成功了。过了几天重做了系统，又要安装TensorFlow，这次抱着试一试的心态使用pip安装，结果成功了= =然而并不知道为什么，所以第二次也就没用源码安装了。</p>
 <p>本机安装环境为Python2.7，安装的TensorFlow版本为 v0.12.0 RC1</p>
 <h3 id="1、pip安装"><a href="#1、pip安装" class="headerlink" title="1、pip安装"></a>1、pip安装</h3><p>首先安装pip</p>
@@ -331,15 +364,15 @@
 <p>安装TensorFlow的GPU版本</p>
 <p><code>sudo pip install tensorflow-gpu</code></p>
 <p>OK，完成！是不是超简单= =哈哈，下面说下注意事项</p>
-<p>如果网速不好的话可以在GitHub上先下载好<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">TensorFlow的安装包</a>，然后进行本地安装，当然还是会联网下一些依赖包，但是都比较小<br>在安装包目录下执行</p>
+<p>如果网速不好的话可以在GitHub上先下载好<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">TensorFlow的安装包</a>，然后进行本地安装，当然还是会联网下一些依赖包，但是都比较小<br>在安装包目录下执行</p>
 <p><code>sudo pip install tensorflow-0.12.0rc1-cp27-none-linux_x86_64.whl</code></p>
 <p><code>sudo pip install tensorflow_gpu-0.12.0rc1-cp27-none-linux_x86_64.whl</code></p>
 <p>install后面那部分就是下载的安装包的文件名</p>
 <h3 id="2、源码编译安装"><a href="#2、源码编译安装" class="headerlink" title="2、源码编译安装"></a>2、源码编译安装</h3><p>首先先安装相关依赖包</p>
 <p><code>sudo apt-get install python-pip</code></p>
 <p><code>sudo apt-get install python-numpy swig python-dev python-wheel</code></p>
-<p>在本地编译TensorFlow源码的话需要使用Google开源的一个构建工具——Bazel，也有<a href="http://www.bazel.io/versions/master/docs/install.html" target="_blank" rel="external">官方安装文档</a></p>
-<p>首先需要下载Bazel，推荐<a href="https://github.com/bazelbuild/bazel/releases" target="_blank" rel="external">去GitHub上下载</a>，下载对应版本的安装包installer-linux-x86_64.sh。之前下载的是0.3.0版本的，结果在配置TensorFlow的时候出了一堆问题，后来换成了0.4.2版本问题解决。所以推荐下载最新版本的</p>
+<p>在本地编译TensorFlow源码的话需要使用Google开源的一个构建工具——Bazel，也有<a href="http://www.bazel.io/versions/master/docs/install.html" target="_blank" rel="noopener">官方安装文档</a></p>
+<p>首先需要下载Bazel，推荐<a href="https://github.com/bazelbuild/bazel/releases" target="_blank" rel="noopener">去GitHub上下载</a>，下载对应版本的安装包installer-linux-x86_64.sh。之前下载的是0.3.0版本的，结果在配置TensorFlow的时候出了一堆问题，后来换成了0.4.2版本问题解决。所以推荐下载最新版本的</p>
 <p>在Bazel安装包所在目录下执行<br><code>sudo chmod +x bazel-0.4.2-installer-linux-x86_64.sh</code></p>
 <p><code>sudo ./bazel-0.4.2-installer-linux-x86_64.sh --user</code></p>
 <p>需要注意的是Bazel需要Java环境，如果没有的话需要安装，直接使用apt-get安装即可</p>
@@ -348,7 +381,7 @@
 <p><code>sudo apt-get install default-jdk</code></p>
 <p>安装完成后再执行<code>sudo ./bazel-0.4.2-installer-linux-x86_64.sh --user</code>即可</p>
 <p>然后在 ~/.bashrc中追加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">source /home/gai/.bazel/bin/bazel-complete.bash</div><div class="line">export PATH=$PATH:/home/gai/.bazel/bin</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source /home/gai/.bazel/bin/bazel-complete.bash</span><br><span class="line">export PATH=$PATH:/home/gai/.bazel/bin</span><br></pre></td></tr></table></figure>
 <p>需要注意的是，把gai换成自己系统的用户名</p>
 <p>至于为什么要追加这个内容，我在Bazel安装文档中找到以下内容</p>
 <blockquote>
@@ -361,17 +394,17 @@
 <p>我在使用源码编译安装的时候直接在~/.bashrc追加了那两行内容，没有做Bazel安装文档中步骤。等下次使用源码编译安装的时候再尝试下</p>
 <p>在~/.bashrc追加完后执行<code>source ~/.bashrc</code>更新一下</p>
 <p>至此Bazel安装完成，下一步开始编译TensorFlow</p>
-<p>首先先下载TensorFlow源码，可以使用git 命令从GitHub上克隆下来：git clone <a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">https://github.com/tensorflow/tensorflow</a> ，这是最新版，也可以自己<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">去GitHub上下载</a>release版，推荐后者</p>
+<p>首先先下载TensorFlow源码，可以使用git 命令从GitHub上克隆下来：git clone <a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow</a> ，这是最新版，也可以自己<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="noopener">去GitHub上下载</a>release版，推荐后者</p>
 <p>下载完成后进入TensorFlow主目录，执行：</p>
 <p><code>./configure</code></p>
 <p>开始配置TensorFlow，接下来会有一系列问题需要确认，我印象中会询问是否需要支持Google Cloud、Hadoop、OpenCL、CUDA等，其中CUDA是我们需要的，所以我除了CUDA选了yes以外其他的都选了no</p>
 <p>如果配置成功的话会出现下列信息，可能不完全一样，但至少会有Configuration finished</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">INFO: Starting clean (this may take a while). Consider using --expunge_async if the clean takes more than several minutes.</div><div class="line">.....</div><div class="line">____Loading package: tensorflow/contrib/util</div><div class="line">____Loading package: tensorflow/tools/test</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 97,938 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 451,148 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 802,540 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 1,317,340 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,055,608 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,247,228 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,328,350 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,457,050 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,585,750 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 3,518,110 bytes</div><div class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 3,711,160 bytes</div><div class="line">INFO: All external dependencies fetched successfully.</div><div class="line">Configuration finished</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">INFO: Starting clean (this may take a while). Consider using --expunge_async if the clean takes more than several minutes.</span><br><span class="line">.....</span><br><span class="line">____Loading package: tensorflow/contrib/util</span><br><span class="line">____Loading package: tensorflow/tools/test</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 97,938 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 451,148 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 802,540 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 1,317,340 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,055,608 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,247,228 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,328,350 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,457,050 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 2,585,750 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 3,518,110 bytes</span><br><span class="line">____Downloading http://bazel-mirror.storage.googleapis.com/github.com/google/protobuf/archive/008b5a228b37c054f46ba478ccafa5e855cb16db.tar.gz: 3,711,160 bytes</span><br><span class="line">INFO: All external dependencies fetched successfully.</span><br><span class="line">Configuration finished</span><br></pre></td></tr></table></figure>
 <p>然后使用Bazel来编译TensorFlow，在TensorFlow源码目录下执行以下命令</p>
 <p><code>bazel build -c opt --config=cuda //tensorflow/cc:tutorials_example_trainer</code></p>
 <p>编译需要一段时间，配置为i7-6700+24G内存大约耗时20分钟</p>
 <p>编译完成后会显示以下信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Target //tensorflow/cc:tutorials_example_trainer up-to-date:</div><div class="line">  bazel-bin/tensorflow/cc/tutorials_example_trainer</div><div class="line">INFO: Elapsed time: 1196.829s, Critical Path: 986.68s</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Target //tensorflow/cc:tutorials_example_trainer up-to-date:</span><br><span class="line">  bazel-bin/tensorflow/cc/tutorials_example_trainer</span><br><span class="line">INFO: Elapsed time: 1196.829s, Critical Path: 986.68s</span><br></pre></td></tr></table></figure>
 <p>执行一下TensorFlow官方提供的例子，看看能否成功调用GPU</p>
 <p><code>bazel-bin/tensorflow/cc/tutorials_example_trainer --use_gpu</code></p>
 <p>如果看到<strong>successfully opened CUDA library、Creating TensorFlow device (/gpu:0)、显卡信息以及下面的运算过程</strong>，那说明成功调用了GPU</p>
@@ -388,13 +421,13 @@
 <p>首先先配置环境变量，在home目录下执行</p>
 <p><code>sudo gedit .bash_profile</code></p>
 <p>然后在里面添加下面两行内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64&quot;</div><div class="line">export CUDA_HOME=/usr/local/cuda</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64&quot;</span><br><span class="line">export CUDA_HOME=/usr/local/cuda</span><br></pre></td></tr></table></figure>
 <p>然后执行：<code>source ~/.bash_profile</code>更新一下</p>
 <p>执行下列代码</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line">...</div><div class="line">&gt;&gt;&gt; import tensorflow as tf</div><div class="line">I tensorflow/stream_executor/dso_loader.cc:128] successfully opened CUDA library libcublas.so locally</div><div class="line">I tensorflow/stream_executor/dso_loader.cc:128] successfully opened CUDA library libcudnn.so locally</div><div class="line">I tensorflow/stream_executor/dso_loader.cc:128] successfully opened CUDA library libcufft.so locally</div><div class="line">I tensorflow/stream_executor/dso_loader.cc:128] successfully opened CUDA library libcuda.so.1 locally</div><div class="line">I tensorflow/stream_executor/dso_loader.cc:128] successfully opened CUDA library libcurand.so locally</div><div class="line">&gt;&gt;&gt; hello = tf.constant('Hello, TensorFlow!')</div><div class="line">&gt;&gt;&gt; sess = tf.Session()</div><div class="line">I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:937] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</div><div class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:885] Found device 0 with properties: </div><div class="line">name: GeForce GTX 1080</div><div class="line">major: 6 minor: 1 memoryClockRate (GHz) 1.8095</div><div class="line">pciBusID 0000:01:00.0</div><div class="line">Total memory: 7.92GiB</div><div class="line">Free memory: 6.47GiB</div><div class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:906] DMA: 0 </div><div class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:916] 0: Y </div><div class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -&gt; (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)</div><div class="line">&gt;&gt;&gt; print(sess.run(hello))</div><div class="line">Hello, TensorFlow!</div><div class="line">&gt;&gt;&gt; a = tf.constant(10)</div><div class="line">&gt;&gt;&gt; b = tf.constant(32)</div><div class="line">&gt;&gt;&gt; print(sess.run(a + b))</div><div class="line">42</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ python</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">I tensorflow/stream_executor/dso_loader.cc:<span class="number">128</span>] successfully opened CUDA library libcublas.so locally</span><br><span class="line">I tensorflow/stream_executor/dso_loader.cc:<span class="number">128</span>] successfully opened CUDA library libcudnn.so locally</span><br><span class="line">I tensorflow/stream_executor/dso_loader.cc:<span class="number">128</span>] successfully opened CUDA library libcufft.so locally</span><br><span class="line">I tensorflow/stream_executor/dso_loader.cc:<span class="number">128</span>] successfully opened CUDA library libcuda.so<span class="number">.1</span> locally</span><br><span class="line">I tensorflow/stream_executor/dso_loader.cc:<span class="number">128</span>] successfully opened CUDA library libcurand.so locally</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hello = tf.constant(<span class="string">'Hello, TensorFlow!'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sess = tf.Session()</span><br><span class="line">I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:<span class="number">937</span>] successful NUMA node read <span class="keyword">from</span> SysFS had negative value (<span class="number">-1</span>), but there must be at least one NUMA node, so returning NUMA node zero</span><br><span class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:<span class="number">885</span>] Found device <span class="number">0</span> <span class="keyword">with</span> properties: </span><br><span class="line">name: GeForce GTX <span class="number">1080</span></span><br><span class="line">major: <span class="number">6</span> minor: <span class="number">1</span> memoryClockRate (GHz) <span class="number">1.8095</span></span><br><span class="line">pciBusID <span class="number">0000</span>:<span class="number">01</span>:<span class="number">00.0</span></span><br><span class="line">Total memory: <span class="number">7.92</span>GiB</span><br><span class="line">Free memory: <span class="number">6.47</span>GiB</span><br><span class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:<span class="number">906</span>] DMA: <span class="number">0</span> </span><br><span class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:<span class="number">916</span>] <span class="number">0</span>: Y </span><br><span class="line">I tensorflow/core/common_runtime/gpu/gpu_device.cc:975] Creating TensorFlow device (/gpu:0) -&gt; (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sess.run(hello))</span><br><span class="line">Hello, TensorFlow!</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = tf.constant(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = tf.constant(<span class="number">32</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sess.run(a + b))</span><br><span class="line"><span class="number">42</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 <p>首先import tensorflow没出错并且能输出<strong>Hello, TensorFlow!</strong>和<strong>42</strong>，这表明TensorFlow是可以使用的</p>
 <p>然后看到<strong>successfully opened CUDA library</strong>和<strong>Creating TensorFlow device (/gpu:0)以及显卡信息</strong>，这表明是能够调用GPU</p>
-<p>此外如何使用GPU以及是否使用了GPU可以<a href="https://www.tensorflow.org/how_tos/using_gpu/" target="_blank" rel="external">参考这篇内容</a></p>
+<p>此外如何使用GPU以及是否使用了GPU可以<a href="https://www.tensorflow.org/how_tos/using_gpu/" target="_blank" rel="noopener">参考这篇内容</a></p>
 <p>还可以测试一个TensorFlow的neural net model</p>
 <p>执行：<code>python /usr/local/lib/python2.7/dist-packages/tensorflow/models/image/mnist/convolutional.py</code></p>
 <p>第一次执行会下载一些东西然后开始执行。我的电脑执行的时间大约是40s</p>
@@ -402,18 +435,18 @@
 <li>如果采用pip安装TensorFlow并要启用GPU支持的话，tensorflow和tensorflow-gpu都要安装，并且顺序不可以错。如果卸载了tensorflow，保留了tensorflow-gpu，此时TensorFlow是不好用的，并且在有tensorflow-gpu的情况下再装tensorflow，这时候TensorFlow是无法识别GPU的。所以如果要卸载那么把tensorflow和tensorflow-gpu都卸载，然后再按照先tensorflow后tensorflow-gpu的顺序安装。</li>
 <li>如果采用源码编译安装TensorFlow并要启用GPU支持的话，直接编译GPU版本的pip安装包然后安装即可。</li>
 <li>采用源码编译安装TensorFlow，在进行TensorFlow配置时，如果系统中没有安装OpenCL而在Do you wish to build TensorFlow with OpenCL support? [y/N]时又选择了y，那么会出现”Invalid SYCL 1.2 library path. /usr/local/computecpp/lib/libComputeCpp.so cannot be found “这个错误。</li>
-<li>当初使用Bazel 0.3.0版本，进行TensorFlow配置时出现的错误如下。解决办法是使用了Bazel最新版0.4.2（在Bazel0.3.0时还使用过该命令tensorflow$ git pull –recurse-submodules，然后后来换成的0.4.2，不知是否有影响 ）。这个错误当初参考了以下信息<a href="https://github.com/tensorflow/tensorflow/issues/4365" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/issues/4365</a> 、<a href="https://github.com/tensorflow/tensorflow/issues/5357" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/issues/5357</a> 、<a href="https://github.com/tensorflow/tensorflow/issues/4319" target="_blank" rel="external">https://github.com/tensorflow/tensorflow/issues/4319</a></li>
+<li>当初使用Bazel 0.3.0版本，进行TensorFlow配置时出现的错误如下。解决办法是使用了Bazel最新版0.4.2（在Bazel0.3.0时还使用过该命令tensorflow$ git pull –recurse-submodules，然后后来换成的0.4.2，不知是否有影响 ）。这个错误当初参考了以下信息<a href="https://github.com/tensorflow/tensorflow/issues/4365" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/issues/4365</a> 、<a href="https://github.com/tensorflow/tensorflow/issues/5357" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/issues/5357</a> 、<a href="https://github.com/tensorflow/tensorflow/issues/4319" target="_blank" rel="noopener">https://github.com/tensorflow/tensorflow/issues/4319</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">INFO: Starting clean (this may take a while). Consider using --expunge_async if the clean takes more than several minutes.</div><div class="line">.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:17:3: //external:eigen_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:17:3: //external:eigen_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:28:3: //external:libxsmm_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:28:3: //external:libxsmm_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:44:3: //external:com_googlesource_code_re2: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:44:3: //external:com_googlesource_code_re2: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:54:3: //external:gemmlowp: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:54:3: //external:gemmlowp: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:64:3: //external:farmhash_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:64:3: //external:farmhash_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:80:3: //external:highwayhash: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:80:3: //external:highwayhash: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:90:3: //external:nasm: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:90:3: //external:nasm: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:101:3: //external:jpeg: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:101:3: //external:jpeg: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:112:3: //external:png_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:112:3: //external:png_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:123:3: //external:gif_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:123:3: //external:gif_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:135:3: //external:six_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:135:3: //external:six_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:151:3: //external:protobuf: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:151:3: //external:protobuf: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:161:3: //external:gmock_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:161:3: //external:gmock_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:187:3: //external:pcre: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:187:3: //external:pcre: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:198:3: //external:swig: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:198:3: //external:swig: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:222:3: //external:grpc: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:222:3: //external:grpc: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:245:3: //external:linenoise: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:245:3: //external:linenoise: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:258:3: //external:llvm: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:258:3: //external:llvm: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:269:3: //external:jsoncpp_git: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:269:3: //external:jsoncpp_git: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:285:3: //external:boringssl: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:285:3: //external:boringssl: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:295:3: //external:nanopb_git: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:295:3: //external:nanopb_git: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:311:3: //external:zlib_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:311:3: //external:zlib_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</div><div class="line">ERROR: com.google.devtools.build.lib.packages.BuildFileContainsErrorsException: error loading package &apos;&apos;: Encountered error while reading extension file &apos;cuda/build_defs.bzl&apos;: no such package &apos;@local_config_cuda//cuda&apos;: error loading package &apos;external&apos;: Could not load //external package.</div><div class="line">ERROR: missing fetch expression. Type &apos;bazel help fetch&apos; for syntax and help.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">INFO: Starting clean (this may take a while). Consider using --expunge_async if the clean takes more than several minutes.</span><br><span class="line">.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:17:3: //external:eigen_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:17:3: //external:eigen_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:28:3: //external:libxsmm_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:28:3: //external:libxsmm_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:44:3: //external:com_googlesource_code_re2: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:44:3: //external:com_googlesource_code_re2: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:54:3: //external:gemmlowp: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:54:3: //external:gemmlowp: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:64:3: //external:farmhash_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:64:3: //external:farmhash_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:80:3: //external:highwayhash: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:80:3: //external:highwayhash: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:90:3: //external:nasm: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:90:3: //external:nasm: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:101:3: //external:jpeg: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:101:3: //external:jpeg: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:112:3: //external:png_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:112:3: //external:png_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:123:3: //external:gif_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:123:3: //external:gif_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:135:3: //external:six_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:135:3: //external:six_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:151:3: //external:protobuf: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:151:3: //external:protobuf: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:161:3: //external:gmock_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:161:3: //external:gmock_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:187:3: //external:pcre: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:187:3: //external:pcre: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:198:3: //external:swig: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:198:3: //external:swig: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:222:3: //external:grpc: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:222:3: //external:grpc: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:245:3: //external:linenoise: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:245:3: //external:linenoise: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:258:3: //external:llvm: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:258:3: //external:llvm: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:269:3: //external:jsoncpp_git: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:269:3: //external:jsoncpp_git: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:285:3: //external:boringssl: no such attribute &apos;urls&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:285:3: //external:boringssl: missing value for mandatory attribute &apos;url&apos; in &apos;http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:295:3: //external:nanopb_git: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:295:3: //external:nanopb_git: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:311:3: //external:zlib_archive: no such attribute &apos;urls&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: /home/gai/tensorflow/tensorflow/workspace.bzl:311:3: //external:zlib_archive: missing value for mandatory attribute &apos;url&apos; in &apos;new_http_archive&apos; rule.</span><br><span class="line">ERROR: com.google.devtools.build.lib.packages.BuildFileContainsErrorsException: error loading package &apos;&apos;: Encountered error while reading extension file &apos;cuda/build_defs.bzl&apos;: no such package &apos;@local_config_cuda//cuda&apos;: error loading package &apos;external&apos;: Could not load //external package.</span><br><span class="line">ERROR: missing fetch expression. Type &apos;bazel help fetch&apos; for syntax and help.</span><br></pre></td></tr></table></figure>
 <ul>
 <li>使用GPU执行TensorFlow时可能会出现以下内容，对实际运行没看出来有什么影响</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">E tensorflow/core/framework/op_kernel.cc:925] OpKernel (&apos;op: &quot;NegTrain&quot; device_type: &quot;CPU&quot;&apos;) for unknown op: NegTrain</div><div class="line">E tensorflow/core/framework/op_kernel.cc:925] OpKernel (&apos;op: &quot;Skipgram&quot; device_type: &quot;CPU&quot;&apos;) for unknown op: Skipgram</div></pre></td></tr></table></figure>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="http://www.52nlp.cn/深度学习主机环境配置-ubuntu-16-04-nvidia-gtx-1080-cuda-8" target="_blank" rel="external">深度学习主机环境配置: Ubuntu16.04+Nvidia GTX 1080+CUDA8.0</a></p>
-<p><a href="http://www.52nlp.cn/深度学习主机环境配置-ubuntu16-04-geforce-gtx1080-tensorflow" target="_blank" rel="external">深度学习主机环境配置: Ubuntu16.04+GeForce GTX 1080+TensorFlow</a></p>
-<p><a href="http://www.cnblogs.com/yiruparadise/p/5671620.html" target="_blank" rel="external">ubuntu14.04 安装 tensorflow</a></p>
-<p><a href="https://alliseesolutions.wordpress.com/2016/09/08/install-gpu-tensorflow-from-sources-w-ubuntu-16-04-and-cuda-8-0-rc/" target="_blank" rel="external">Install GPU TensorFlow From Sources w/ Ubuntu 16.04 and Cuda 8.0</a></p>
-<p><a href="http://darren1231.pixnet.net/blog/post/331300298-安裝-tensorflow-教學-gpu%3Anvidia1070(from-source" target="_blank" rel="external">安裝 tensorflow 教學 GPU:Nvidia1070(from source)</a>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E tensorflow/core/framework/op_kernel.cc:925] OpKernel (&apos;op: &quot;NegTrain&quot; device_type: &quot;CPU&quot;&apos;) for unknown op: NegTrain</span><br><span class="line">E tensorflow/core/framework/op_kernel.cc:925] OpKernel (&apos;op: &quot;Skipgram&quot; device_type: &quot;CPU&quot;&apos;) for unknown op: Skipgram</span><br></pre></td></tr></table></figure>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="http://www.52nlp.cn/深度学习主机环境配置-ubuntu-16-04-nvidia-gtx-1080-cuda-8" target="_blank" rel="noopener">深度学习主机环境配置: Ubuntu16.04+Nvidia GTX 1080+CUDA8.0</a></p>
+<p><a href="http://www.52nlp.cn/深度学习主机环境配置-ubuntu16-04-geforce-gtx1080-tensorflow" target="_blank" rel="noopener">深度学习主机环境配置: Ubuntu16.04+GeForce GTX 1080+TensorFlow</a></p>
+<p><a href="http://www.cnblogs.com/yiruparadise/p/5671620.html" target="_blank" rel="noopener">ubuntu14.04 安装 tensorflow</a></p>
+<p><a href="https://alliseesolutions.wordpress.com/2016/09/08/install-gpu-tensorflow-from-sources-w-ubuntu-16-04-and-cuda-8-0-rc/" target="_blank" rel="noopener">Install GPU TensorFlow From Sources w/ Ubuntu 16.04 and Cuda 8.0</a></p>
+<p><a href="http://darren1231.pixnet.net/blog/post/331300298-安裝-tensorflow-教學-gpu%3Anvidia1070(from-source" target="_blank" rel="noopener">安裝 tensorflow 教學 GPU:Nvidia1070(from source)</a>)</p>
 <h4 id="课外小知识"><a href="#课外小知识" class="headerlink" title="课外小知识"></a>课外小知识</h4><p>为什么使用Bazel来编译TensorFlow，他们是什么关系？</p>
 <p>Bazel是一个构建工具（构建工具：依据文件之间的依赖关系来决定文件编译的顺序），类似于Linux下的make命令。Bazel的出现是Google为了解决自己的问题：Google所有的源代码都在一个源代码仓库，而Google是一个跨国公司，世界各地的程序员都需要下载代码然后编译，所以在项目的构建过程中，性能问题是最关键的需求。</p>
 <p>Bazel相对于其他的构建工具相比，更加强调结构化和速度。</p>
@@ -424,10 +457,10 @@
 <p>Bazel和TensorFlow师出同门都来自于Google，在Google内部编译都使用Bazel，所以TensorFlow的编译过程自然也使用Bazel啦。</p>
 <p>想进一步了解Bazel的同学可以看看以下内容：</p>
 <p>Google开发Bazel的背景知识</p>
-<p><a href="http://google-engtools.blogspot.co.uk/2011/06/build-in-cloud-accessing-source-code.html" target="_blank" rel="external">http://google-engtools.blogspot.co.uk/2011/06/build-in-cloud-accessing-source-code.html</a></p>
-<p><a href="http://google-engtools.blogspot.tw/2011/08/build-in-cloud-how-build-system-works.html" target="_blank" rel="external">http://google-engtools.blogspot.tw/2011/08/build-in-cloud-how-build-system-works.html</a></p>
-<p><a href="http://google-engtools.blogspot.jp/2011/09/build-in-cloud-distributing-build-steps.html" target="_blank" rel="external">http://google-engtools.blogspot.jp/2011/09/build-in-cloud-distributing-build-steps.html</a></p>
-<p><a href="http://google-engtools.blogspot.tw/2011/10/build-in-cloud-distributing-build.html" target="_blank" rel="external">http://google-engtools.blogspot.tw/2011/10/build-in-cloud-distributing-build.html</a></p>
+<p><a href="http://google-engtools.blogspot.co.uk/2011/06/build-in-cloud-accessing-source-code.html" target="_blank" rel="noopener">http://google-engtools.blogspot.co.uk/2011/06/build-in-cloud-accessing-source-code.html</a></p>
+<p><a href="http://google-engtools.blogspot.tw/2011/08/build-in-cloud-how-build-system-works.html" target="_blank" rel="noopener">http://google-engtools.blogspot.tw/2011/08/build-in-cloud-how-build-system-works.html</a></p>
+<p><a href="http://google-engtools.blogspot.jp/2011/09/build-in-cloud-distributing-build-steps.html" target="_blank" rel="noopener">http://google-engtools.blogspot.jp/2011/09/build-in-cloud-distributing-build-steps.html</a></p>
+<p><a href="http://google-engtools.blogspot.tw/2011/10/build-in-cloud-distributing-build.html" target="_blank" rel="noopener">http://google-engtools.blogspot.tw/2011/10/build-in-cloud-distributing-build.html</a></p>
 
       
     </div>
@@ -438,15 +471,15 @@
 
   <div class="post-copyright">
     <p class="copyright-item">
-      <span>Author: </span>
+      <span>原文作者: </span>
       <a href="https://bluesmilery.github.io">Gai</a>
     </p>
     <p class="copyright-item">
-      <span>Link: </span>
+      <span>原文链接: </span>
       <a href="https://bluesmilery.github.io/blogs/9a018dfc/">https://bluesmilery.github.io/blogs/9a018dfc/</a>
     </p>
     <p class="copyright-item">
-      <span>License: </span>
+      <span>许可协议: </span>
       
       <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
     </p>
@@ -463,9 +496,9 @@
         
           <div class="post-tags">
             
-              <a href="/tags/Machine-Learning/">Machine Learning</a>
-            
               <a href="/tags/Linux/">Linux</a>
+            
+              <a href="/tags/Machine-Learning/">Machine Learning</a>
             
           </div>
         
@@ -476,13 +509,13 @@
       <a class="prev" href="/blogs/481fe3af/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">增强学习 Reinforcement learning part 1 - Introduction</span>
-        <span class="prev-text nav-mobile">Prev</span>
+        <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
       <a class="next" href="/blogs/1509af3a/">
         <span class="next-text nav-default">Linux系统安装——Ubuntu16.04+Windows7双系统</span>
-        <span class="prev-text nav-mobile">Next</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
@@ -511,12 +544,27 @@
       <footer id="footer" class="footer"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
-
   <div class="social-links">
     
       
         
-          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:plgaixd92498@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/bluesmilery" class="iconfont icon-github" title="github"></a>
         
       
     
@@ -532,21 +580,8 @@
     
       
     
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
     
     
-    
-      
       <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     
   </div>
@@ -554,11 +589,11 @@
 
 <div class="copyright">
   <span class="power-by">
-    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    Theme - 
+    主题 - 
     <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
   </span>
 
@@ -585,7 +620,6 @@
     <span class="author">Gai</span>
   </span>
 </div>
-
 
       </footer>
 
@@ -617,12 +651,19 @@
 
 
     
+  
+
+
+
+  
+  
+
 
 
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
   
 
   
@@ -630,10 +671,19 @@
   
 
   
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
 
 
-    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
 
   </body>
 </html>

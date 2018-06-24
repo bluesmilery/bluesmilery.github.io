@@ -3,6 +3,8 @@
 
 
     
+    
+    
   <url>
     <loc>https://bluesmilery.github.io/blogs/9ef0e127/</loc>
     <lastmod>2018-01-31T03:45:37.756Z</lastmod>
@@ -133,9 +135,9 @@
         <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
         <pubTime>2017-03-15T12:51:45.000Z</pubTime>
         
-        <tag>Machine Learning</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Machine Learning</tag>
          
          
            
@@ -166,6 +168,4 @@
     </data>
     </url>
 
-    
-    
 </urlset>

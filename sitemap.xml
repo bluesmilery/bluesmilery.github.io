@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bluesmilery.github.io/categories/index.html</loc>
+    
+    <lastmod>2018-06-24T08:30:10.156Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://bluesmilery.github.io/tags/index.html</loc>
+    
+    <lastmod>2018-06-24T08:28:23.568Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://bluesmilery.github.io/blogs/9ef0e127/</loc>
     
     <lastmod>2018-01-31T03:45:37.756Z</lastmod>
@@ -54,20 +68,6 @@
     <loc>https://bluesmilery.github.io/blogs/18a3f212/</loc>
     
     <lastmod>2018-01-31T03:37:12.741Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://bluesmilery.github.io/tags/index.html</loc>
-    
-    <lastmod>2018-01-31T03:36:51.786Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://bluesmilery.github.io/categories/index.html</loc>
-    
-    <lastmod>2018-01-31T03:35:46.154Z</lastmod>
     
   </url>
   
