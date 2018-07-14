@@ -4,12 +4,34 @@
 
     
   <url>
+    <loc>https://bluesmilery.github.io/blogs/a687003b/</loc>
+    <lastmod>2018-07-14T13:54:12.432Z</lastmod>
+    <data>
+        <display>
+        <title>多版本CUDA和TensorFlow共存</title>
+        <pubTime>2018-06-17T10:57:03.000Z</pubTime>
+        
+        <tag>TensorFlow</tag>
+         
+        <tag>CUDA</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https://bluesmilery.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://bluesmilery.github.io/blogs/77f7532c/</loc>
-    <lastmod>2018-07-14T10:45:57.767Z</lastmod>
+    <lastmod>2018-07-14T10:58:35.179Z</lastmod>
     <data>
         <display>
         <title>腾讯云GPU服务器搭建TensorFlow开发环境</title>
-        <pubTime>2018-05-14T08:12:56.000Z</pubTime>
+        <pubTime>2018-05-13T08:12:56.000Z</pubTime>
         
         <tag>CentOS</tag>
          
@@ -159,9 +181,9 @@
         <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
         <pubTime>2017-03-15T12:51:45.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
         <tag>Machine Learning</tag>
+         
+        <tag>Linux</tag>
          
          
            
