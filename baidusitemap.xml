@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://bluesmilery.github.io/blogs/6d457259/</loc>
+    <lastmod>2018-09-23T15:09:23.008Z</lastmod>
+    <data>
+        <display>
+        <title>使用Python多进程Pool类时遇见的一些问题</title>
+        <pubTime>2018-09-23T14:55:45.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>多进程</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="https://bluesmilery.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://bluesmilery.github.io/blogs/a687003b/</loc>
     <lastmod>2018-07-14T14:14:04.183Z</lastmod>
     <data>
@@ -181,9 +203,9 @@
         <title>机器学习系统环境配置指南 —— GTX 1080 + Ubuntu16.04 + CUDA8 + cuDNN5.1 + TensorFlow</title>
         <pubTime>2017-03-15T12:51:45.000Z</pubTime>
         
-        <tag>Machine Learning</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Machine Learning</tag>
          
          
            
