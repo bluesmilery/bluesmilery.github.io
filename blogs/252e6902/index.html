@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Docker安装指南以及使用GPU">
+
+
+
+
+  <meta name="keywords" content="Docker, GPU, Gai's Blog">
+
+
+
+
+
+  <meta name="google-site-verification" content="SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g">
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gai's Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0">
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/252e6902/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0">
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3f2fd48827f9ed28f8d9432317653de";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121307266-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121307266-1');
+</script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz",
+      appKey: "mOzxpdEEenjouuAKMFPazvnd"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Gai's Blog","subtitle":"A Zone for Knowledge","description":null,"author":"Gai","language":null,"timezone":null,"url":"https://bluesmilery.github.io","root":"/","permalink":"blogs/:abbrlink/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":year-:month-:day-:title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":[{"type":"git","repo":"git@github.com:bluesmilery/bluesmilery.github.io.git","branch":"master"},{"type":"baidu_url_submitter"}],"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"sitemap":{"path":"sitemap.xml"},"baidusitemap":{"path":"baidusitemap.xml"},"abbrlink":{"alg":"crc32","rep":"hex"},"baidu_url_submit":{"count":1,"host":"bluesmilery.github.io","token":"cktimjuXHORRMXsM","path":"baidu_urls.txt"},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":10},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"tag_generator":{"per_page":10},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2017,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Archives":"/archives/","Tags":"/tags","Categories":"/categories"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"plgaixd92498@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/bluesmilery","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz","app_key":"mOzxpdEEenjouuAKMFPazvnd"},"baidu_analytics":"a3f2fd48827f9ed28f8d9432317653de","baidu_verification":null,"google_analytics":"UA-121307266-1","google_verification":"SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g","disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":"MTAyMC8zMzY4MC8xMDIzNQ","version":"2.9.0","word_count":true};
+</script>
+
+    <title> Docker安装指南以及使用GPU - Gai's Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Gai's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Gai's Blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Docker安装指南以及使用GPU
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-11-25
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+        <div class="post-visits" data-url="/blogs/252e6902/" data-title="Docker安装指南以及使用GPU">
+            阅读次数 0
+          </div>
+        
+        
+        
+        
+          <span class="post-count">本文共4.5k字</span>
+          <span class="post-count">阅读约20分钟</span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#系列文章"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-text">环境配置</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#1、安装Docker"><span class="toc-text">1、安装Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#卸载旧版本"><span class="toc-text">卸载旧版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Docker-CE"><span class="toc-text">安装Docker CE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证是否安装成功"><span class="toc-text">验证是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加权限"><span class="toc-text">添加权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改Docker-Hub为国内镜像"><span class="toc-text">修改Docker Hub为国内镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转移数据目录"><span class="toc-text">转移数据目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Docker-Compose"><span class="toc-text">安装Docker Compose</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些错误"><span class="toc-text">一些错误</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、安装Nvidia-Docker"><span class="toc-text">2、安装Nvidia-Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前置条件"><span class="toc-text">前置条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除旧版本"><span class="toc-text">删除旧版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加相关库"><span class="toc-text">添加相关库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些问题"><span class="toc-text">一些问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、使用容器运行TensorFlow"><span class="toc-text">3、使用容器运行TensorFlow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、小结"><span class="toc-text">4、小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-text">References</span></a>
+    </li></div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>随着公司GPU服务器数量的增加，深度学习开发环境的部署逐渐成为了负担。因为机器本身环境配置的差异，即使经验丰富的人也会遇到一些全新的问题，需要耗费时间去解决。而Docker与生俱来的<code>Build once, Run anywhere</code>特点使得多机器统一环境部署变得极为容易，所以使用Docker势在必行</p>
+<p>本文的主要内容为在腾讯云的GPU服务器上如何安装Docker，并能支持GPU的使用</p>
+<p>（用了Docker后，就可以跟<a href="https://bluesmilery.github.io/blogs/a687003b/">前文介绍的Anaconda</a>拜拜了，因为conda只做到了Python环境隔离，并且每个虚拟环境还是要手动配置）</p>
+<a id="more"></a>
+<p>Docker是什么，有什么好处，网上的介绍很多，相关图书也有很多，在此不做赘述。我是通过《循序渐进学Docker》这本书入门的，让我很清晰的知道了基本概念和基本原理，摆脱了之前一看就头大的困扰</p>
+<p>如果在网上搜索Docker相关的内容，经常会看到这个四个词：<code>Docker、Moby、Docker-CE、Docker-EE</code>，所以在这里简单介绍一下这四个词之间有什么关系：</p>
+<blockquote>
+<p>Docker于2013年3月正式开源，然后由社区正常进行版本迭代，一直至2017年3月版本为v1.13.1。然后Docker公司将Docker项目改名为Moby项目（仍由社区维护），并发布两款自己维护的产品Docker-CE和Docker-EE。其中Docker-CE为开源免费的，提供给广大开发者和用户使用；Docker-EE为封闭收费的，提供给企业级用户使用。现在大家口中的Docker主要指的就是Docker-CE</p>
+</blockquote>
+<h3 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h3><p> 本文为【Docker &amp; Kubernetes &amp; GPU】系列文章中的一篇。其他篇正在编写中</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>本文实践的服务器环境为：</p>
+<ul>
+<li>CentOS Linux release 7.5.1804 (Core)</li>
+<li>内核版本：3.10.0-862.14.4.el7.x86_64</li>
+<li>所安装的Docker-CE版本：18.06.1-ce</li>
+</ul>
+<h2 id="1、安装Docker"><a href="#1、安装Docker" class="headerlink" title="1、安装Docker"></a>1、安装Docker</h2><p>Docker需要使用root权限来安装。以下内容根据官方安装指南进行简化整理，完整版请移步：<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">https://docs.docker.com/install/</a></p>
+<p>官方指南中针对各个系统都有安装说明，此处使用的是CentOS。Docker CE要求使用CentOS 7版本，并且<code>centos-extras</code>库需要启用，不过正常来说是默认启用的</p>
+<h3 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">           docker-client \</span><br><span class="line">           docker-client-latest \</span><br><span class="line">           docker-common \</span><br><span class="line">           docker-latest \</span><br><span class="line">           docker-latest-logrotate \</span><br><span class="line">           docker-logrotate \</span><br><span class="line">           docker-selinux \</span><br><span class="line">           docker-engine-selinux \</span><br><span class="line">           docker-engine</span><br></pre></td></tr></table></figure>
+<h3 id="安装Docker-CE"><a href="#安装Docker-CE" class="headerlink" title="安装Docker CE"></a>安装Docker CE</h3><p>安装方式有许多种，这里选择使用添加yum库的方式来安装</p>
+<p>安装相关依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+<p>添加Docker的yum库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"><span class="comment"># 若担心下载过慢，可以添加阿里的镜像源</span></span><br><span class="line"><span class="comment"># yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span></span><br></pre></td></tr></table></figure>
+<p>安装最新版Docker CE（安装时为18.06.1-ce）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce</span><br></pre></td></tr></table></figure>
+<p>如果遇见无法安装的问题（跟audit-lib相关），请参考下方’一些错误’部分</p>
+<p>如果提示需要接受GPG key，看一下是不是<code>060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</code>，是的话就接受</p>
+<p>如果要安装指定版本的，可以先执行<code>yum list docker-ce --showduplicates | sort -r</code>列举出来所有版本，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker-ce.x86_64            3:18.09.0-3.el7                    docker-ce-stable</span><br><span class="line">docker-ce.x86_64            3:18.09.0-3.el7                    @docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.1.ce-3.el7                   docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.06.0.ce-3.el7                   docker-ce-stable</span><br><span class="line">docker-ce.x86_64            18.03.1.ce-1.el7.centos            docker-ce-stable</span><br></pre></td></tr></table></figure>
+<p>然后执行<code>yum install docker-ce-&lt;VERSION STRING&gt;</code>安装。其中<code>&lt;VERSION STRING&gt;</code>指的是版本号中第一个破折号之前的内容，例如<code>yum install docker-ce-18.06.1.ce</code></p>
+<h3 id="验证是否安装成功"><a href="#验证是否安装成功" class="headerlink" title="验证是否安装成功"></a>验证是否安装成功</h3><p>启动Docker服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># service docker start  # 也可以</span></span><br></pre></td></tr></table></figure>
+<p>如果报错，请参考下方’一些错误’部分</p>
+<p>运行hello-world镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<p>该命令会首先在本地寻找是否存在hello-world镜像，如果不存在就会去Docker官方镜像库Docker Hub中拉取下载，然后启动一个容器运行该镜像。如果成功运行，将会打印以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image which runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, which sent it</span><br><span class="line">    to your terminal.</span><br><span class="line"></span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"> $ docker run -it ubuntu bash</span><br><span class="line"></span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line"></span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+<h3 id="添加权限"><a href="#添加权限" class="headerlink" title="添加权限"></a>添加权限</h3><p>执行Docker需要用户具有sudo权限，所以可以将需要使用Docker的普通用户加入docker用户组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -aG docker username</span><br></pre></td></tr></table></figure>
+<h3 id="修改Docker-Hub为国内镜像"><a href="#修改Docker-Hub为国内镜像" class="headerlink" title="修改Docker Hub为国内镜像"></a>修改Docker Hub为国内镜像</h3><p>参考自：<a href="https://www.docker-cn.com/registry-mirror" target="_blank" rel="noopener">https://www.docker-cn.com/registry-mirror</a></p>
+<p>修改<code>/etc/docker/daemon.json</code>文件（不存在则创建），并添加上 registry-mirrors 键值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="转移数据目录"><a href="#转移数据目录" class="headerlink" title="转移数据目录"></a>转移数据目录</h3><p>Docker的数据目录默认位于<code>/var/lib/docker</code>，里面会存储着Docker镜像的数据。如果其所在的硬盘分区空间较小，可以将其转移到大的磁盘分区。例如我这里是根目录<code>/</code>挂载在小硬盘上，<code>/home</code>目录挂载在大硬盘上，所以将其转移到<code>/home</code>目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service docker stop</span><br><span class="line">mkdir /home/dockerData</span><br><span class="line">mv /var/lib/docker /home/dockerData</span><br><span class="line">ln -s /home/dockerData/docker /var/lib/docker</span><br><span class="line">service docker start</span><br></pre></td></tr></table></figure>
+<h3 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker Compose"></a>安装Docker Compose</h3><p>Docker提倡的理念是一个容器一个进程，那么一个服务是由多个进程组成的，那么就需要启动多个容器。而容器之间肯定是有依赖关系的（比如需要先启动数据库容器），如果手动管理则太麻烦。幸好Docker提供了一个工具——Docker Compose来解决这个问题，它允许用户在一个模版（yaml格式的）中定义一组相关联的容器，通过配置可以实现多个容器依次创建和启动</p>
+<p>执行以下命令进行安装。其中1.23.1为撰文时的最新版本。可以去<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">GitHub</a>去查看最新版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L &quot;https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<p>执行<code>docker-compose --version</code>验证是否安装成功</p>
+<h3 id="一些错误"><a href="#一些错误" class="headerlink" title="一些错误"></a>一些错误</h3><ul>
+<li>跟audit-libs相关的依赖问题，错误内容如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">错误：软件包：audit-libs-python-2.8.1-3.el7.x86_64 (lianjia-base)</span><br><span class="line">          需要：audit-libs(x86-64) = 2.8.1-3.el7</span><br><span class="line">          已安装: audit-libs-2.8.1-3.el7_5.1.x86_64 (@updates)</span><br><span class="line">              audit-libs(x86-64) = 2.8.1-3.el7_5.1</span><br><span class="line">          可用: audit-libs-2.8.1-3.el7.x86_64 (lianjia-base)</span><br><span class="line">              audit-libs(x86-64) = 2.8.1-3.el7</span><br><span class="line"> 您可以尝试添加 --skip-broken 选项来解决该问题</span><br><span class="line"> 您可以尝试执行：rpm -Va --nofiles --nodigest</span><br></pre></td></tr></table></figure>
+<p>看错误内容，是因为Docker所要依赖的包已经安装了，但是太新了不支持。所以需要卸载已安装的，然后安装Docker的时候自动安装所需要的版本。因为有很多包依赖了audit-libs，如果直接用yum进行删除会导致依赖audit-libs的包也被删除，所以这里使用<code>rpm -e --nodeps xxx</code>的方式进行脱离依赖删除</p>
+<p>执行<code>rpm -e --nodeps audit-libs-2.8.1-3.el7_5.1.x86_64</code>后再安装Docker可能会提示下面的内容。这是因为服务器上安装了针对两个平台的audit-libs，只卸载一个的话，另外一个会被错误识别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">错误： Multilib version problems found. This often means that the root</span><br><span class="line">      cause is something else and multilib version checking is just</span><br><span class="line">      pointing out that there is a problem. Eg.:</span><br><span class="line"></span><br><span class="line">        1. You have an upgrade for audit-libs which is missing some</span><br><span class="line">           dependency that another package requires. Yum is trying to</span><br><span class="line">           solve this by installing an older version of audit-libs of the</span><br><span class="line">           different architecture. If you exclude the bad architecture</span><br><span class="line">           yum will tell you what the root cause is (which package</span><br><span class="line">           requires what). You can try redoing the upgrade with</span><br><span class="line">           --exclude audit-libs.otherarch ... this should give you an error</span><br><span class="line">           message showing the root cause of the problem.</span><br><span class="line"></span><br><span class="line">        2. You have multiple architectures of audit-libs installed, but</span><br><span class="line">           yum can only see an upgrade for one of those architectures.</span><br><span class="line">           If you don&apos;t want/need both architectures anymore then you</span><br><span class="line">           can remove the one with the missing update and everything</span><br><span class="line">           will work.</span><br><span class="line"></span><br><span class="line">        3. You have duplicate versions of audit-libs installed already.</span><br><span class="line">           You can use &quot;yum check&quot; to get yum show these errors.</span><br><span class="line"></span><br><span class="line">      ...you can also use --setopt=protected_multilib=false to remove</span><br><span class="line">      this checking, however this is almost never the correct thing to</span><br><span class="line">      do as something else is very likely to go wrong (often causing</span><br><span class="line">      much more problems).</span><br><span class="line"></span><br><span class="line">      保护多库版本：audit-libs-2.8.1-3.el7.x86_64 != audit-libs-2.8.1-3.el7_5.1.i686</span><br></pre></td></tr></table></figure>
+<p>那解决办法就是把支持另外一个平台的audit-libs也删除，执行<code>rpm -e --nodeps audit-libs-2.8.1-3.el7_5.1.i686</code>，然后再<code>yum install docker-ce</code>安装Docker就没问题了</p>
+<ul>
+<li>执行<code>systemctl start docker</code>无法启动Docker服务，报错信息如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Job for docker.service failed because the control process exited with error code. See &quot;systemctl status docker.service&quot; and &quot;journalctl -xe&quot; for details.</span><br></pre></td></tr></table></figure>
+<p>不论Docker服务因为什么原因无法启动都会报这个错误，具体的错误信息需要使用<code>systemctl status docker.service</code>或者<code>journalctl -xe</code>去查看，然后根据具体的错误再去解决（上网寻找资料）</p>
+<p>执行<code>journalctl -xe &gt; error_info</code>将错误信息保存，便于查看。打开error_info，定位到Docker相关的部分。在这里我的最后的错误信息为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dockerd[3518]: Error starting daemon: Error initializing network controller: error obtaining controller instance: failed to create NAT chain DOCKER: iptables failed: iptables --wait -t nat -N DOCKER: iptables v1.4.21: can&apos;t initialize iptables table `nat&apos;: Table does not exist (do you need to insmod?)</span><br></pre></td></tr></table></figure>
+<p>看起来是跟iptables和nat等网络有关的问题。再往上看会发现一堆<code>nf_nat_ipv4: Unknown symbol nf_nat_l3proto_register (err 0)</code>类似的错误，再往上会看到最相关的初始错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kernel: xt_conntrack: Unknown symbol nf_ct_l3proto_module_put (err 0)</span><br><span class="line">kernel: xt_conntrack: Unknown symbol nf_ct_l3proto_try_module_get (err 0)</span><br><span class="line">dockerd[3518]: time=&quot;2018-11-02T13:32:27.308082925+08:00&quot; level=warning msg=&quot;Running modprobe xt_conntrack failed with message: `modprobe: ERROR: could not insert &apos;xt_conntrack&apos;: Unknown symbol in module, or unknown parameter (see dmesg)\ninstall /bin/true \ninsmod /lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/net/netfilter/xt_conntrack.ko.xz`, error: exit status 1&quot;</span><br></pre></td></tr></table></figure>
+<p>分析一下是因为无法加载xt_conntrack内核模块，而无法加载的原因是找不到<code>nf_ct_l3proto_module_put</code>和<code>nf_ct_l3proto_try_module_get</code>这两个内核符号</p>
+<p>使用<code>modinfo xt_conntrack</code>查看模块信息，可以发现其依赖于nf_conntrack。使用<code>modprobe -v nf_conntrack</code>尝试加载，然后<code>lsmod | grep nf_conntrack</code>检查是否加载成功，发现并没有输出相应信息。陷入困境。此处非常感谢 @武帅，指出可能是该模块被加入了黑名单，导致无法加载（自己完全没有考虑过还有模块加载黑名单的存在）。具体的解决办法为：</p>
+<p>打开<code>/etc/modprobe.d/blacklist.conf</code>文件，会看到其中跟nf_conntrack相关的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># I/O dynamic configuration support for s390x (bz #563228)</span><br><span class="line">blacklist chsc_sch</span><br><span class="line">blacklist nf_conntrack</span><br><span class="line">blacklist nf_conntrack_ipv6</span><br><span class="line">blacklist xt_conntrack</span><br><span class="line">blacklist nf_conntrack_ftp</span><br><span class="line">blacklist xt_state</span><br><span class="line">blacklist iptable_nat</span><br><span class="line">blacklist ipt_REDIRECT</span><br><span class="line">blacklist nf_nat</span><br><span class="line">blacklist nf_conntrack_ipv4</span><br></pre></td></tr></table></figure>
+<p>可以看到使用一系列网络相关的模块被blacklist关键字给屏蔽了，解决办法为将从nf_conntrack开始到nf_conntrack_ipv4之间的行加上注释</p>
+<p>打开<code>/etc/modprobe.d/connectiontracking.conf</code>，也会看到其中跟nf_conntrack相关的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">install nf_nat /bin/true</span><br><span class="line">install xt_state  /bin/true</span><br><span class="line">install iptable_nat /bin/true</span><br><span class="line">install nf_conntrack /bin/true</span><br><span class="line">install nf_defrag_ipv4   /bin/true</span><br><span class="line">install nf_conntrack_ipv4 /bin/true</span><br><span class="line">install nf_conntrack_ipv6  /bin/true</span><br></pre></td></tr></table></figure>
+<p>这里的含义是如果发生<code>install xxx</code>的行为，跳过加载过程直接返回<code>install /bin/true</code>，所以也起到了加载模块屏蔽的作用。解决办法为将文件的后缀名进行修改，此处将其重命名为<code>connectiontracking.conf.old</code>使其失效（或将文件内容全部加上注释）</p>
+<p>然后再启动Docker服务<code>systemctl start docker</code>，拉取hello-world镜像，成功。问题解决</p>
+<h2 id="2、安装Nvidia-Docker"><a href="#2、安装Nvidia-Docker" class="headerlink" title="2、安装Nvidia-Docker"></a>2、安装Nvidia-Docker</h2><p>安装好了普通的Docker以后，如果想在容器内使用GPU会非常麻烦（并不是不可行），好在Nvidia为了让大家能在容器中愉快使用GPU，基于Docker开发了Nvidia-Docker，使得在容器中深度学习框架调用GPU变得极为容易</p>
+<p>以下内容根据官方安装指南进行简化整理，完成版请移步<a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">https://github.com/NVIDIA/nvidia-docker</a></p>
+<p>官方指南中针对各个系统都有安装说明，因为使用的是CentOS 7，并且安装的Docker-CE，所以此处参照的是<code>CentOS 7 (docker-ce), RHEL 7.4/7.5 (docker-ce), Amazon Linux 1/2</code></p>
+<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><ol>
+<li>GNU/Linux x86_64 with kernel version &gt; 3.10</li>
+<li>Docker &gt;= 1.12</li>
+<li>NVIDIA GPU with Architecture &gt; Fermi (2.1)</li>
+<li>NVIDIA drivers ~= 361.93 (untested on older versions)</li>
+</ol>
+<p>一句话，只要安装了显卡驱动就可以（终于不用自己搞CUDA和cuDNN了）</p>
+<p>显卡驱动下载链接：<a href="https://www.nvidia.com/Download/index.aspx" target="_blank" rel="noopener">https://www.nvidia.com/Download/index.aspx</a></p>
+<p>这里根据本机环境，各个选项的选择如下：</p>
+<ul>
+<li>Product Type: Tesla</li>
+<li>Product Series: P-Series</li>
+<li>Product: Tesla P40</li>
+<li>Operating System: Linux 64-bit</li>
+<li>Windows Driver Type: Standard</li>
+<li>CUDA Toolkit: 10.0</li>
+<li>Language: English(US)</li>
+</ul>
+<p>其中CUDA版本选择最高的就行，因为支持高版本CUDA的驱动可以支持低版本CUDA，反过来不行</p>
+<p>下载的文件名为：<code>NVIDIA-Linux-x86_64-410.72.run</code></p>
+<p>关于显卡驱动的安装可以<a href="https://bluesmilery.github.io/blogs/77f7532c/#%E5%AE%89%E8%A3%85">参考之前的文章</a></p>
+<h3 id="删除旧版本"><a href="#删除旧版本" class="headerlink" title="删除旧版本"></a>删除旧版本</h3><p>如果以前安装过nvidia-docker 1.0版本，需要先将其删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker volume ls -q -f driver=nvidia-docker | xargs -r -I&#123;&#125; -n1 docker ps -q -a -f volume=&#123;&#125; | xargs -r docker rm -f</span><br><span class="line">yum remove nvidia-docker</span><br></pre></td></tr></table></figure>
+<h3 id="添加相关库"><a href="#添加相关库" class="headerlink" title="添加相关库"></a>添加相关库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">distribution=$(. /etc/os-release;<span class="built_in">echo</span> <span class="variable">$ID</span><span class="variable">$VERSION_ID</span>)</span><br><span class="line">curl -s -L https://nvidia.github.io/nvidia-docker/<span class="variable">$distribution</span>/nvidia-docker.repo | tee /etc/yum.repos.d/nvidia-docker.repo</span><br></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nvidia-docker2</span><br><span class="line">pkill -SIGHUP dockerd</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi</span><br></pre></td></tr></table></figure>
+<p>看到如下信息那便表示安装成功了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 410.72       Driver Version: 410.72       CUDA Version: 10.0     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  Tesla P40           Off  | 00000000:00:06.0 Off |                  N/A |</span><br><span class="line">| N/A   23C    P0    48W / 250W |      0MiB / 22919MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line">|   1  Tesla P40           Off  | 00000000:00:07.0 Off |                  N/A |</span><br><span class="line">| N/A   23C    P0    44W / 250W |      0MiB / 22919MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|  No running processes found                                                 |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><ul>
+<li>安装完nvidia-docker后，之前配置使用Docker Hub国内镜像的那个文件（<code>/etc/docker/daemon.json</code>）内容可能会发生改变，需要检查并如有必要重新添加Docker Hub国内镜像</li>
+<li>docker: Error response from daemon: OCI runtime create failed: container_linux.go:348: starting container process caused “process_linux.go:402: container init caused \”process_linux.go:385: running prestart hook 1 caused \\”error running hook: exit status 1, stdout: , stderr: exec command: [/usr/bin/nvidia-container-cli –load-kmods configure --ldconfig=@/sbin/ldconfig –device=all –compute –utility –require=cuda&gt;=10.0 brand=tesla,driver&gt;=384,driver&lt;385 –pid=46031 /home/dockerData/docker/overlay2/2965080837ad6a78dd0013f677706eac50d147e457a719281750755f7aecbdb1/merged]\\nnvidia-container-cli: requirement error: unsatisfied condition: driver &lt; 385\\n\\”\””: unknown.</li>
+</ul>
+<p>这个是在运行<code>docker run --runtime=nvidia --rm nvidia/cuda nvidia-smi</code>时的报错。报错的关键信息为最后的<code>requirement error: unsatisfied condition: driver &lt; 385</code>，是说驱动不满足要求。这是因为在使用CUDA镜像的时候没指定tag，那么就会使用最新的，而最新版本的CUDA为10.0。出问题的这台服务器上安装的显卡驱动是当时为使用CUDA9安装的。所以问题就是因为现有的显卡驱动不支持CUDA10导致的</p>
+<p>两种解决办法，一种是升级显卡驱动，如果要使用CUDA10可以这么做；另外一种是指定CUDA镜像的tag，因为目前的显卡驱动是支持CUDA9.0的，而此处运行该镜像也只是为了验证Nvidia-Docker是否安装成功，所以可以执行<code>docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi</code>，从而可以成功看到显卡信息</p>
+<h2 id="3、使用容器运行TensorFlow"><a href="#3、使用容器运行TensorFlow" class="headerlink" title="3、使用容器运行TensorFlow"></a>3、使用容器运行TensorFlow</h2><p>接下来需要验证在容器中能否正常使用TensorFlow，参考自：<a href="https://www.tensorflow.org/install/docker" target="_blank" rel="noopener">https://www.tensorflow.org/install/docker</a></p>
+<ul>
+<li>CPU版</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm tensorflow/tensorflow \</span><br><span class="line">    python -c <span class="string">"import tensorflow as tf; print(tf.__version__)"</span></span><br></pre></td></tr></table></figure>
+<p>能输出TensorFlow的版本号便是成功，此处为1.11.0</p>
+<ul>
+<li>GPU版</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --runtime=nvidia -it --rm tensorflow/tensorflow:latest-gpu \</span><br><span class="line">    python -c <span class="string">"import tensorflow as tf; print(tf.contrib.eager.num_gpus())"</span></span><br></pre></td></tr></table></figure>
+<p>能输出TensorFlow调用GPU的信息以及GPU数量便是成功，此处输出为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">2018-11-02 10:02:03.213647: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA</span><br><span class="line">2018-11-02 10:02:03.827049: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</span><br><span class="line">2018-11-02 10:02:03.827656: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties:</span><br><span class="line">name: Tesla P40 major: 6 minor: 1 memoryClockRate(GHz): 1.531</span><br><span class="line">pciBusID: 0000:00:06.0</span><br><span class="line">totalMemory: 22.38GiB freeMemory: 22.22GiB</span><br><span class="line">2018-11-02 10:02:03.916592: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero</span><br><span class="line">2018-11-02 10:02:03.917168: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 1 with properties:</span><br><span class="line">name: Tesla P40 major: 6 minor: 1 memoryClockRate(GHz): 1.531</span><br><span class="line">pciBusID: 0000:00:07.0</span><br><span class="line">totalMemory: 22.38GiB freeMemory: 22.22GiB</span><br><span class="line">2018-11-02 10:02:03.917248: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0, 1</span><br><span class="line">2018-11-02 10:02:04.566762: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:</span><br><span class="line">2018-11-02 10:02:04.566813: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 1</span><br><span class="line">2018-11-02 10:02:04.566824: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N N</span><br><span class="line">2018-11-02 10:02:04.566831: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 1:   N N</span><br><span class="line">2018-11-02 10:02:04.567666: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 21551 MB memory) -&gt; physical GPU (device: 0, name: Tesla P40, pci bus id: 0000:00:06.0, compute capability: 6.1)</span><br><span class="line">2018-11-02 10:02:04.960299: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 21551 MB memory) -&gt; physical GPU (device: 1, name: Tesla P40, pci bus id: 0000:00:07.0, compute capability: 6.1)</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<p>PS：添加<code>-e NVIDIA_VISIBLE_DEVICES</code>参数可以指定容器使用哪一张（哪几张显卡），例如只使用第一张显卡</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=0 -it --rm tensorflow/tensorflow:latest-gpu \</span><br><span class="line">    python -c <span class="string">"import tensorflow as tf; print(tf.contrib.eager.num_gpus())"</span></span><br></pre></td></tr></table></figure>
+<h2 id="4、小结"><a href="#4、小结" class="headerlink" title="4、小结"></a>4、小结</h2><p>至此完成了Docker的安装以及在容器内使用GPU</p>
+<p>容器使用GPU并不会对其独占，多个容器使用GPU就如同多个程序使用GPU一样，只要协调好显存与计算力的使用即可</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li>各类官方安装指南<ul>
+<li>Docker：<a href="https://docs.docker.com/install/linux/docker-ce/centos/" target="_blank" rel="noopener">https://docs.docker.com/install/linux/docker-ce/centos/</a></li>
+<li>Nvidia-Docker：<a href="https://github.com/NVIDIA/nvidia-docker" target="_blank" rel="noopener">https://github.com/NVIDIA/nvidia-docker</a></li>
+<li>TensorFlow：<a href="https://www.tensorflow.org/install/docker" target="_blank" rel="noopener">https://www.tensorflow.org/install/docker</a></li>
+</ul>
+</li>
+<li>内核模块屏蔽相关<ul>
+<li><a href="https://www.linuxquestions.org/questions/linux-kernel-70/block-a-kernel-module-to-be-loaded-4175490812/" target="_blank" rel="noopener">https://www.linuxquestions.org/questions/linux-kernel-70/block-a-kernel-module-to-be-loaded-4175490812/</a></li>
+<li><a href="https://www.cyberciti.biz/faq/linux-disable-mounting-of-uncommon-filesystem/" target="_blank" rel="noopener">https://www.cyberciti.biz/faq/linux-disable-mounting-of-uncommon-filesystem/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://bluesmilery.github.io/blogs/252e6902/">https://bluesmilery.github.io/blogs/252e6902/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+              <a href="/tags/GPU/">GPU</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/blogs/6d457259/">
+        <span class="next-text nav-default">使用Python多进程Pool类时遇见的一些问题</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzY4MC8xMDIzNQ">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>  
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:plgaixd92498@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/bluesmilery" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  
+  <br>
+  <span id="busuanzi_container_site_uv">
+    被<span id="busuanzi_value_site_uv"></span>个小伙伴
+  </span>
+  <span id="busuanzi_container_site_pv">
+    查看了<span id="busuanzi_value_site_pv"></span>次~
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+   <script type="text/javascript">
+	(function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+  </script>
+
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>
