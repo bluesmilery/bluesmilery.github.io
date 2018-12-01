@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="使用Harbor搭建Docker私有仓库">
+
+
+
+
+  <meta name="keywords" content="Docker, Harbor, Gai's Blog">
+
+
+
+
+
+  <meta name="google-site-verification" content="SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g">
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Gai's Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.9.0">
+
+
+
+<link rel="canonical" href="https://bluesmilery.github.io/blogs/b6607682/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.9.0">
+
+
+
+  
+  <script id="baidu_analytics">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3f2fd48827f9ed28f8d9432317653de";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121307266-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121307266-1');
+</script>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz",
+      appKey: "mOzxpdEEenjouuAKMFPazvnd"
+    });
+  </script>
+
+
+
+
+<script>
+  window.config = {"title":"Gai's Blog","subtitle":"A Zone for Knowledge","description":null,"author":"Gai","language":null,"timezone":null,"url":"https://bluesmilery.github.io","root":"/","permalink":"blogs/:abbrlink/","permalink_defaults":null,"source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"categories","code_dir":"downloads/code","i18n_dir":":lang","skip_render":null,"new_post_name":":year-:month-:day-:title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":true,"auto_detect":false,"line_number":true,"tab_replace":null,"first_line_number":"always1"},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":10,"pagination_dir":"page","theme":"even","deploy":[{"type":"git","repo":"git@github.com:bluesmilery/bluesmilery.github.io.git","branch":"master"},{"type":"baidu_url_submitter"}],"ignore":[],"keywords":null,"index_generator":{"per_page":10,"order_by":"-date","path":""},"sitemap":{"path":"sitemap.xml"},"baidusitemap":{"path":"baidusitemap.xml"},"abbrlink":{"alg":"crc32","rep":"hex"},"baidu_url_submit":{"count":1,"host":"bluesmilery.github.io","token":"cktimjuXHORRMXsM","path":"baidu_urls.txt"},"category_generator":{"per_page":10},"archive_generator":{"per_page":10,"yearly":true,"monthly":true,"daily":false},"feed":{"type":"atom","limit":20,"hub":"","content":true,"content_limit":140,"content_limit_delim":"","path":"atom.xml"},"tag_generator":{"per_page":10},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"since":2017,"favicon":"/favicon.ico","rss":"default","menu":{"Home":"/","Archives":"/archives/","Tags":"/tags","Categories":"/categories"},"color":"Default","toc":true,"fancybox":true,"pjax":true,"copyright":{"enable":true,"license":"<a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc/4.0/\" target=\"_blank\">知识共享署名-非商业性使用 4.0 国际许可协议</a>"},"reward":{"enable":false,"qrCode":{"wechat":null,"alipay":null}},"social":{"email":"plgaixd92498@gmail.com","stack-overflow":null,"twitter":null,"facebook":null,"linkedin":null,"google":null,"github":"https://github.com/bluesmilery","weibo":null,"zhihu":null,"douban":null,"pocket":null,"tumblr":null,"instagram":null},"leancloud":{"app_id":"BmUgD1geFKBFQpURVdGNzgl1-gzGzoHsz","app_key":"mOzxpdEEenjouuAKMFPazvnd"},"baidu_analytics":"a3f2fd48827f9ed28f8d9432317653de","baidu_verification":null,"google_analytics":"UA-121307266-1","google_verification":"SrSETrQ8JjhGYLB-qHgsT23NdViq-VEpvghPoNFdn2g","disqus_shortname":null,"changyan":{"appid":null,"appkey":null},"livere_datauid":"MTAyMC8zMzY4MC8xMDIzNQ","version":"2.9.0","word_count":true};
+</script>
+
+    <title> 使用Harbor搭建Docker私有仓库 - Gai's Blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Gai's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Gai's Blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          使用Harbor搭建Docker私有仓库
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-11-26
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/技术/">技术</a>
+            
+          </div>
+        
+        
+        <div class="post-visits" data-url="/blogs/b6607682/" data-title="使用Harbor搭建Docker私有仓库">
+            阅读次数 0
+          </div>
+        
+        
+        
+        
+          <span class="post-count">本文共1.9k字</span>
+          <span class="post-count">阅读约6分钟</span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#系列文章"><span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境配置"><span class="toc-text">环境配置</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Harbor安装指南"><span class="toc-text">1、Harbor安装指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前置条件"><span class="toc-text">前置条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载说明"><span class="toc-text">下载说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装配置"><span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转移数据目录"><span class="toc-text">转移数据目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口修改"><span class="toc-text">端口修改</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、Harbor使用须知"><span class="toc-text">2、Harbor使用须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-text">References</span></a>
+    </li></div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>Docker官方提供了Docker Hub作为Docker公共仓库，大家可以上传或者下载镜像。但是对于企业来说将生产环境的镜像放在公共仓库是不安全的，所以企业有必要搭建自己的私有仓库。Docker官方提供了开源的registry镜像，可以用于搭建Docker私有仓库。但是它没有管理界面，缺少运维和管理功能，并不适用于企业搭建</p>
+<p>由VMware中国研发团队负责开发的开源企业级Docker Registry——Harbor，以Docker官方提供的开源registry为基础，增加了Web UI、用户权限管理、日志等一系列便于运维和管理的功能，可以帮助企业快速搭建企业级的Docker私有仓库。所以Harbor成为了第一选择</p>
+<p>本文的主要内容为如何使用Harbor搭建Docker私有仓库，并简单说明下使用中的注意事项</p>
+<a id="more"></a>
+<h3 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h3><p>本文为【Docker &amp; Kubernetes &amp; GPU】系列文章中的一篇。其他文章为：</p>
+<ul>
+<li><a href="https://bluesmilery.github.io/blogs/252e6902/">Docker安装指南以及使用GPU</a></li>
+</ul>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>本文实践的服务器环境为：</p>
+<ul>
+<li>CentOS Linux release 7.5.1804 (Core)</li>
+<li>内核版本：3.10.0-862.3.2.el7.x86_64</li>
+<li>Docker-CE版本：18.09.0</li>
+<li>所安装的Harbor版本为：1.6.1</li>
+</ul>
+<h2 id="1、Harbor安装指南"><a href="#1、Harbor安装指南" class="headerlink" title="1、Harbor安装指南"></a>1、Harbor安装指南</h2><p>官方完整版安装指南：<a href="https://github.com/goharbor/harbor/blob/master/docs/installation_guide.md" target="_blank" rel="noopener">https://github.com/goharbor/harbor/blob/master/docs/installation_guide.md</a></p>
+<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><p>Harbor是使用Docker Compose进行快速部署，所以需要确保机器已经安装Docker Compose与Docker。相关安装指南可参见：<a href="https://bluesmilery.github.io/blogs/252e6902/">Docker安装指南以及使用GPU</a></p>
+<p>更为具体的硬件、软件、端口要求可见下图。其中端口如果被占用的话，可以修改相应文件改变端口映射。下文会有具体说明</p>
+<p>#todo：图片</p>
+<h3 id="下载说明"><a href="#下载说明" class="headerlink" title="下载说明"></a>下载说明</h3><p>首先先从<a href="https://github.com/goharbor/harbor/releases" target="_blank" rel="noopener">GitHub</a>上下载安装文件，分为在线安装版和离线安装版</p>
+<p>因为Harbor的所有组件运行在容器中，所以在线版就是安装的时候会联网下载相应的Docker镜像，而离线版就是安装文件中包含了相应的镜像</p>
+<p>但是需要注意的是无论在线还是离线，安装文件都存放在Google相应的网址中（需自行翻墙解决），但是在线版所需要的镜像国内联网可正常下载</p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><p>解压后目录下会有一个名为<code>harbor.cfg</code>的文件，Harbor的所有安装配置都存在于这里。官方对每一个参数都有说明，主要包括网络、日志、邮件、CA、账号、数据库和LDAP、redis等相关参数设置，其中部分设置在安装后还可以在Web端修改</p>
+<p>因为这里是公司内网使用，所以不需要做CA认证，直接http链接即可。所以唯一需要修改的就是hostname，需要修改为本机IP（如果不使用域名的话），其他的默认</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>修改完配置以后，执行目录下的<code>install.sh</code>文件便开始安装，然后会依次启动相关服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[Step 3]: starting Harbor ...</span><br><span class="line">Creating network &quot;harbor_harbor&quot; with the default driver</span><br><span class="line">Creating harbor-log ... done</span><br><span class="line">Creating harbor-db          ... done</span><br><span class="line">Creating redis              ... done</span><br><span class="line">Creating harbor-adminserver ... done</span><br><span class="line">Creating registry           ... done</span><br><span class="line">Creating harbor-ui          ... done</span><br><span class="line">Creating harbor-jobservice  ... done</span><br><span class="line">Creating nginx              ... done</span><br><span class="line"></span><br><span class="line">✔ ----Harbor has been installed and started successfully.----</span><br><span class="line"></span><br><span class="line">Now you should be able to visit the admin portal at http://【所设置的hostname】.</span><br><span class="line">For more details, please visit https://github.com/goharbor/harbor .</span><br></pre></td></tr></table></figure>
+<p>在浏览器中打开所设置的hostname，看到登陆界面的话即为安装成功</p>
+<h3 id="转移数据目录"><a href="#转移数据目录" class="headerlink" title="转移数据目录"></a>转移数据目录</h3><p>转移数据目录有两种方式：一种是将默认数据目录软链至其他路径，另外一种是修改相应配置。目前使用的是第一种</p>
+<ul>
+<li>目录软链</li>
+</ul>
+<p>Harbor所有数据文件（包括镜像）默认存储在<code>/data</code>目录下，如果其所在的硬盘分区空间较小，可以将其转移到大的磁盘分区。例如我这里是根目录<code>/</code>挂载在小硬盘上，<code>/home</code>目录挂载在大硬盘上，所以将其转移到<code>/home</code>目录下。前往Harbor目录，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop</span><br><span class="line">mkdir /home/root_data</span><br><span class="line">mv /data /home/root_data</span><br><span class="line">ln -s /home/root_data/data /data</span><br><span class="line">docker-compose start</span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改配置</li>
+</ul>
+<p>注：因未完全摸清所有配置，不知有没有地方漏修改了，所以该方法<strong>没有经过测试</strong></p>
+<p>Harbor各个组件容器的启动配置在<code>docker-compose.yml</code>文件中，所以可以在这里修改</p>
+<p>打开该文件后，搜索所有<code>volumes</code>关键字，可以在每个容器的volumes下面看到，数据在Host机器上的挂载只会在两个地方：<code>/data</code>和<code>./common</code>。将<code>/data</code>修改为所需目录即可，例如<code>/home/harborData</code></p>
+<p>在Harbor的安装配置文件<code>harbor.cfg</code>中也有部分数据路径设置，主要为ssh相关设置，也作出相应修改即可</p>
+<p>修改前使用<code>docker-compose down -v</code>停止并删除现有容器，修改完成后先执行<code>.prepare</code>使配置生效，然后使用<code>docker-compose up -d</code>重新创建容器并启动服务</p>
+<h3 id="端口修改"><a href="#端口修改" class="headerlink" title="端口修改"></a>端口修改</h3><p>Harbor默认使用的端口是80（HTTP）、443和4443（HTTPS），如果存在端口占用冲突，可以进行修改</p>
+<p>打开<code>docker-compose.yml</code>文件，在proxy服务下面的ports参数部分，可以看到端口映射关系，冒号左边为Host所用端口，冒号右边为容器所用端口。根据自己的需要对Host所用端口进行修改即可</p>
+<p>然后再打开<code>harbor.cfg</code>文件，在hostname处IP（或域名）的后面增加所用端口</p>
+<p>然后执行以下命令重启Harbor服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down -v</span><br><span class="line">./prepare</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>之后需要使用IP加端口才能访问Harbor服务</p>
+<h2 id="2、Harbor使用须知"><a href="#2、Harbor使用须知" class="headerlink" title="2、Harbor使用须知"></a>2、Harbor使用须知</h2><p>在使用Harbor的过程中经常会遇见网络连接相关或者认证相关的错误，一般是由于以下几点没有设置或者做对。所以挑出来一起说明一下</p>
+<p>PS：如果修改了Harbor所使用的端口，那么下面的内容中在IP或者域名后面均需要加上所使用的端口</p>
+<ul>
+<li>修改Docker配置</li>
+</ul>
+<p>如果Harbor配置的是HTTP链接，那么在需要使用私有仓库的机器上编辑<code>/etc/docker/daemon.json</code>文件，在其中加上以下键值对。修改后需要重启Docker<code>systemctl restart docker</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;insecure-registries&quot; : [&quot;IP或者域名&quot;]</span><br></pre></td></tr></table></figure>
+<p>HTTPS链接无需修改</p>
+<ul>
+<li>推送镜像</li>
+</ul>
+<p>所推送的镜像命名要符合规范。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push IP或者域名/library/镜像名:tag</span><br></pre></td></tr></table></figure>
+<p>其中library为Harbor默认存在的项目。如果使用自建的项目，修改为相应的项目名即可</p>
+<p>（Harbor必须有项目才可以使用，无项目名直接推送的话会报错）</p>
+<p>推送前要先登录<code>docker login IP或者域名</code>。并且需要已经加入所要推送到的项目（例如默认的library），这一项需要联系Harbor管理员进行添加</p>
+<ul>
+<li>拉取镜像</li>
+</ul>
+<p>拉取镜像时代码与推送一样，只是将push换为pull</p>
+<p>如果所要拉取的镜像所在的项目是公开的，那么可以直接拉取不需要登录。否则需要是项目成员且需要登录才可以拉取</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li>Harbor安装指南：<a href="https://github.com/goharbor/harbor/blob/master/docs/installation_guide.md" target="_blank" rel="noopener">https://github.com/goharbor/harbor/blob/master/docs/installation_guide.md</a></li>
+<li>Harbor使用指南：<a href="https://github.com/goharbor/harbor/blob/master/docs/user_guide.md" target="_blank" rel="noopener">https://github.com/goharbor/harbor/blob/master/docs/user_guide.md</a></li>
+<li>搭建Harbor的参考文章：<a href="https://blog.csdn.net/aixiaoyang168/article/details/73549898" target="_blank" rel="noopener">https://blog.csdn.net/aixiaoyang168/article/details/73549898</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://bluesmilery.github.io">Gai</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://bluesmilery.github.io/blogs/b6607682/">https://bluesmilery.github.io/blogs/b6607682/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Docker/">Docker</a>
+            
+              <a href="/tags/Harbor/">Harbor</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/blogs/252e6902/">
+        <span class="next-text nav-default">Docker安装指南以及使用GPU</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzY4MC8xMDIzNQ">
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+      </div>  
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:plgaixd92498@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/bluesmilery" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  
+  <br>
+  <span id="busuanzi_container_site_uv">
+    被<span id="busuanzi_value_site_uv"></span>个小伙伴
+  </span>
+  <span id="busuanzi_container_site_pv">
+    查看了<span id="busuanzi_value_site_pv"></span>次~
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Gai</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+   <script type="text/javascript">
+	(function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+  </script>
+
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.9.0"></script>
+
+  </body>
+</html>
